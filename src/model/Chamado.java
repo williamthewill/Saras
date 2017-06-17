@@ -1,6 +1,7 @@
-package model;
 
-import java.util.Date;
+//esta classe não vale: vale a do William, que vai comitar no GITHUB
+
+package model;
 
 public class Chamado {
 	
@@ -57,7 +58,21 @@ public class Chamado {
 		}
 	}
 	
+	public Chamado() {}
 	
+	public boolean eRemoto() {
+		if(descricaoProblema.contains("viadagem"));
+		return true;
+	}
+	
+	public boolean eFone() {
+		if(descricaoProblema.contains("viadagem"));
+		return true;
+	}
+	
+	public int getEstado(){
+		return this.estado;
+	}
 	
 	public int getDiasTrabalho() {
 		return diasTrabalho;
@@ -107,12 +122,6 @@ public class Chamado {
 		return observacao;
 	}
 
-
-	public boolean iseSoftplan() {
-		return eSoftplan;
-	}
-
-
 	public void setDataAbertura(String dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
@@ -121,12 +130,6 @@ public class Chamado {
 	public void setSetor(String setor) {
 		this.setor = setor;
 	}
-
-
-	public void setTipoAtendimento(String tipoAtendimento) {
-		this.tipoAtendimento = tipoAtendimento;
-	}
-
 
 	public void setSaltNum(int saltNum) {
 		this.saltNum = saltNum;
@@ -172,19 +175,12 @@ public class Chamado {
 		this.nomeSolicitante = nomeSolicitante;
 	}
 
-
-	public void setLocalChamado(String localChamado) {
-		this.localChamado = localChamado;
-	}
-
-
-	public void seteSoftplan(boolean eSoftplan) {
+	public void setESoftplan(boolean eSoftplan) {
 		this.eSoftplan = eSoftplan;
 	}
 
-
-	private String requestLocalChamado(String descricaiProblema){
-		return null;
+	public boolean getESoftplan() {
+		return eSoftplan;
 	}
 
 	public String getDescricaoProblema() {
@@ -203,18 +199,5 @@ public class Chamado {
 		return localChamado;
 	}
 
-	public boolean eRemoto() {
-		if(descricaoProblema.contains("viadagem"));
-		return true;
-	}
 	
-	public boolean eFone() {
-		if(descricaoProblema.contains("viadagem"));
-		return true;
-	}
-
-	public boolean getESoftplan() {
-		return eSoftplan;
-	}
-
 }

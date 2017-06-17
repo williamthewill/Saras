@@ -1,41 +1,28 @@
 package view;
 
-
-//comentário alterado testeee
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Color;
 import java.awt.SystemColor;
-import javax.swing.JButton;
+
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-import javax.swing.event.ChangeListener;
 
-import model.Chamado;
 import model.RegistroChamado;
-
-import javax.swing.event.ChangeEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class TelaChamado extends JFrame {
 
@@ -44,6 +31,9 @@ public class TelaChamado extends JFrame {
 	private JTextArea textAreaDescricao;
 	private JTextField textFieldLinha1;
 	private JTextField textFieldLinha2;
+	JCheckBox checkBoxFone;
+	JCheckBox chckbxRemoto;
+	JCheckBox chckbxSoftplan;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -80,7 +70,20 @@ public class TelaChamado extends JFrame {
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Artur Engenheiro");
+				//JOptionPane.showMessageDialog(null, "Artur Engenheiro");
+
+				if (checkBoxFone.isSelected()){
+					//ação
+				}
+	
+				if (chckbxRemoto.isSelected()){
+					//ação
+				}
+				
+				if (chckbxSoftplan.isSelected()){
+					//ação
+				}
+								
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -121,11 +124,16 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(lblLimpar);
 		
 		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			
+		});
 		label.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/Limpar.png")));
 		label.setBounds(25, 133, 40, 47);
 		panelPainel.add(label);
 		
 		JLabel label_1 = new JLabel("");
+		label_1.addMouseListener(new MouseAdapter() {
+		});
 		label_1.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/Execel.PNG")));
 		label_1.setBounds(25, 202, 40, 47);
 		panelPainel.add(label_1);
@@ -174,6 +182,8 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(lblCadastrar);
 		
 		JLabel label_7 = new JLabel("");
+		label_7.addMouseListener(new MouseAdapter() {
+		});
 		label_7.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/relatorio.png")));
 		label_7.setBounds(22, 260, 40, 47);
 		panelPainel.add(label_7);
@@ -273,9 +283,12 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(chackBoxDefLinha);
 	
 		
-		JCheckBox checkBoxFone = new JCheckBox("Fone");
+		checkBoxFone = new JCheckBox("Fone");
 		checkBoxFone.addMouseListener(new MouseAdapter() {
-			@Override
+						@Override
+			public void mouseClicked(MouseEvent e) {	
+			}
+						@Override
 			public void mouseEntered(MouseEvent arg0) {
 				checkBoxFone.setForeground(Color.BLACK);
 			}
@@ -283,12 +296,7 @@ public class TelaChamado extends JFrame {
 				checkBoxFone.setForeground(SystemColor.textHighlight);
 			}
 			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				
-				
-			}
+
 		});
 		checkBoxFone.setFont(new Font("Tahoma", Font.BOLD, 13));
 		checkBoxFone.setForeground(SystemColor.textHighlight);
@@ -296,9 +304,15 @@ public class TelaChamado extends JFrame {
 		checkBoxFone.setBounds(308, 19, 62, 23);
 		contentPane.add(checkBoxFone);
 		
-		JCheckBox chckbxRemoto = new JCheckBox("Remoto");
+		
+		chckbxRemoto = new JCheckBox("Remoto");
 		chckbxRemoto.addMouseListener(new MouseAdapter() {
-			@Override
+					@Override
+			public void mouseClicked(MouseEvent arg0) {
+			
+			}
+					
+					@Override
 			public void mouseEntered(MouseEvent arg0) {
 				chckbxRemoto.setForeground(Color.BLACK);
 			}
@@ -308,6 +322,8 @@ public class TelaChamado extends JFrame {
 			
 			
 			
+	
+			
 		});
 		chckbxRemoto.setFont(new Font("Tahoma", Font.BOLD, 13));
 		chckbxRemoto.setForeground(SystemColor.textHighlight);
@@ -315,7 +331,10 @@ public class TelaChamado extends JFrame {
 		chckbxRemoto.setBounds(390, 19, 88, 23);
 		contentPane.add(chckbxRemoto);
 		
-		JCheckBox chckbxSoftplan = new JCheckBox("Softplan");
+		
+		
+		
+		chckbxSoftplan = new JCheckBox("Softplan");
 		chckbxSoftplan.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {

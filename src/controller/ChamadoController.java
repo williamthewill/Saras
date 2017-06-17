@@ -41,4 +41,7 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 		return this.findAll();
 	}
 
+	
+	
+	
 }
