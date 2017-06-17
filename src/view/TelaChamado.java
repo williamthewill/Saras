@@ -36,7 +36,7 @@ import model.RegistroChamado;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import controller.ChamadoController;
+
 
 
 public class TelaChamado extends JFrame {
@@ -288,7 +288,7 @@ public class TelaChamado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				ChamadoController chamadoController = new ChamadoController();
+				Chamado chamadoController = new Chamado();
 				if (checkBoxFone.isSelected()){//15JUN17
 					textAreaDescricao.setText(chamadoController.getMensagemFone()+"\n"+textAreaDescricao.getText());
 				}else{
@@ -319,7 +319,7 @@ public class TelaChamado extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				ChamadoController chamadoController = new ChamadoController();
+				Chamado chamadoController = new Chamado();
 				if (chckbxRemoto.isSelected()){//15JUN17
 					textAreaDescricao.setText(chamadoController.getMensagemRemoto()+"\n"+textAreaDescricao.getText());
 				}else{

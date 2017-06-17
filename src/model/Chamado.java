@@ -42,6 +42,10 @@ public class Chamado {
 		this.localChamado = this.requestLocalChamado(this.descricaoProblema);
 	}
 	
+	public Chamado() {//vazio, apenas para usar getFone e getRemoto. (Artur,17JUN17)
+		// vazio!
+	}
+
 	private String requestLocalChamado(String descricaiProblema){
 		return null;
 	}
@@ -74,4 +78,12 @@ public class Chamado {
 		return eSoftplan;
 	}
 
+	public String getMensagemFone(){
+		return "Este chamado teve entrada via Fone. ";
+	}
+	
+	public String getMensagemRemoto(){
+		return "Este chamado teve entrada via Remoto. ";
+	}
+	
 }

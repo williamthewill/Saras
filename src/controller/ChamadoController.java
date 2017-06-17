@@ -25,13 +25,7 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 		return null;
 	}
 
-	public String getMensagemFone(){
-		return "Este chamado teve entrada via Fone. ";
-	}
 	
-	public String getMensagemRemoto(){
-		return "Este chamado teve entrada via Remoto. ";
-	}
 	
 	
 }
