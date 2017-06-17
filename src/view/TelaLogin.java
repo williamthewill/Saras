@@ -2,6 +2,8 @@ package view;
 
 // Faturar Arthur
 
+
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
