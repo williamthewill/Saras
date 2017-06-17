@@ -46,6 +46,9 @@ public class TelaChamado extends JFrame {
 	private JTextArea textAreaDescricao;
 	private JTextField textFieldLinha1;
 	private JTextField textFieldLinha2;
+	JCheckBox checkBoxFone;
+	JCheckBox chckbxRemoto;
+	JCheckBox chckbxSoftplan;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -82,7 +85,31 @@ public class TelaChamado extends JFrame {
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Artur Engenheiro");
+				//JOptionPane.showMessageDialog(null, "Artur Engenheiro");
+				
+
+			if (checkBoxFone.isSelected()){
+				//ação
+			}
+
+			if (chckbxRemoto.isSelected()){
+				//ação
+			}
+			
+			if (chckbxSoftplan.isSelected()){
+				//ação
+			}
+			
+			
+			
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -282,7 +309,7 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(chackBoxDefLinha);
 	
 		
-		JCheckBox checkBoxFone = new JCheckBox("Fone");
+		checkBoxFone = new JCheckBox("Fone");
 		checkBoxFone.addMouseListener(new MouseAdapter() {
 						@Override
 			public void mouseClicked(MouseEvent e) {	
@@ -303,7 +330,8 @@ public class TelaChamado extends JFrame {
 		checkBoxFone.setBounds(308, 19, 62, 23);
 		contentPane.add(checkBoxFone);
 		
-		JCheckBox chckbxRemoto = new JCheckBox("Remoto");
+		
+		chckbxRemoto = new JCheckBox("Remoto");
 		chckbxRemoto.addMouseListener(new MouseAdapter() {
 					@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -329,7 +357,10 @@ public class TelaChamado extends JFrame {
 		chckbxRemoto.setBounds(390, 19, 88, 23);
 		contentPane.add(chckbxRemoto);
 		
-		JCheckBox chckbxSoftplan = new JCheckBox("Softplan");
+		
+		
+		
+		chckbxSoftplan = new JCheckBox("Softplan");
 		chckbxSoftplan.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
