@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -194,6 +195,26 @@ public class Relatorio {
 		public void quantUsuarioMaiorInteracao(){
 			//this.usuarioMInterecao= Coloca aqui o usuarui maior interacao;
 			//this.contUsuarioMInterecao= Coloca aqui a quantidade de vezes que ele apareceu.
+		}
+		public void quantLocalSistema(){
+			chamadoController = new ChamadoController();
+			List<Chamado> listaChamado= chamadoController.todosChamados();
+			Collections.sort(chamadoController);
+			String nome = "";
+			int maior=0;
+			for(int i=0; i<chamadoController.size(); i++){
+				int count = Collections.frequency(chamadoController, chamadoController.get(i));
+				if(count>maior){
+					maior=count;
+					nome= chamadoController.get(i);
+					 
+				}
+				this.usuarioMInterecao=nome;
+				this.contUsuarioMInterecao=maior;
+		    
+				
+			}
+			
 		}
 
 }
