@@ -5,6 +5,9 @@ import java.awt.List;
 import model.Chamado;
 import model.DAO.FactoryDAO;
 
+import model.Chamado;
+import model.DAO.FactoryDAO;
+
 public class ChamadoController implements FactoryDAO<Chamado>{
 
 	@Override
@@ -22,4 +25,7 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 		return null;
 	}
 
+	
+	
+	
 }

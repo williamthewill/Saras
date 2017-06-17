@@ -1,3 +1,6 @@
+
+//esta classe não vale: vale a do William, que vai comitar no GITHUB
+
 package model;
 
 import java.util.Date;
@@ -42,6 +45,10 @@ public class Chamado {
 		this.localChamado = this.requestLocalChamado(this.descricaoProblema);
 	}
 	
+	public Chamado() {
+	
+	}
+
 	private String requestLocalChamado(String descricaiProblema){
 		return null;
 	}
@@ -73,5 +80,5 @@ public class Chamado {
 	public boolean getESoftplan() {
 		return eSoftplan;
 	}
-
+	
 }
