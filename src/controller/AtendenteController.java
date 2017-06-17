@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.List;
+import java.util.List;
 
 import model.Atendente;
 import model.DAO.FactoryDAO;
@@ -18,7 +18,7 @@ public class AtendenteController implements FactoryDAO<Atendente>{
 	}
 
 	@Override
-	public List findAll(Class classe) {
+	public List<Atendente> findAll() {
 		return null;
 	}
 	

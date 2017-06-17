@@ -7,27 +7,47 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class CSVUtils {
 
     private static final char DEFAULT_SEPARATOR = ';';
-
-    private String followCVSformat(Chamado chamado) {
-        String chamadoLine = chamado.getDescricaoProblema().replaceAll(";", "|").replaceAll("\n", "|n");
-        chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getDescricaoSolicitante().replaceAll(";", "|").replaceAll("\n", "|n");
-        chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getDescricaoProblema().replaceAll(";", "|").replaceAll("\n", "|n");
-        chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getLotacaoSolicitante();
+    
+    @SuppressWarnings({ "static-access", "static-access" })
+	private String followCVSformat(Chamado chamado) {
+        String chamadoLine = chamado.getDataAbertura();
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getNomeSolicitante();
         chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getSetor();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getTipoAtendimento();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getDescricaoSolicitante();
+        chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getLocalChamado();
         chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getERemoto();
+        chamadoLine += chamado.getSaltNum();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getSituacaoAtual();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getSituacaoSalt();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getDataEncerramento();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getSolucao();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getObservacao();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getDiasTrabalho();
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getESoftplan();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getDiasTrabalho();
+        chamadoLine += DEFAULT_SEPARATOR;
+        
         System.out.println("followCSVformat");	
         System.out.println(chamadoLine);
         return chamadoLine;
@@ -44,26 +64,8 @@ public class CSVUtils {
 		pw.flush();
 		pw.close();
 	}
-
-	public String load(String arquivo) throws FileNotFoundException, IOException {
-		File file = new File(arquivo);
-		if (!file.exists()) {
-			return null;
-		}
-		BufferedReader br = new BufferedReader(new FileReader(arquivo));
-		String line = br.readLine();
-		int currentLine = 1;
-		while( line != null ){
-			System.out.println(currentLine);
-			System.out.println(line);
-			currentLine++;			
-			line = br.readLine();
-		}
-		br.close();
-		return null;
-	}
 	
-	public String load(String arquivo, int position) throws FileNotFoundException, IOException {
+	public List<Chamado> load(String arquivo, int position) throws FileNotFoundException, IOException {
 		File file = new File(arquivo);
 		if (!file.exists()) {
 			return null;
@@ -83,23 +85,31 @@ public class CSVUtils {
 		return null;
 	}
 	
-	public String load(String arquivo, int beginPosition, int endPosition) throws FileNotFoundException, IOException {
+	public List<Chamado> load(String arquivo) throws FileNotFoundException, IOException {
 		File file = new File(arquivo);
 		if (!file.exists()) {
 			return null;
 		}
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 		String line = br.readLine();
+		String lineAttributes[];
+		List<Chamado> allChamados = new ArrayList<>();
+		Chamado chamado;
 		int currentLine = 1;
 		while( line != null ){
-			if(currentLine >= beginPosition & currentLine <= endPosition){
-				System.out.println(currentLine);
-				System.out.println(line);				
-			}
+			System.out.println(currentLine);
+			System.out.println(line);
+			lineAttributes = line.split(";");
+			chamado = new Chamado(lineAttributes[0], lineAttributes[1], 
+					lineAttributes[2], lineAttributes[4], 
+					lineAttributes[5], Integer.parseInt(lineAttributes[6]), 
+					lineAttributes[7], Boolean.parseBoolean(lineAttributes[8]), lineAttributes[11], 
+					Boolean.parseBoolean(lineAttributes[13]), lineAttributes[14], Integer.parseInt(lineAttributes[15]));
+			allChamados.add(chamado);
 			currentLine++;
 			line = br.readLine();
 		}
 		br.close();
-		return null;
+		return allChamados;
 	}
 }
