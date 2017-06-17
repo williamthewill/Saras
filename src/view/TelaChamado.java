@@ -71,7 +71,6 @@ public class TelaChamado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				//JOptionPane.showMessageDialog(null, "Artur Engenheiro");
-				
 
 				if (checkBoxFone.isSelected()){
 					//ação
@@ -84,7 +83,7 @@ public class TelaChamado extends JFrame {
 				if (chckbxSoftplan.isSelected()){
 					//ação
 				}
-				
+								
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
