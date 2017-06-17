@@ -1,43 +1,28 @@
 package view;
 
-
-
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Color;
 import java.awt.SystemColor;
-import javax.swing.JButton;
+
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-import javax.swing.event.ChangeListener;
 
-import model.Chamado;
 import model.RegistroChamado;
-
-import javax.swing.event.ChangeEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-
 
 public class TelaChamado extends JFrame {
 
@@ -86,30 +71,19 @@ public class TelaChamado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				//JOptionPane.showMessageDialog(null, "Artur Engenheiro");
-				
 
-			if (checkBoxFone.isSelected()){
-				//ação
-			}
-
-			if (chckbxRemoto.isSelected()){
-				//ação
-			}
-			
-			if (chckbxSoftplan.isSelected()){
-				//ação
-			}
-			
-			
-			
+				if (checkBoxFone.isSelected()){
+					//ação
+				}
+	
+				if (chckbxRemoto.isSelected()){
+					//ação
+				}
 				
-				
-				
-				
-				
-				
-				
-				
+				if (chckbxSoftplan.isSelected()){
+					//ação
+				}
+								
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

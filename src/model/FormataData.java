@@ -8,7 +8,7 @@ import java.util.Date;
 public final class FormataData {
 	
 	
-	private static String formataData(){
+	static String formataData(){
 		System.err.println("construtor");
 		Date data = new Date();
 	    Calendar c = Calendar.getInstance();
@@ -19,5 +19,13 @@ public final class FormataData {
 	    return mes;
 	}
 	
+	static String formataHora(){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		Date hora = Calendar.getInstance().getTime(); // Ou qualquer outra forma que tem
+		String horaFormatada = sdf.format(hora);
+	    return horaFormatada;
+	}
+	
 	public static String data = formataData();
+	public static String hora= formataHora();
 }

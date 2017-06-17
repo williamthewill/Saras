@@ -9,6 +9,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -24,13 +25,19 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import controller.ChamadoController;
+
 public class Relatorio {
 	
-	private String fone;
-	private String Remoto;
-	private String chamadosDia;
+	private int contFone;
+	private int contRemoto;
+	private int contChamadosDia;
+	private int contUsuarioMInterecao;
+	private int contLocalSistema;
 	private String usuarioMInterecao;
 	private String localSistema;
+	
+	ChamadoController chamadoController;
 	
 		public void geraPDF() throws DocumentException, IOException{
 			Document doc = null;
@@ -43,7 +50,7 @@ public class Relatorio {
 				
 				doc.open(); //	//abre o documento
 				
-				Paragraph emissão = new Paragraph("Emitido em:"+this.geraMes()+" - "+this.geraHora());//	//adiciona o texto ao PDF
+				Paragraph emissão = new Paragraph("Emitido em:"+ FormataData.data +" - "+FormataData.hora);//	//adiciona o texto ao PDF
 				emissão.setAlignment(Element.ALIGN_RIGHT);
 				doc.add(emissão);
 				
@@ -99,36 +106,9 @@ public class Relatorio {
 						 JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
 					}
 			}
-			public String getFone() {
-				return fone;
-			}
-			public void setFone(String fone) {
-				this.fone = fone;
-			}
-			public String getRemoto() {
-				return Remoto;
-			}
-			public void setRemoto(String remoto) {
-				Remoto = remoto;
-			}
-			public String getChamadosDia() {
-				return chamadosDia;
-			}
-			public void setChamadosDia(String chamadosDia) {
-				this.chamadosDia = chamadosDia;
-			}
-			public String getUsuarioMInterecao() {
-				return usuarioMInterecao;
-			}
-			public void setUsuarioMInterecao(String usuarioMInterecao) {
-				this.usuarioMInterecao = usuarioMInterecao;
-			}
-			public String getLocalSistema() {
-				return localSistema;
-			}
-			public void setLocalSistema(String localSistema) {
-				this.localSistema = localSistema;
-			}
+			
+			
+			
 			public String geraMes(){
 				Date data = new Date();
 			    Calendar c = Calendar.getInstance();
@@ -148,5 +128,99 @@ public class Relatorio {
 			public void abrePDF() throws IOException, InterruptedException{
 				java.awt.Desktop.getDesktop().open( new File( "Relatório Consolidado Saras.pdf" ) );
 			}
+			
+			
+			public int getContFone() {
+				return contFone;
+			}
+
+			public int getContRemoto() {
+				return contRemoto;
+			}
+
+			public int getContChamadosDia() {
+				return contChamadosDia;
+			}
+
+			public int getContUsuarioMInterecao() {
+				return contUsuarioMInterecao;
+			}
+
+			public int getContLocalSistema() {
+				return contLocalSistema;
+			}
+
+			public String getUsuarioMInterecao() {
+				return usuarioMInterecao;
+			}
+
+			public String getLocalSistema() {
+				return localSistema;
+			}
+
+
+
+		public void quantFone(){
+			chamadoController =new ChamadoController();
+			List<Chamado> listaChamado= chamadoController.todosChamados();
+			for(int i=0; i<listaChamado.size();i++){
+				if(listaChamado.get(i).eFone()){
+					this.contFone++;
+				}
+			}
+			
+		}
+		public void quantAcessoRemoto(){
+			chamadoController = new ChamadoController();
+			List<Chamado> listaChamado= chamadoController.todosChamados();
+			for(int i=0; i<listaChamado.size();i++){
+				if(listaChamado.get(i).eRemoto()){
+					this.contRemoto++;
+				}
+			}
+			
+		}
+		public void quantChamadoDia(){
+			chamadoController = new ChamadoController();
+			List<Chamado> listaChamado= chamadoController.todosChamados();
+			for(int i=0; i<listaChamado.size();i++){
+				if(listaChamado.get(i).getDataAbertura().equas(FormataData.data)){
+					this.contChamadosDia++;
+					
+				}
+			}
+			
+		}
+		public void quantUsuarioMaiorInteracao(){
+			//this.usuarioMInterecao= Coloca aqui o usuarui maior interacao;
+			//this.contUsuarioMInterecao= Coloca aqui a quantidade de vezes que ele apareceu.
+		}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
