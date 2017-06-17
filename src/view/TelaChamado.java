@@ -1,7 +1,7 @@
 package view;
 
 
-//comentário alterado testeee
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -36,6 +36,8 @@ import model.RegistroChamado;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import controller.ChamadoController;
+
 
 public class TelaChamado extends JFrame {
 
@@ -286,7 +288,14 @@ public class TelaChamado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				ChamadoController chamadoController = new ChamadoController();
+				if (checkBoxFone.isSelected()){//15JUN17
+					textAreaDescricao.setText(chamadoController.getMensagemFone()+"\n"+textAreaDescricao.getText());
+				}else{
+					String texto = chamadoController.getMensagemFone();
+					texto=textAreaDescricao.getText().replaceAll(texto, "");
+					textAreaDescricao.setText(texto);
+				}
 				
 			}
 		});
@@ -308,6 +317,17 @@ public class TelaChamado extends JFrame {
 			
 			
 			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ChamadoController chamadoController = new ChamadoController();
+				if (chckbxRemoto.isSelected()){//15JUN17
+					textAreaDescricao.setText(chamadoController.getMensagemRemoto()+"\n"+textAreaDescricao.getText());
+				}else{
+					String texto = chamadoController.getMensagemRemoto();
+					texto=textAreaDescricao.getText().replaceAll(texto, "");
+					textAreaDescricao.setText(texto);
+				}
+			}
 		});
 		chckbxRemoto.setFont(new Font("Tahoma", Font.BOLD, 13));
 		chckbxRemoto.setForeground(SystemColor.textHighlight);
