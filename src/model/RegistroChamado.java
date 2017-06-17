@@ -77,8 +77,6 @@ public class RegistroChamado {
 		
 	}
 	
-	
-	
 	public void nomeNaoEncontrado(String nome){
 		listNomeNaoEncontrado.add(nome);
 		
