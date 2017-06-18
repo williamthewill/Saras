@@ -57,9 +57,20 @@ public class Chamado {
 		}
 		this.setor = "";
 		this.descricaoSolicitante = descricaoSlicitante;
+		this.buscaLocalChamado();
 	}
 	
 	public Chamado() {}
+	
+	private void buscaLocalChamado(){
+		LocaisDoSistemaCollection locaisDoSistemaCollection = new LocaisDoSistemaCollection();
+		for(int i = 0; i < locaisDoSistemaCollection.getCollectionLocaisDoSistema().size(); i++){
+			if(this.descricaoSolicitante.toLowerCase().contains(locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i).toLowerCase())){
+				this.localChamado = locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i);
+				break;
+			}
+		}
+	}
 	
 	public boolean eRemoto() {
 		if(descricaoProblema.contains("viadagem"));
