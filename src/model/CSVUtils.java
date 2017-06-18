@@ -44,11 +44,11 @@ public class CSVUtils {
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getESoftplan();
         chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getDiasTrabalho();
+        chamadoLine += chamado.getDescricaoProblema();
+        chamadoLine += DEFAULT_SEPARATOR;
+        chamadoLine += chamado.getEstado();
         chamadoLine += DEFAULT_SEPARATOR;
         
-        System.out.println("followCSVformat");	
-        System.out.println(chamadoLine);
         return chamadoLine;
     }
 
@@ -96,8 +96,6 @@ public class CSVUtils {
 		Chamado chamado;
 		int currentLine = 1;
 		while( line != null ){
-			System.out.println(currentLine);
-			System.out.println(line);
 			lineAttributes = line.split(";");
 			chamado = new Chamado(lineAttributes[0], lineAttributes[1], 
 					lineAttributes[2], lineAttributes[4], 

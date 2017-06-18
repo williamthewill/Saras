@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.ChamadoController;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
@@ -142,7 +145,8 @@ public class TelaChamado extends JFrame {
 		lblPlanilha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Artur Engenheiro");
+				
+				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
