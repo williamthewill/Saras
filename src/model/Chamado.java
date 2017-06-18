@@ -3,6 +3,15 @@
 
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import javax.swing.JOptionPane;
+
 public class Chamado {
 	
 	private String dataAbertura;
@@ -55,6 +64,7 @@ public class Chamado {
 	}
 	
 	public Chamado() {}
+	
 	
 	public boolean eRemoto() {
 		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto."));

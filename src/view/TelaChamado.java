@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
 
 import model.CSVUtils;
 import model.Chamado;
+import model.NomesSolicitantes;
 import model.RegistroChamado;
 
 public class TelaChamado extends JFrame {
@@ -93,15 +94,22 @@ public class TelaChamado extends JFrame {
 					if (chckbxSoftplan.isSelected()){
 						eSoft= true;
 						textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
+						//chckbxSoftplan.setSelected(false);
+						
 					}
 				
 					//CSVUtils csvUtils = new CSVUtils();
 					//Chamado chamado =new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), eSoft, eRemoto, eFone, textAreaDescricao.getText());
-					textAreaDescricao.setText("");
-					textFieldSolicitante.setText("");
+					
+					if (!chckbxSoftplan.isSelected()){
+						textAreaDescricao.setText("");
+						textFieldSolicitante.setText("");
+						
+					}
 					checkBoxFone.setSelected(false);
 					chckbxRemoto.setSelected(false);
-					chckbxSoftplan.setSelected(false);
+					
+					
 					
 				
 				}else{
@@ -366,16 +374,15 @@ public class TelaChamado extends JFrame {
 		textAreaDescricao.addKeyListener(new java.awt.event.KeyAdapter() { // terminar metodo, ver no trelo?????????????????????????????????????????????????????????????w
             public void keyReleased(java.awt.event.KeyEvent evt) {
             if(!chckbxSoftplan.isSelected()){
-            	RegistroChamado registroChamado= new RegistroChamado();
+            	
+            	NomesSolicitantes nomesSolicitantes= new NomesSolicitantes();
             	
             	try {
-					if(registroChamado.contemNomeSolicitante(textAreaDescricao.getText())){
-						textFieldSolicitante.setText(registroChamado.getNomeSolicitante());						
-					}					
-				} catch (IOException | URISyntaxException e ) {
+					textFieldSolicitante.setText(nomesSolicitantes.getNomeSoslicitante(textAreaDescricao.getText()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
-            	// Adirlana Teixeira da Silva
+				}
             	}
 		    }
 		});
