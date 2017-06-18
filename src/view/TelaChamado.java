@@ -25,6 +25,9 @@ import java.net.URISyntaxException;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 
+import model.CSVUtils;
+import model.Chamado;
+import model.NomesSolicitantes;
 import model.RegistroChamado;
 
 public class TelaChamado extends JFrame {
@@ -73,19 +76,56 @@ public class TelaChamado extends JFrame {
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//JOptionPane.showMessageDialog(null, "Artur Engenheiro");
-
-				if (checkBoxFone.isSelected()){
-					//ação
-				}
-	
-				if (chckbxRemoto.isSelected()){
-					//ação
-				}
 				
-				if (chckbxSoftplan.isSelected()){
-					//ação
+				
+				if(textAreaDescricao.getText()!=null&& textAreaDescricao.getText().trim().length() > 0 && textFieldSolicitante.getText()!=null&& textFieldSolicitante.getText().trim().length() > 0 ){
+					String descricaoProblema="";
+					boolean eFone= false;
+					boolean eRemoto= false;
+					boolean eSoft= false;
+					if (checkBoxFone.isSelected()){
+						eFone= true;
+					}
+		
+					if (chckbxRemoto.isSelected()){
+						eRemoto= true;
+					}
+					
+					if (chckbxSoftplan.isSelected()){
+						eSoft= true;
+						textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
+						//chckbxSoftplan.setSelected(false);
+						
+					}
+				
+					//CSVUtils csvUtils = new CSVUtils();
+					//Chamado chamado =new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), eSoft, eRemoto, eFone, textAreaDescricao.getText());
+					
+					if (!chckbxSoftplan.isSelected()){
+						textAreaDescricao.setText("");
+						textFieldSolicitante.setText("");
+						
+					}
+					checkBoxFone.setSelected(false);
+					chckbxRemoto.setSelected(false);
+					
+					
+					
+				
+				}else{
+					JOptionPane.showMessageDialog(null,"Existe algum campo em branco, por favor preencha");
 				}
+					
+				
+
+				
+				
+				
+				
+				
+				
+
+				
 								
 			}
 			@Override
@@ -134,36 +174,11 @@ public class TelaChamado extends JFrame {
 		label.setBounds(25, 133, 40, 47);
 		panelPainel.add(label);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.addMouseListener(new MouseAdapter() {
-		});
-		label_1.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/Execel.PNG")));
-		label_1.setBounds(25, 202, 40, 47);
-		panelPainel.add(label_1);
-		
-		JLabel lblPlanilha = new JLabel("Planilha");
-		lblPlanilha.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-				
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblPlanilha.setForeground(Color.black);
-			}
-			public void mouseExited(MouseEvent e) {
-				lblPlanilha.setForeground(Color.white);
-			}
-		});
-		lblPlanilha.setForeground(Color.WHITE);
-		lblPlanilha.setFont(new Font("Segoe UI Historic", Font.BOLD, 14));
-		lblPlanilha.setBounds(74, 220, 69, 21);
-		panelPainel.add(lblPlanilha);
-		
+	
+	
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/cadastrar2.PNG")));
-		label_2.setBounds(21, 318, 40, 47);
+		label_2.setBounds(25, 271, 40, 47);
 		panelPainel.add(label_2);
 		
 		JLabel lblCadastrar = new JLabel("Cadastrar");
@@ -182,14 +197,14 @@ public class TelaChamado extends JFrame {
 		});
 		lblCadastrar.setForeground(Color.WHITE);
 		lblCadastrar.setFont(new Font("Segoe UI Historic", Font.BOLD, 14));
-		lblCadastrar.setBounds(74, 336, 72, 21);
+		lblCadastrar.setBounds(71, 287, 72, 21);
 		panelPainel.add(lblCadastrar);
 		
 		JLabel label_7 = new JLabel("");
 		label_7.addMouseListener(new MouseAdapter() {
 		});
 		label_7.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/relatorio.png")));
-		label_7.setBounds(22, 260, 40, 47);
+		label_7.setBounds(25, 201, 40, 47);
 		panelPainel.add(label_7);
 		
 		JLabel lblRelatrio = new JLabel("Relat\u00F3rio");
@@ -230,7 +245,7 @@ public class TelaChamado extends JFrame {
 		});
 		lblRelatrio.setForeground(Color.WHITE);
 		lblRelatrio.setFont(new Font("Segoe UI Historic", Font.BOLD, 14));
-		lblRelatrio.setBounds(74, 279, 72, 20);
+		lblRelatrio.setBounds(71, 228, 72, 20);
 		panelPainel.add(lblRelatrio);
 		
 		textFieldLinha1 = new JTextField();
@@ -245,7 +260,7 @@ public class TelaChamado extends JFrame {
 		
 		textFieldLinha1.setForeground(Color.WHITE);
 		textFieldLinha1.setBackground(new Color(0, 0, 51));
-		textFieldLinha1.setBounds(6, 387, 24, 20);
+		textFieldLinha1.setBounds(4, 336, 24, 20);
 		panelPainel.add(textFieldLinha1);
 		textFieldLinha1.setColumns(10);
 		
@@ -262,7 +277,7 @@ public class TelaChamado extends JFrame {
 		textFieldLinha2.setForeground(Color.WHITE);
 		textFieldLinha2.setBackground(new Color(0, 0, 51));
 		textFieldLinha2.setColumns(10);
-		textFieldLinha2.setBounds(32, 387, 24, 20);
+		textFieldLinha2.setBounds(30, 336, 24, 20);
 		panelPainel.add(textFieldLinha2);
 		
 		JCheckBox chackBoxDefLinha = new JCheckBox("Def.Linha");
@@ -283,7 +298,7 @@ public class TelaChamado extends JFrame {
 		chackBoxDefLinha.setFont(new Font("Tahoma", Font.BOLD, 13));
 		chackBoxDefLinha.setForeground(Color.WHITE);
 		chackBoxDefLinha.setBackground(new Color(30, 144, 255));
-		chackBoxDefLinha.setBounds(54, 385, 97, 23);
+		chackBoxDefLinha.setBounds(55, 336, 97, 23);
 		panelPainel.add(chackBoxDefLinha);
 	
 		
@@ -359,16 +374,15 @@ public class TelaChamado extends JFrame {
 		textAreaDescricao.addKeyListener(new java.awt.event.KeyAdapter() { // terminar metodo, ver no trelo?????????????????????????????????????????????????????????????w
             public void keyReleased(java.awt.event.KeyEvent evt) {
             if(!chckbxSoftplan.isSelected()){
-            	RegistroChamado registroChamado= new RegistroChamado();
+            	
+            	NomesSolicitantes nomesSolicitantes= new NomesSolicitantes();
             	
             	try {
-					if(registroChamado.contemNomeSolicitante(textAreaDescricao.getText())){
-						textFieldSolicitante.setText(registroChamado.getNomeSolicitante());						
-					}					
-				} catch (IOException | URISyntaxException e ) {
+					textFieldSolicitante.setText(nomesSolicitantes.getNomeSoslicitante(textAreaDescricao.getText()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
-            	// Adirlana Teixeira da Silva
+				}
             	}
 		    }
 		});
