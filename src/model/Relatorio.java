@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -195,7 +197,27 @@ public class Relatorio {
 			//this.usuarioMInterecao= Coloca aqui o usuarui maior interacao;
 			//this.contUsuarioMInterecao= Coloca aqui a quantidade de vezes que ele apareceu.
 		}
-
+		public void quantLocalSistema() throws FileNotFoundException, IOException{
+			chamadoController = new ChamadoController();
+			List<Chamado> listaChamado= chamadoController.todosChamados();
+			List<String> localChamado = new ArrayList<>();
+			for(int l = 0; l < listaChamado.size(); l++){
+				localChamado.add(listaChamado.get(l).getLocalChamado());
+			}
+			String nome = "";
+			int maior=0;
+			for(int i=0; i<listaChamado.size(); i++){
+				int count = Collections.frequency(localChamado, localChamado.get(i));
+				if(count>maior){
+					maior=count;
+					nome= localChamado.get(i);					
+					 
+				}
+				this.localSistema=nome;
+				this.contLocalSistema=maior;				
+			}
+			System.out.println(nome);
+		}
 }
 
 

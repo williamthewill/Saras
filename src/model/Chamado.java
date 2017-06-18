@@ -8,6 +8,7 @@ public class Chamado {
 	private String dataAbertura;
 	private String nomeSolicitante;
 	private String setor;
+	private static String tipoAtendimento = "Solicitação";
 	private String descricaoSolicitante;
 	private String localChamado;
 	private int saltNum;
@@ -18,7 +19,6 @@ public class Chamado {
 	private String observacao; //Nome do atendente
 	private static int diasTrabalho = 0;
 	private boolean eSoftplan;
-	private static String tipoAtendimento = "Solicitação";
 	private String descricaoProblema;
 	private int estado;
 	
@@ -38,11 +38,10 @@ public class Chamado {
 		this.situacaoSalt = situacaoSalt;
 	}
 	
-	public Chamado(String nomeSolicitante, String setor, 
+	public Chamado(String nomeSolicitante,
 			String descricaoSlicitante, String localChamado, int saltNum, String situacaoAtual,
 			String observacao, boolean eSoftplan, String descricaoProblema){
 		this.nomeSolicitante = nomeSolicitante;
-		this.setor = setor;
 		this.descricaoProblema = descricaoProblema;
 		this.localChamado = localChamado;
 		this.saltNum = saltNum;
@@ -56,6 +55,8 @@ public class Chamado {
 		if(eSoftplan){
 			this.situacaoSalt = true;
 		}
+		this.setor = "";
+		this.descricaoSolicitante = descricaoSlicitante;
 	}
 	
 	public Chamado() {}
