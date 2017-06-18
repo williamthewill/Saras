@@ -39,14 +39,9 @@ public class Chamado {
 	}
 	
 	public Chamado(String nomeSolicitante,
-			String descricaoSlicitante, String localChamado, int saltNum, String situacaoAtual,
-			String observacao, boolean eSoftplan, String descricaoProblema){
+			String descricaoSlicitante,boolean eSoftplan, boolean eRemoto, boolean eFone, String descricaoProblema){
 		this.nomeSolicitante = nomeSolicitante;
 		this.descricaoProblema = descricaoProblema;
-		this.localChamado = localChamado;
-		this.saltNum = saltNum;
-		this.situacaoAtual = situacaoAtual;
-		this.observacao = observacao;
 		this.eSoftplan = eSoftplan;
 		this.descricaoProblema = descricaoProblema;
 		this.dataAbertura = FormataData.data;
@@ -62,12 +57,12 @@ public class Chamado {
 	public Chamado() {}
 	
 	public boolean eRemoto() {
-		if(descricaoProblema.contains("viadagem"));
+		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto."));
 		return true;
 	}
 	
 	public boolean eFone() {
-		if(descricaoProblema.contains("viadagem"));
+		if(descricaoProblema.contains("Este atendimento teve interação via telefone, referente a: "));
 		return true;
 	}
 	

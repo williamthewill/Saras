@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class CSVUtils {
 
     private static final char DEFAULT_SEPARATOR = ';';
@@ -55,7 +57,7 @@ public class CSVUtils {
     public void salvar(String arquivo, Chamado chamado) throws IOException {
     	File file = new File(arquivo);
 		if (!file.exists()) {
-			new FileWriter(arquivo);
+			new FileWriter(arquivo);		
 		}
 		FileWriter fw = new FileWriter(arquivo, true);
 		PrintWriter pw = new PrintWriter(fw);
