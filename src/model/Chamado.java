@@ -48,7 +48,7 @@ public class Chamado {
 	}
 	
 	public Chamado(String nomeSolicitante,
-			String descricaoSlicitante,boolean eSoftplan, boolean eRemoto, boolean eFone, String descricaoProblema){
+			String descricaoSolicitante,boolean eSoftplan, boolean eRemoto, boolean eFone, String descricaoProblema){
 		this.nomeSolicitante = nomeSolicitante;
 		this.descricaoProblema = descricaoProblema;
 		this.eSoftplan = eSoftplan;
@@ -60,8 +60,10 @@ public class Chamado {
 			this.situacaoSalt = true;
 		}
 		this.setor = "";
-		this.descricaoSolicitante = descricaoSlicitante;
+
+		this.descricaoSolicitante = descricaoSolicitante;
 		this.buscaLocalChamado();
+
 	}
 	
 	public Chamado() {}
@@ -77,13 +79,17 @@ public class Chamado {
 	}
 	
 	public boolean eRemoto() {
-		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto."));
-		return true;
+		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto.")){
+			return true;
+		};
+		return false;
 	}
 	
 	public boolean eFone() {
-		if(descricaoProblema.contains("Este atendimento teve interação via telefone, referente a: "));
-		return true;
+		if(descricaoProblema.contains("Este atendimento teve interação via telefone, referente a: ")){
+			return true;
+		}
+		return false;
 	}
 	
 	public int getEstado(){
