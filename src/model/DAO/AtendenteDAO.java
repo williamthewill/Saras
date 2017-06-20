@@ -10,6 +10,9 @@ import model.Atendente;
 public class AtendenteDAO {
 
 	private Atendente atendente;
+	public AtendenteDAO(Atendente atendente){
+		this.atendente = atendente;
+	}
 		
 	public boolean persiste(){
 		boolean returner = false;

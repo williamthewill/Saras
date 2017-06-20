@@ -20,15 +20,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 
-import model.CSVUtils;
-import model.Chamado;
 import model.NomesSolicitantes;
-import model.RegistroChamado;
 
 public class TelaChamado extends JFrame {
 
@@ -41,6 +37,7 @@ public class TelaChamado extends JFrame {
 	JCheckBox chckbxRemoto;
 	JCheckBox chckbxSoftplan;
 	
+	private ChamadoController chamadoController = new ChamadoController();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -95,38 +92,24 @@ public class TelaChamado extends JFrame {
 						eSoft= true;
 						textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
 						//chckbxSoftplan.setSelected(false);
-						
+						//chamadoController.insert(chamado);
+						//registrachamado.regitrar(chamado);
 					}
 				
 					//CSVUtils csvUtils = new CSVUtils();
-					//Chamado chamado =new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), eSoft, eRemoto, eFone, textAreaDescricao.getText());
+					//Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), eSoft, eRemoto, eFone, textAreaDescricao.getText());
 					
 					if (!chckbxSoftplan.isSelected()){
 						textAreaDescricao.setText("");
-						textFieldSolicitante.setText("");
-						
+						textFieldSolicitante.setText("");						
 					}
 					checkBoxFone.setSelected(false);
 					chckbxRemoto.setSelected(false);
-					
-					
-					
 				
 				}else{
 					JOptionPane.showMessageDialog(null,"Existe algum campo em branco, por favor preencha");
 				}
-					
-				
-
-				
-				
-				
-				
-				
-				
-
-				
-								
+			
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

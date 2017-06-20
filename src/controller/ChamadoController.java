@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import model.CSVUtils;
 import model.Chamado;
+import model.DAO.CSVUtils;
 import model.DAO.FactoryDAO;
 
 public class ChamadoController implements FactoryDAO<Chamado>{
@@ -16,11 +16,11 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 	@Override
 	public void insert(Object obj) {
 		Chamado chamado = (Chamado)obj;	
-	}
-
-	@Override
-	public void update(Object obj) {
-		
+		try {
+			csvUtils.salvar("./persistences/Chamados.csv", chamado);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -28,10 +28,8 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 		try {
 			return csvUtils.load("./persistences/Chamado.csv");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

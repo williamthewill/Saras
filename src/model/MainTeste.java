@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
-import model.CSVUtils;
+import model.DAO.CSVUtils;
 
 public class MainTeste {
 	public static void main(String[] args) throws FileNotFoundException, IOException {

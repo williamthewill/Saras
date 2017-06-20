@@ -13,11 +13,6 @@ public class AtendenteController implements FactoryDAO<Atendente>{
 	}
 
 	@Override
-	public void update(Object obj) {
-		
-	}
-
-	@Override
 	public List<Atendente> findAll() {
 		return null;
 	}
