@@ -60,11 +60,23 @@ public class Chamado {
 			this.situacaoSalt = true;
 		}
 		this.setor = "";
+
 		this.descricaoSolicitante = descricaoSolicitante;
+		this.buscaLocalChamado();
+
 	}
 	
 	public Chamado() {}
 	
+	private void buscaLocalChamado(){
+		LocaisDoSistemaCollection locaisDoSistemaCollection = new LocaisDoSistemaCollection();
+		for(int i = 0; i < locaisDoSistemaCollection.getCollectionLocaisDoSistema().size(); i++){
+			if(this.descricaoSolicitante.toLowerCase().contains(locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i).toLowerCase())){
+				this.localChamado = locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i);
+				break;
+			}
+		}
+	}
 	
 	public boolean eRemoto() {
 		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto.")){

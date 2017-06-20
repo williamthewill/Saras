@@ -16,7 +16,7 @@ public class CSVUtils {
 
     private static final char DEFAULT_SEPARATOR = ';';
     
-    @SuppressWarnings({ "static-access", "static-access" })
+    @SuppressWarnings("static-access")
 	private String followCVSformat(Chamado chamado) {
         String chamadoLine = chamado.getDataAbertura();
         chamadoLine += DEFAULT_SEPARATOR;
