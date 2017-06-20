@@ -1,6 +1,3 @@
-
-//esta classe não vale: vale a do William, que vai comitar no GITHUB
-
 package model;
 
 public class Chamado {
@@ -39,7 +36,7 @@ public class Chamado {
 	}
 	
 	public Chamado(String nomeSolicitante,
-			String descricaoSlicitante,boolean eSoftplan, boolean eRemoto, boolean eFone, String descricaoProblema){
+			String descricaoSolicitante,boolean eSoftplan, boolean eRemoto, boolean eFone, String descricaoProblema){
 		this.nomeSolicitante = nomeSolicitante;
 		this.descricaoProblema = descricaoProblema;
 		this.eSoftplan = eSoftplan;
@@ -51,8 +48,9 @@ public class Chamado {
 			this.situacaoSalt = true;
 		}
 		this.setor = "";
-		this.descricaoSolicitante = descricaoSlicitante;
+		this.descricaoSolicitante = descricaoSolicitante;
 		this.buscaLocalChamado();
+
 	}
 	
 	public Chamado() {}
@@ -68,13 +66,17 @@ public class Chamado {
 	}
 	
 	public boolean eRemoto() {
-		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto."));
-		return true;
+		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto.")){
+			return true;
+		};
+		return false;
 	}
 	
 	public boolean eFone() {
-		if(descricaoProblema.contains("Este atendimento teve interação via telefone, referente a: "));
-		return true;
+		if(descricaoProblema.contains("Este atendimento teve interação via telefone, referente a: ")){
+			return true;
+		}
+		return false;
 	}
 	
 	public int getEstado(){
@@ -89,41 +91,33 @@ public class Chamado {
 		return dataAbertura;
 	}
 
-
 	public String getSetor() {
 		return setor;
 	}
-
 
 	public String getTipoAtendimento() {
 		return tipoAtendimento;
 	}
 
-
 	public int getSaltNum() {
 		return saltNum;
 	}
-
 
 	public String getSituacaoAtual() {
 		return situacaoAtual;
 	}
 
-
 	public boolean getSituacaoSalt() {
 		return situacaoSalt;
 	}
-
 
 	public String getDataEncerramento() {
 		return dataEncerramento;
 	}
 
-
 	public static String getSolucao() {
 		return solucao;
 	}
-
 
 	public String getObservacao() {
 		return observacao;
@@ -142,41 +136,33 @@ public class Chamado {
 		this.saltNum = saltNum;
 	}
 
-
 	public void setSituacaoAtual(String situacaoAtual) {
 		this.situacaoAtual = situacaoAtual;
 	}
-
 
 	public void setSituacaoSalt(boolean situacaoSalt) {
 		this.situacaoSalt = situacaoSalt;
 	}
 
-
 	public void setDataEncerramento(String dataEncerramento) {
 		this.dataEncerramento = dataEncerramento;
 	}
-
 
 	public static void setSolucao(String solucao) {
 		Chamado.solucao = solucao;
 	}
 
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
 
 	public void setDescricaoProblema(String descricaoProblema) {
 		this.descricaoProblema = descricaoProblema;
 	}
 
-
 	public void setDescricaoSolicitante(String descricaoSolicitante) {
 		this.descricaoSolicitante = descricaoSolicitante;
 	}
-
 
 	public void setNomeSolicitante(String nomeSolicitante) {
 		this.nomeSolicitante = nomeSolicitante;
@@ -204,7 +190,5 @@ public class Chamado {
 
 	public String getLocalChamado() {
 		return localChamado;
-	}
-
-	
+	}	
 }
