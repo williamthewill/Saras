@@ -58,12 +58,12 @@ public class Chamado {
 	
 	private void buscaLocalChamado(){
 		LocaisDoSistemaCollection locaisDoSistemaCollection = new LocaisDoSistemaCollection();
-		for(int i = 0; i < locaisDoSistemaCollection.getCollectionLocaisDoSistema().size(); i++){
-			if(this.descricaoSolicitante.toLowerCase().contains(locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i).toLowerCase())){
-				this.localChamado = locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i);
-				break;
-			}
-		}
+//		for(int i = 0; i < locaisDoSistemaCollection.getCollectionLocaisDoSistema().size(); i++){
+//			if(this.descricaoSolicitante.toLowerCase().contains(locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i).toLowerCase())){
+//				this.localChamado = locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i);
+//				break;
+//			}
+//		}
 	}
 	
 	public boolean eRemoto() {

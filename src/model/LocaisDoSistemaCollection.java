@@ -1,160 +1,50 @@
 package model;
 
-import java.util.ArrayList;
-
 public class LocaisDoSistemaCollection {
-	private String[][] locaisDoSistema;
-	
-	public LocaisDoSistemaCollection() {
-		locaisDoSistema[0][0] = "Acesso ao Sistema(instalação/atualização)";
-			locaisDoSistema[0][1] = "08.20";
-			
-		locaisDoSistema[1][0] = "Acesso ao Sistema (lotação de usuários)";
-			locaisDoSistema[0][1] = "lotação"; 
-			locaisDoSistema[0][1] = "lotar"; 
-			locaisDoSistema[0][1] = "liberar acesso"; 
-			locaisDoSistema[0][1] = "Solicito acesso "; 
-			locaisDoSistema[0][1] = "Solicitar acesso"; 
-			locaisDoSistema[0][1] = "lotação"; 
-			locaisDoSistema[0][1] = "liberar meu acesso"; 
-			locaisDoSistema[0][1] = "substituição"; 
-			locaisDoSistema[0][1] = "substituir";
-		locaisDoSistema[2][0] = "Acesso ao Sistema (outras causas)";
-			locaisDoSistema[0][1] = "fundo"; 
-			locaisDoSistema[0][1] = "fundo de garantia"; 
-			locaisDoSistema[0][1] = "acompanhamento de tac"; 
-			locaisDoSistema[0][1] = "TAC"; 
-			locaisDoSistema[0][1] = "boleto"; 
-			locaisDoSistema[0][1] = "FRBL"; 
-			locaisDoSistema[0][1] = "frbl";
-		locaisDoSistema[3][0] = "Agenda";
-		locaisDoSistema[4][0] = "AVA - Ambiente Virtual de Aprendizagem";
-		locaisDoSistema[5][0] = "Banco de Pareceres";
-		locaisDoSistema[6][0] = "Banco de Teses";
-		locaisDoSistema[7][0] = "Cadastro Controlado de Pessoas";
-		locaisDoSistema[8][0] = "Cadastro da Corregedoria";
-		locaisDoSistema[9][0] = "Cadastro de Atendimentos";
-		locaisDoSistema[10][0] = "Cadastro de Manifestações da Ouvidoria";
-		locaisDoSistema[11][0] = "Cadastro de Modelos";
-		locaisDoSistema[12][0] = "Cadastro de Notícia de Fato";
-			locaisDoSistema[0][1] = "noticia de fato"; 
-			locaisDoSistema[0][1] = "notícia de fato"; 
-			locaisDoSistema[0][1] = "01.20"; 
-			locaisDoSistema[0][1] = "0120";
-		locaisDoSistema[13][0] = "Cadastro de Notícia de Fato Antiga";
-		locaisDoSistema[14][0] = "Cadastro de Procedimento";
-			locaisDoSistema[0][1] = "cadastro  de procedimento"; 
-			locaisDoSistema[0][1] = "converter"; 
-			locaisDoSistema[0][1] = "06.20"; 
-			locaisDoSistema[0][1] = "09.20"; 
-			locaisDoSistema[0][1] = "07"; 
-			locaisDoSistema[0][1] = "02"; 
-			locaisDoSistema[0][1] = "01"; 
-			locaisDoSistema[0][1] = "0"; locaisDoSistema[0][1] = "cadastro extra judicial"; locaisDoSistema[0][1] = "extra judicial"; locaisDoSistema[0][1] = "procedimento administrativo"; locaisDoSistema[0][1] = "processo preparatorio"; locaisDoSistema[0][1] = "notícia de fatos"; locaisDoSistema[0][1] = "inquerito cívil"; locaisDoSistema[0][1] = "tac"; locaisDoSistema[0][1] = " prorrogação";
-		locaisDoSistema[15][0] = "Cadastro de Procedimento Administrativo";
-		locaisDoSistema[16][0] = "Cadastro de Procedimento Administrativo Antigo";
-		locaisDoSistema[17][0] = "Cadastro de Procedimento Antigo";
-		locaisDoSistema[18][0] = "Cadastro de Processo (2º Grau)";
-			locaisDoSistema[0][1] = "2º grau"; 
-			locaisDoSistema[0][1] = "peticionamento em 2º grau |recurso"; 
-			locaisDoSistema[0][1] = "agravo"; locaisDoSistema[0][1] = "agravar"; 
-			locaisDoSistema[0][1] = "recorrer"; 
-			locaisDoSistema[0][1] = "segundo grau"; 
-			locaisDoSistema[0][1] = "peticionamento em segundo grau"; 
-			locaisDoSistema[0][1] = "contra recurso"; 
-			locaisDoSistema[0][1] = "copij";
-			locaisDoSistema[0][1] = "COPIJ"; 
-			locaisDoSistema[0][1] = "suscitação";
-		locaisDoSistema[19][0] = "Cadastro de Processo Judicial";
-			locaisDoSistema[19][1] = "08.20";
-			locaisDoSistema[19][1] = "fisico";
-			locaisDoSistema[19][1] = "físico";
-			locaisDoSistema[19][1] = "fisicos";
-			locaisDoSistema[19][1] = "processos eletrônicos";
-			locaisDoSistema[19][1] = "processo eletrônico";
-		locaisDoSistema[20][0] = "Cadastro de Protocolo";
-			locaisDoSistema[0][1] = "02.20"; 
-			locaisDoSistema[0][1] = "0220"; 
-			locaisDoSistema[0][1] = "protocolo";
-		locaisDoSistema[21][0] = "Cadastro de Registros Públicos";
-		locaisDoSistema[22][0] = "Cadastro de Solicitações de Apoio";
-		locaisDoSistema[23][0] = "Carga, remessa e distribuição";
-			locaisDoSistema[0][1] = "Carga Importação "; 
-			locaisDoSistema[0][1] = "carga importação "; 
-			locaisDoSistema[0][1] = "carga"; 
-			locaisDoSistema[0][1] = "recebimento"; 
-			locaisDoSistema[0][1] = "recebimento de processos"; 
-			locaisDoSistema[0][1] = "Importação"; 
-			locaisDoSistema[0][1] = "receber processos"; 
-			locaisDoSistema[0][1] = "remessa"; 
-			locaisDoSistema[0][1] = "distribuição";
-		locaisDoSistema[24][0] = "Consulta";
-		locaisDoSistema[25][0] = "Editor de Textos";
-				locaisDoSistema[0][1] = "Editor de textos"; 
-				locaisDoSistema[0][1] = "Editor de documentos"; 
-				locaisDoSistema[0][1] = "editor de texto do sig"; 
-				locaisDoSistema[0][1] = "editor sig"; 
-				locaisDoSistema[0][1] = "fonte"; 
-				locaisDoSistema[0][1] = "instalar fonte"; 
-				locaisDoSistema[0][1] = "campo automaticos"; 
-				locaisDoSistema[0][1] = "modelo"; 
-				locaisDoSistema[0][1] = "campo automatico"; 
-				locaisDoSistema[0][1] = "auto texto"; 
-				locaisDoSistema[0][1] = "auto completar";
-		locaisDoSistema[26][0] = "Elogio";
-		locaisDoSistema[27][0] = "Emissão de Documentos";
-		locaisDoSistema[28][0] = "Fluxo de Trabalho";
-		locaisDoSistema[29][0] = "Gerenciador de Arquivos";
-			locaisDoSistema[0][1] = "Gerenciador de Arquivos"; 
-			locaisDoSistema[0][1] = "achar documento"; 
-			locaisDoSistema[0][1] = "modelos"; 
-			locaisDoSistema[0][1] = "modelo"; 
-			locaisDoSistema[0][1] = "gerenciador"; 
-			locaisDoSistema[0][1] = "lixeira";
-		locaisDoSistema[30][0] = "Integração com o Poder Judiciário";
-		locaisDoSistema[31][0] = "Lentidão ou Travamento";
-		locaisDoSistema[32][0] = "Pasta Digital";
-			locaisDoSistema[0][1] = "pasta digital"; 
-			locaisDoSistema[0][1] = "pasta digital do sig"; 
-			locaisDoSistema[0][1] = "assinatura";
-		locaisDoSistema[33][0] = "Pasta Digital do TJ";
-			locaisDoSistema[0][1] = "pasta digital do tj"; 
-			locaisDoSistema[0][1] = "pasta tj"; 
-			locaisDoSistema[0][1] = "documentos pasta"; 
-			locaisDoSistema[0][1] = "tj está fora"; 
-			locaisDoSistema[0][1] = "tj instavél"; 
-			locaisDoSistema[0][1] = "tj intavel";
-		locaisDoSistema[34][0] = "Pendências e Prazos";
-			locaisDoSistema[0][1] = "pendências"; 
-			locaisDoSistema[0][1] = "pendência"; 
-			locaisDoSistema[0][1] = "prazo"; 
-			locaisDoSistema[0][1] = "gerar pendência"; 
-			locaisDoSistema[0][1] = "pendencia de processo"; 
-			locaisDoSistema[0][1] = "pendencia";
-		locaisDoSistema[35][0] = "Peticionamento Eletrônico";
-			locaisDoSistema[35][1] = "Peticionamento"; 
-			locaisDoSistema[0][1] = "peticionar"; 
-			locaisDoSistema[0][1] = "peticionamento bloqueado"; 
-			locaisDoSistema[0][1] = "competência"; 
-			locaisDoSistema[0][1] = "classe"; 
-			locaisDoSistema[0][1] = "parte mpsc"; 
-			locaisDoSistema[0][1] = "peticionamento"; 
-			locaisDoSistema[0][1] = "assunto inexistente";
-		locaisDoSistema[36][0] = "Portal do SIG - Internet";
-		locaisDoSistema[37][0] = "Problema Alheio ao SIG/MPSC";
-		
-		locaisDoSistema[38][0] = "Problema com Cadastros em Geral";
-		locaisDoSistema[39][0] = "Processo Eletrônico";
-		locaisDoSistema[40][0] = "Taxonomia (Classes, Assuntos e Movimentos)";
-		locaisDoSistema[41][0] = "Tela Principal do SIG";
-			locaisDoSistema[0][1] = "acesso rápido"; 
-			locaisDoSistema[0][1] = "tela inicia"; 
-			locaisDoSistema[0][1] = "links importantes"; 
-			locaisDoSistema[0][1] = "atualização de tela"; 
-			locaisDoSistema[0][1] = " notificações";
-	}
+	private String[][] locaisDoSistema = {
+			{"Acesso ao Sistema(instalação/atualização)", "instalar", "reinstalar", "acessar o sig"},			
+			{"Acesso ao Sistema (lotação de usuários)", "lotação", "lotar", "liberar acesso", "Solicito acesso ", "Solicitar acesso", "lotação", "liberar meu acesso", "substituição", "substituir"},
+			{"Acesso ao Sistema (outras causas)", "fundo", "fundo de garantia", "acompanhamento de tac", "TAC", "boleto", "FRBL", "frbl"},
+			{"Agenda"},
+			{"AVA - Ambiente Virtual de Aprendizagem", "Banco de Pareceres", "Banco de Teses", "Cadastro Controlado de Pessoas", "Cadastro da Corregedoria", "Cadastro de Atendimentos", "Cadastro de Manifestações da Ouvidoria", "Cadastro de Modelos"},
+			{"Cadastro de Notícia de Fato", "noticia de fato", "notícia de fato", "01.2016.", "01201600"},
+			{"Cadastro de Notícia de Fato Antiga"},
+			{"Cadastro de Procedimento", "cadastro  de procedimento", "converter", "06.20", "09", "07", "01", "cadastro extra judicial", "procedimento administrativo", "processo preparatório", "notícia de fatos", "inquerito cívil", "tac"},
+			{"Cadastro de Procedimento Administrativo", "Cadastro de Procedimento Administrativo Antigo", "Cadastro de Procedimento Antigo"},
+			{"Cadastro de Processo (2º Grau)", "2º grau", "peticionamento em 2º grau |recurso", "agravo", "agravar", "recorrer", "segundo grau", "peticionamento em segundo grau", "contra recurso", "copij", "COPIJ", "suscitação"},
+			{"Cadastro de Processo Judicial",  "08.20", "fisico", "físico", "fisicos", "processos eletrônicos", "processo eletrônico"},
+			{"Cadastro de Protocolo", "02.20", "0220", "protocolo", "Cadastro de Registros Públicos", "Cadastro de Solicitações de Apoio"},
+			{"Carga, remessa e distribuição", "Carga Importação ", "carga importação ", "carga", "recebimento", "recebimento de processos", "Importação", "receber processos", "remessa", "distribuição"},
+			{"Consulta"},
+			{"Editor de Textos", "Editor de textos", "Editor de documentos", "editor de texto do sig", "editor sig", "fonte", "instalar fonte", "campo automaticos", "modelo", "campo automatico", "auto texto", "auto completar"},
+			{"Elogio"},
+			{"Emissão de Documentos"},
+			{"Fluxo de Trabalho"},
+			{"Gerenciador de Arquivos", "Gerenciador de Arquivos", "achar documento", "modelos", "modelo", "gerenciador", "lixeira"},
+			{"Integração com o Poder Judiciário"},
+			{"Lentidão ou Travamento"},
+			{"Pasta Digital", "pasta digital", "pasta digital do sig"},
+			{"Pasta Digital do TJ", "pasta digital do tj", "pasta tj", "documentos pasta", "tj está fora", "tj instável"},
+			{"Pendências e Prazos", "pendências", "pendência", "prazo", "gerar pendência", "pendencia de processo", "pendencia"},
+			{"Peticionamento Eletrônico", "Peticionamento", "peticionar", "peticionamento bloqueado", "competência", "classe", "parte mpsc", "peticionamento", "assunto inexistente"},
+			{"Portal do SIG - Internet"},
+			{"Problema Alheio ao SIG/MPSC", "SAU", "sau"},
+			{"Problema com Cadastros em Geral", "Processo Eletrônico", "Taxonomia (Classes, Assuntos e Movimentos)"},
+			{"Tela Principal do SIG", "acesso rápido", "tela inicial", "links importantes", "atualização de tela", "notificações"}
+	};
 	
 	public String[][] getCollectionLocaisDoSistema(){
 		return this.locaisDoSistema;
+	}
+	
+	public String containsInCollection(String description){
+		for(int i = 0; i < locaisDoSistema.length; i++){
+			for(int j = 0; j < locaisDoSistema[i].length; j++){
+				if(description.contains(locaisDoSistema[i][j])){
+					return locaisDoSistema[i][0];
+				}
+			}
+		}
+		return null;
 	}
 }
