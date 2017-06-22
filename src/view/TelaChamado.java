@@ -29,6 +29,9 @@ import model.CSVUtils;
 import model.Chamado;
 import model.NomesSolicitantes;
 import model.RegistroChamado;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaChamado extends JFrame {
 
@@ -40,7 +43,9 @@ public class TelaChamado extends JFrame {
 	JCheckBox checkBoxFone;
 	JCheckBox chckbxRemoto;
 	JCheckBox chckbxSoftplan;
-	
+	static String descriProblema="";
+	static String descricaoSoliciatante= "";
+	static int cont=0;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -71,18 +76,20 @@ public class TelaChamado extends JFrame {
 		contentPane.add(panelPainel);
 		panelPainel.setLayout(null);
 		
+		JLabel alertaEsof = new JLabel("");
 		JLabel lblSalvar = new JLabel("Salvar");
-	
+		
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				
 				if(textAreaDescricao.getText()!=null&& textAreaDescricao.getText().trim().length() > 0 && textFieldSolicitante.getText()!=null&& textFieldSolicitante.getText().trim().length() > 0 ){
-					String descricaoProblema="";
+					
 					boolean eFone= false;
 					boolean eRemoto= false;
 					boolean eSoft= false;
+				
+		
 					if (checkBoxFone.isSelected()){
 						eFone= true;
 					}
@@ -91,42 +98,63 @@ public class TelaChamado extends JFrame {
 						eRemoto= true;
 					}
 					
-					if (chckbxSoftplan.isSelected()){
-						eSoft= true;
-						textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
-						//chckbxSoftplan.setSelected(false);
+					
+					if(descriProblema!=""){
+						
+						chckbxSoftplan.setSelected(false);
+						descriProblema= textAreaDescricao.getText();
+						
+						
+						CSVUtils csvUtils = new CSVUtils();	
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoSoliciatante, eSoft, eRemoto, eFone, descriProblema);
+						try {
+							csvUtils.salvar("./persistences/Chamado.csv", chamado);
+							
+						} catch (IOException e) {
+							
+							JOptionPane.showMessageDialog(null, "O arquivo está sendo aberto em outra operação");
+							descriProblema="";
+						}
+						JOptionPane.showMessageDialog(null, "Cadastra");
+						descriProblema="";
 						
 					}
-				
-					//CSVUtils csvUtils = new CSVUtils();
-					//Chamado chamado =new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), eSoft, eRemoto, eFone, textAreaDescricao.getText());
+					
+					if (chckbxSoftplan.isSelected()){
+							descricaoSoliciatante=textAreaDescricao.getText();
+							descriProblema="contemParte";
+							JOptionPane.showMessageDialog(null, "Agora descreva o problema a ser enviado para Softplan \nATENÇÃO! após clicar em SALVAR o seu chamado vai ser cadastrado. ");
+							eSoft= true;
+							alertaEsof.setText("");
+							textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
+			
+					}
+					
+
+					
 					
 					if (!chckbxSoftplan.isSelected()){
+						
+						CSVUtils csvUtils = new CSVUtils();	
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoSoliciatante, eSoft, eRemoto, eFone, descriProblema);
+						try {
+							csvUtils.salvar("./persistences/Chamado.csv", chamado);
+							
+						} catch (IOException e) {
+							
+							JOptionPane.showMessageDialog(null, "O arquivo está sendo aberto em outra operação");
+						}
+						
+						
 						textAreaDescricao.setText("");
 						textFieldSolicitante.setText("");
-						
 					}
 					checkBoxFone.setSelected(false);
 					chckbxRemoto.setSelected(false);
-					
-					
-					
 				
-				}else{
+				}else
 					JOptionPane.showMessageDialog(null,"Existe algum campo em branco, por favor preencha");
-				}
-					
-				
-
-				
-				
-				
-				
-				
-				
-
-				
-								
+							
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -300,8 +328,8 @@ public class TelaChamado extends JFrame {
 		chackBoxDefLinha.setBackground(new Color(30, 144, 255));
 		chackBoxDefLinha.setBounds(55, 336, 97, 23);
 		panelPainel.add(chackBoxDefLinha);
-	
 		
+	
 		checkBoxFone = new JCheckBox("Fone");
 		checkBoxFone.addMouseListener(new MouseAdapter() {
 						@Override
@@ -354,14 +382,29 @@ public class TelaChamado extends JFrame {
 		
 		
 		chckbxSoftplan = new JCheckBox("Softplan");
+		
 		chckbxSoftplan.addMouseListener(new MouseAdapter() {
 			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(chckbxSoftplan.isSelected()){
+					
+					alertaEsof.setText("Cole ou descreva o seu atendimento!");
+					
+				}else{
+					alertaEsof.setText("");
+				}
+					
+				
+			}
+			
 			public void mouseEntered(MouseEvent arg0) {
 				chckbxSoftplan.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent e) {
 				chckbxSoftplan.setForeground(SystemColor.textHighlight);
 			}
+			
+			
 		});
 		chckbxSoftplan.setFont(new Font("Tahoma", Font.BOLD, 13));
 		chckbxSoftplan.setForeground(SystemColor.textHighlight);
@@ -521,6 +564,12 @@ public class TelaChamado extends JFrame {
 		lblVoltar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblVoltar.setBounds(610, 502, 34, 14);
 		contentPane.add(lblVoltar);
+		
+		
+		alertaEsof.setFont(new Font("Tahoma", Font.BOLD, 15));
+		alertaEsof.setForeground(Color.RED);
+		alertaEsof.setBounds(293, 484, 284, 23);
+		contentPane.add(alertaEsof);
 		
 		
 	}
