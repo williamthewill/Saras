@@ -2,10 +2,12 @@ package model.DAO;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import model.Atendente;
+import model.Conecta;
 
 public class AtendenteDAO {
 
@@ -13,11 +15,27 @@ public class AtendenteDAO {
 	public AtendenteDAO(Atendente atendente){
 		this.atendente = atendente;
 	}
+	
+	public Boolean validaUsuarioPortal() throws IOException, InterruptedException{
+		boolean returner = false;
+		Conecta conecta = new Conecta();
+		boolean autenticado = conecta.conectaAutentica( this.atendente);
+		
+		if(autenticado){
+			conecta.close();
+			returner = this.persiste();
+		}else{
+			throw new RuntimeException("Login não consta no portal MPSC");
+			
+		}
+		
+		return returner;
+	}
 		
 	public boolean persiste(){
 		boolean returner = false;
 		 try{
-            FileOutputStream arquivoGrav = new FileOutputStream("./media/Atendente.ser");
+            FileOutputStream arquivoGrav = new FileOutputStream("./persistences/Atendente.ser");
             
 			ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
             

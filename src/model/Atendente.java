@@ -1,6 +1,10 @@
 package model;
 
-public class Atendente {
+import java.io.Serializable;
+
+public class Atendente implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String nome;
 	private String usuario;
