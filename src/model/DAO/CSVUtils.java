@@ -1,4 +1,4 @@
-package model;
+package model.DAO;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import model.Chamado;
 
 public class CSVUtils {
 
@@ -54,6 +56,15 @@ public class CSVUtils {
         return chamadoLine;
     }
 
+    private Chamado createChamado(String line){
+    	String[] lineAttributes = line.split(";");
+    	return new Chamado(lineAttributes[0], lineAttributes[1], 
+				lineAttributes[2], lineAttributes[4], 
+				lineAttributes[5], Integer.parseInt(lineAttributes[6]), 
+				lineAttributes[7], Boolean.parseBoolean(lineAttributes[8]), lineAttributes[11], 
+				Boolean.parseBoolean(lineAttributes[13]), lineAttributes[14], Integer.parseInt(lineAttributes[15]));
+    }
+    
     public void salvar(String arquivo, Chamado chamado) throws IOException {
     	File file = new File(arquivo);
 		if (!file.exists()) {
@@ -74,16 +85,36 @@ public class CSVUtils {
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 		String line = br.readLine();
 		int currentLine = 1;
+		List<Chamado> chamados = new ArrayList<>();
 		while( line != null ){
 			if(currentLine >= position){
-				System.out.println(currentLine);
-				System.out.println(line);				
+				chamados.add(createChamado(line));		
 			}
 			currentLine++;
 			line = br.readLine();
 		}
 		br.close();
-		return null;
+		return chamados;
+	}
+	
+	public List<Chamado> load(String arquivo, int beginPosition, int endPosition) throws FileNotFoundException, IOException {
+		File file = new File(arquivo);
+		if (!file.exists()) {
+			return null;
+		}
+		BufferedReader br = new BufferedReader(new FileReader(arquivo));
+		String line = br.readLine();
+		int currentLine = 1;
+		List<Chamado> chamados = new ArrayList<>();
+		while( line != null ){
+			if(currentLine >= beginPosition && currentLine <= endPosition){				
+				chamados.add(createChamado(line));				
+			}
+			currentLine++;
+			line = br.readLine();
+		}
+		br.close();
+		return chamados;
 	}
 	
 	public List<Chamado> load(String arquivo) throws FileNotFoundException, IOException {
@@ -93,19 +124,11 @@ public class CSVUtils {
 		}
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 		String line = br.readLine();
-		String lineAttributes[];
 		List<Chamado> allChamados = new ArrayList<>();
 		Chamado chamado;
-		int currentLine = 1;
 		while( line != null ){
-			lineAttributes = line.split(";");
-			chamado = new Chamado(lineAttributes[0], lineAttributes[1], 
-					lineAttributes[2], lineAttributes[4], 
-					lineAttributes[5], Integer.parseInt(lineAttributes[6]), 
-					lineAttributes[7], Boolean.parseBoolean(lineAttributes[8]), lineAttributes[11], 
-					Boolean.parseBoolean(lineAttributes[13]), lineAttributes[14], Integer.parseInt(lineAttributes[15]));
+			chamado = createChamado(line);
 			allChamados.add(chamado);
-			currentLine++;
 			line = br.readLine();
 		}
 		br.close();

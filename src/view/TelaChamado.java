@@ -20,7 +20,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
@@ -28,10 +27,13 @@ import javax.swing.JTextArea;
 import model.CSVUtils;
 import model.Chamado;
 import model.NomesSolicitantes;
+<<<<<<< HEAD
 import model.RegistroChamado;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+=======
+>>>>>>> 7f1274c2c6868a46f22336d57ef459d54514bfd0
 
 public class TelaChamado extends JFrame {
 
@@ -43,9 +45,14 @@ public class TelaChamado extends JFrame {
 	JCheckBox checkBoxFone;
 	JCheckBox chckbxRemoto;
 	JCheckBox chckbxSoftplan;
+<<<<<<< HEAD
 	static String descriProblema="";
 	static String descricaoSoliciatante= "";
 	static int cont=0;
+=======
+	
+	private ChamadoController chamadoController = new ChamadoController();
+>>>>>>> 7f1274c2c6868a46f22336d57ef459d54514bfd0
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -98,7 +105,7 @@ public class TelaChamado extends JFrame {
 						eRemoto= true;
 					}
 					
-					
+
 					if(descriProblema!=""){
 						
 						chckbxSoftplan.setSelected(false);
@@ -130,8 +137,6 @@ public class TelaChamado extends JFrame {
 			
 					}
 					
-
-					
 					
 					if (!chckbxSoftplan.isSelected()){
 						
@@ -145,16 +150,14 @@ public class TelaChamado extends JFrame {
 							JOptionPane.showMessageDialog(null, "O arquivo está sendo aberto em outra operação");
 						}
 						
-						
-						textAreaDescricao.setText("");
-						textFieldSolicitante.setText("");
+					
 					}
 					checkBoxFone.setSelected(false);
 					chckbxRemoto.setSelected(false);
 				
 				}else
 					JOptionPane.showMessageDialog(null,"Existe algum campo em branco, por favor preencha");
-							
+
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

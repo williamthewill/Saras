@@ -1,8 +1,7 @@
 package controller;
 
-
 import model.Atendente;
-import model.PersisteAtendente;
+import model.DAO.AtendenteDAO;
 
 public class CadastroAtendente{
 	
@@ -11,9 +10,6 @@ public class CadastroAtendente{
 	public CadastroAtendente(Atendente atendente){
 		this.atendente=atendente;
 	}
-	
-	
-	
 	
 	public void setAtendente(Atendente atendente){
 		this.atendente = atendente;
@@ -24,7 +20,6 @@ public class CadastroAtendente{
 	}
 	
 	public Boolean validaUsuarioPortal(){
-		System.out.println(atendente.getUsuario());
 		boolean returner = false;
 		
 		returner = this.persisteAtendente();//remover quando implementar o codigo comentado abaixo
@@ -42,7 +37,7 @@ public class CadastroAtendente{
 	}
 	
 	public Boolean persisteAtendente(){
-		 PersisteAtendente persiste = new PersisteAtendente(atendente);
+		 AtendenteDAO persiste = new AtendenteDAO(atendente);
 		 return persiste.persiste();
 	}
 }
