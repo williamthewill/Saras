@@ -35,7 +35,7 @@ public class CadastroAtendente{
 		if(autenticado){
 			returner = this.persisteAtendente();
 		}else{
-			JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
+			JOptionPane.showMessageDialog(null,("Login não encontrado no portal MPSC"));
 		}
 		
 		return returner;

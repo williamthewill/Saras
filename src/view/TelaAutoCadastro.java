@@ -118,7 +118,7 @@ public class TelaAutoCadastro extends JFrame {
 
 				if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
 						&& texfeadSenha.getText() != null && texfeadSenha.getText().trim().length() > 0) {
-					System.out.println("PAss2");
+				
 					Atendente atendente = new Atendente();
 					try {
 
@@ -131,8 +131,7 @@ public class TelaAutoCadastro extends JFrame {
 						cadastro.validaUsuarioPortal();
 
 					} catch (IOException | InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
 					}
 
 				}else{

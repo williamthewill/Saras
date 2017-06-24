@@ -27,7 +27,7 @@ public class TelaLogin extends JFrame {
 	static private JTextField textFieldNome;
 	static private JPasswordField passwordFieldSenha;
 	private JLabel lbEntrarLb;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,6 +42,7 @@ public class TelaLogin extends JFrame {
 			}
 		});
 	}
+
 	public TelaLogin() {
 		setTitle("SARAS   Vers\u00E3o: 0.0.1");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaLogin.class.getResource("/Imagens/SarasIco_ne.png")));
@@ -78,46 +79,55 @@ public class TelaLogin extends JFrame {
 		lbEntrarLb = new JLabel("");
 
 		lblEntrar.addMouseListener(new MouseAdapter() {
-			
+
 			public void mouseClicked(MouseEvent e) {
 
-				Atendente atendente = new Atendente();
+				if (textFieldNome.getText() != null && textFieldNome.getText().trim().length() > 0
+						&& passwordFieldSenha.getText() != null && passwordFieldSenha.getText().trim().length() > 0) {
 
-				atendente.setUsuarioRede(textFieldNome.getText());
-				char[] chars = passwordFieldSenha.getPassword();
-				String senhaTextField = String.valueOf(chars);
-				atendente.setSenha(senhaTextField);
+					Atendente atendente = new Atendente();
 
-				AtendenteController atendenteController = new AtendenteController();
-				Atendente atendentePer = atendenteController.recuperaAtende();
+					atendente.setUsuarioRede(textFieldNome.getText());
+					char[] chars = passwordFieldSenha.getPassword();
+					String senhaTextField = String.valueOf(chars);
+					atendente.setSenha(senhaTextField);
 
-				if (atendente.getUsuarioRede().equals(atendentePer.getUsuarioRede())
-						&& atendente.getSenha().equals(atendentePer.getSenha())) {
-					// chama entra na tela de cadastro se bater usuario e senha
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								TelaChamado frame = new TelaChamado();
-								frame.setLocationRelativeTo(null);
-								frame.setBounds(100, 100, 709, 585);
-								frame.setLocationRelativeTo(null);
-								frame.setResizable(false);
+					AtendenteController atendenteController = new AtendenteController(); 
+					Atendente atendentePer = atendenteController.recuperaAtendente(); // recuperando
 
-								frame.setSize(709, 585);
-								frame.setVisible(true);
-								frame.setLocationRelativeTo(null);
-								frame.setResizable(false);
-								dispose();
+					if (atendente.getUsuarioRede().equals(atendentePer.getUsuarioRede())  //verificar se ta funcionado
+							&& atendente.getSenha().equals(atendentePer.getSenha())) {
+						
+						EventQueue.invokeLater(new Runnable() { // chama tela
+							public void run() {
+								try {
+									TelaChamado frame = new TelaChamado();
+									frame.setLocationRelativeTo(null);
+									frame.setBounds(100, 100, 709, 585);
+									frame.setLocationRelativeTo(null);
+									frame.setResizable(false);
 
-							} catch (Exception e) {
-								e.printStackTrace();
+									frame.setSize(709, 585);
+									frame.setVisible(true);
+									frame.setLocationRelativeTo(null);
+									frame.setResizable(false);
+									dispose();
+
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
 							}
-						}
-					});
+						});
 
+					}else{
+						JOptionPane.showInternalMessageDialog(null,("Senha ou usuário incorreto"));
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
 				}
-			
 			}
+
 			public void mouseEntered(MouseEvent arg0) {
 				lbEntrarLb.setText("Entrar");
 
@@ -140,7 +150,8 @@ public class TelaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JOptionPane sair = new JOptionPane();
-				int Sair = sair.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",JOptionPane.YES_NO_OPTION);
+				int Sair = sair.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+						JOptionPane.YES_NO_OPTION);
 				if (Sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
 					// this.dispose();

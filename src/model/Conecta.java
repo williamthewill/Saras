@@ -163,7 +163,7 @@ public class Conecta {
 
 		} catch (WebDriverException e) {
 			minimizeFirefox();
-			JOptionPane.showMessageDialog(null, "Senha ou usuário inválido");
+			JOptionPane.showMessageDialog(null, "Não foi possível conectar ao portal do MPSC");
 			this.driver.quit();
 			return returner;
 

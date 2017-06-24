@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JOptionPane;
+
 import model.Atendente;
 import model.Conecta;
 
@@ -62,7 +64,7 @@ public class AtendenteDAO {
             objLeitura.close();
             arquivoLeitura.close();
 		}catch(Exception e){
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,("Login não cadastrado, por favor primeiro clique em (Cadastre-se)"));
 		}
 		return atendente;
 	}
