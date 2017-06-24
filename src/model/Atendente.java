@@ -15,6 +15,9 @@ public class Atendente implements Serializable{
 		this.usuarioRede = usuario;
 		this.senha = senha;
 	}
+	public Atendente(){
+		
+	}
 
 	public String getNome() {
 		return nome;
@@ -28,7 +31,7 @@ public class Atendente implements Serializable{
 		return usuarioRede;
 	}
 
-	public void setUsuario(String usuario) {
+	public void setUsuarioRede(String usuario) {
 		this.usuarioRede = usuario;
 	}
 

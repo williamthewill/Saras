@@ -129,9 +129,9 @@ public class TelaChamado extends JFrame {
 					}
 					checkboxFone.setSelected(false);
 					checkboxRemoto.setSelected(false);
-				}else
+				}else{
 					JOptionPane.showMessageDialog(null,"Existe algum campo em branco, por favor preencha");
-
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

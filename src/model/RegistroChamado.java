@@ -39,7 +39,7 @@ public void cadastraChamado(Chamado chamado,Atendente atendente){
 		conecta.clicKnomeSolicitante(chamado);
 		Thread.sleep(1000);
 		conecta.clicLotacao();
-		chamado.salvaLotacao(conecta.getLotacaoSolicitante());
+		//chamado.salvaLotacao(conecta.getLotacaoSolicitante());
 		conecta.clickContatoFeitoPor();
 		conecta.clickTipoLocalChamado(chamado);
 		Thread.sleep(1000);

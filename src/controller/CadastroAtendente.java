@@ -1,6 +1,11 @@
 package controller;
 
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
 import model.Atendente;
+import model.Conecta;
 import model.DAO.AtendenteDAO;
 
 public class CadastroAtendente{
@@ -19,19 +24,19 @@ public class CadastroAtendente{
 		return this.atendente;
 	}
 	
-	public Boolean validaUsuarioPortal(){
+	public Boolean validaUsuarioPortal() throws IOException, InterruptedException{
 		boolean returner = false;
 		
-		returner = this.persisteAtendente();//remover quando implementar o codigo comentado abaixo
+		//returner = this.persisteAtendente();//remover quando implementar o codigo comentado abaixo
 		
-		/*Conecta conecta = new Conecta();
-		boolean autenticado = conecta.autenticaLogin(atendente);
+		Conecta conecta = new Conecta();
+		boolean autenticado = conecta.conectaAutentica(atendente);
 		
 		if(autenticado){
 			returner = this.persisteAtendente();
 		}else{
-			throw new RuntimeException("Login não consta no portal MPSC");
-		}*/
+			JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
+		}
 		
 		return returner;
 	}
