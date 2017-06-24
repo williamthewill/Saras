@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.AtendenteController;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
@@ -93,9 +95,11 @@ public class TelaChamado extends JFrame {
 					if(descriProblema!=""){
 						checkboxSoftplan.setSelected(false);
 						descriProblema= textAreaDescricao.getText();
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema);
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema.replaceAll("\n", " /# "));
+						
 						registroChamado.salvaLocalmente(chamado);
-					
+						registroChamado.cadastraChamado(chamado, new AtendenteController().recuperaAtendente());
+						
 						JOptionPane.showMessageDialog(null, "Cadastra");
 						descriProblema="";
 						textAreaDescricao.setText("");
