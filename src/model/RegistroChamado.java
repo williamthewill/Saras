@@ -9,12 +9,16 @@ import javax.swing.JOptionPane;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnhandledAlertException;
 
+import controller.ChamadoController;
+
 public class RegistroChamado {
 	
-	List<String> chamadosNaoSalvos = new ArrayList<>();
+	private ChamadoController chamadoController = new ChamadoController();
+	private List<String> chamadosNaoSalvos = new ArrayList<>();
+	private Conecta conecta = new Conecta();
 	
 	public void salvaLocalmente(Chamado chamado){
-		
+		chamadoController.insert(chamado);
 	}
 	
 	public void cadastraChamados(List<Chamado> chamados, Atendente atendente) throws IOException, InterruptedException{
@@ -24,7 +28,6 @@ public class RegistroChamado {
 	}
 	
 	public void cadastraChamado(Chamado chamado, Atendente atendente) throws IOException, InterruptedException {
-		Conecta conecta = new Conecta();
 		if(!chamado.getESoftplan()){
 			try{
 				conecta.conecta();
@@ -69,15 +72,6 @@ public class RegistroChamado {
 				JOptionPane.showMessageDialog(null, "Aconteceu algo, não foi possível abrir o Matins, por favor tente novamente");
 			}
 		}
-	}
-	public void avaliaChamado(){
-		
-	}
-	public void getChamado(Chamado chamado){
-		
-	}
-	public int lerChamado(Chamado chamado){
-		return 0;
 	}
 	
 	public void notificaExito(){

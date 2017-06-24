@@ -25,6 +25,7 @@ import controller.CadastroAtendente;
 
 public class TelaAutoCadastro extends JFrame {
 
+	private static final long serialVersionUID = 4804405991557711595L;
 	private JPanel contentPane;
 	private JTextField textFieldUsuario;
 	private JPasswordField texfeadSenha;

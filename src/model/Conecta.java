@@ -12,8 +12,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.Select;
 
-import view.TelaLogin;
-
 public class Conecta {
 
 	WebElement elemento;
@@ -31,7 +29,7 @@ public class Conecta {
 
 		try {
 			FirefoxProfile profile = new FirefoxProfile();
-			profile.setPreference("network.proxy.type", 1); // tipo ante era 1
+			profile.setPreference("network.proxy.type", 1); // tipo antes era 1
 			profile.setPreference("network.proxy.http", "proxy.mp.sc.gov.br");
 			profile.setPreference("network.proxy.http_port", 8080);
 			profile.setPreference("network.proxy.ssl", "proxy.mp.sc.gov.br");
