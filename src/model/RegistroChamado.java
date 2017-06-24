@@ -22,14 +22,14 @@ public class RegistroChamado {
 public void salvaLocalmente(Chamado chamado){
 	
 }
-public void cadastraChamado(Chamado chamado, boolean eSoft){
+public void cadastraChamado(Chamado chamado,Atendente atendente){
 	//LOOP?
 	//chamado linha inicio e fim ?????
 	
-	Atendente atendente = new Atendente(nome, usuario, senha); // ?
+	
 	Conecta conecta = new Conecta();
 	
-	if(!eSoft){
+	if(!chamado.getESoftplan()){
 		try{
 		
 		conecta.conecta();

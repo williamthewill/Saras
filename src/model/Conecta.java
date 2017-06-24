@@ -78,7 +78,7 @@ public class Conecta {
 
 	public void clicLotacao() {
 		Select seleciona = new Select(driver.findElement(By.name("lotacao")));
-		seleciona.selectByIndex(1);// seleciono o primeiro indice,
+		seleciona.selectByIndex(1);// seleciono o primeiro indice
 		this.lotacaoUsuario = seleciona.getFirstSelectedOption().getText();
 	}
 
