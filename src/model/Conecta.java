@@ -29,7 +29,8 @@ public class Conecta {
 
 		try {
 			FirefoxProfile profile = new FirefoxProfile();
-			profile.setPreference("network.proxy.type", 1); // tipo antes era 1
+			// tipo antes era 1
+			profile.setPreference("network.proxy.type", 1);
 			profile.setPreference("network.proxy.http", "proxy.mp.sc.gov.br");
 			profile.setPreference("network.proxy.http_port", 8080);
 			profile.setPreference("network.proxy.ssl", "proxy.mp.sc.gov.br");
@@ -53,12 +54,12 @@ public class Conecta {
 		this.driver.switchTo().frame(frame);
 		this.driver.findElement(By.name("login")).sendKeys(atendente.getUsuarioRede());
 		this.driver.findElement(By.name("senha")).sendKeys(atendente.getSenha());
-		this.driver.findElement(By.name("mantis")).click(); // botsub1 = acessar
+		// botsub1 = acessar
+		this.driver.findElement(By.name("mantis")).click();
 		
 		if(!chamado.getESoftplan()){
-		this.driver.findElement(By.className("botao1")).click();
+			this.driver.findElement(By.className("botao1")).click();
 		}
-		
 		Thread.sleep(2000);
 	}
 
@@ -86,12 +87,14 @@ public class Conecta {
 
 	public void clickContatoFeitoPor() {
 		Select seleciona = new Select(driver.findElement(By.name("meio_contato")));
-		seleciona.selectByIndex(2); // seleciono o indice,
+		// seleciono o indice
+		seleciona.selectByIndex(2);
 	}
 
 	public void clickTipoLocalChamado(Chamado chamado) {
 		Select seleciona = new Select(driver.findElement(By.name("local_problema")));
-		seleciona.selectByVisibleText(chamado.getLocalChamado());// seleciono o indice,															
+		// seleciono o indice
+		seleciona.selectByVisibleText(chamado.getLocalChamado());															
 	}
 
 	public void clickDescricaoSolicitante(Chamado chamado) {
@@ -107,7 +110,8 @@ public class Conecta {
 	}
 
 	public void clickTerminoCadastro() {
-		this.driver.findElement(By.className("botao1")).click();// botao fim
+		// botao fim
+		this.driver.findElement(By.className("botao1")).click();
 	}
 
 	public boolean loginAutentica(Atendente atendente) {
@@ -118,7 +122,6 @@ public class Conecta {
 			this.driver.findElement(By.name("login")).sendKeys(atendente.getUsuarioRede());
 			this.driver.findElement(By.name("senha")).sendKeys(atendente.getSenha());
 			this.driver.findElement(By.name("mantis")).click();
-			// Thread.sleep(1000);
 			this.driver.findElement(By.className("botao1")).click();
 
 			Thread.sleep(2000);
@@ -144,7 +147,8 @@ public class Conecta {
 
 			FirefoxProfile profile = new FirefoxProfile();
 
-			profile.setPreference("network.proxy.type", 1); // tipo ante era 1
+			// tipo ante era 1
+			profile.setPreference("network.proxy.type", 1);
 			profile.setPreference("network.proxy.http", "proxy.mp.sc.gov.br");
 			profile.setPreference("network.proxy.http_port", 8080);
 			profile.setPreference("network.proxy.ssl", "proxy.mp.sc.gov.br");
@@ -185,8 +189,8 @@ public class Conecta {
 		this.driver.quit();
 	}
 	public String validaSistemaOp() throws IOException {
-		String osCpu = System.getProperty("sun.arch.data.model"); // pega 32 /// 62												
-		System.out.println(osCpu);
+		// pega 32 /// 62
+		String osCpu = System.getProperty("sun.arch.data.model");												
 		return osCpu;
 	}
 }

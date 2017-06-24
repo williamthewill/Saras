@@ -89,7 +89,7 @@ public class TelaLogin extends JFrame {
 				atendente.setSenha(senhaTextField);
 
 				AtendenteController atendenteController = new AtendenteController();
-				Atendente atendentePer = atendenteController.recuperaAtende();
+				Atendente atendentePer = atendenteController.recuperaAtendente();
 
 				if (atendente.getUsuarioRede().equals(atendentePer.getUsuarioRede())
 						&& atendente.getSenha().equals(atendentePer.getSenha())) {
