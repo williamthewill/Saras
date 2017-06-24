@@ -23,16 +23,15 @@ import java.io.IOException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-
-
 import model.Chamado;
 import model.NomesSolicitantes;
-import model.DAO.CSVUtils;
-
-
 
 public class TelaChamado extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldSolicitante;
 	private JTextArea textAreaDescricao;

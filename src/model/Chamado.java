@@ -4,7 +4,7 @@ public class Chamado {
 	
 	private String dataAbertura;
 	private String nomeSolicitante;
-	private String setor;
+	private String setor;//lotação
 	private static String tipoAtendimento = "Solicitação";
 	private String descricaoSolicitante;
 	private String localChamado;
@@ -58,12 +58,7 @@ public class Chamado {
 	
 	private void buscaLocalChamado(){
 		LocaisDoSistemaCollection locaisDoSistemaCollection = new LocaisDoSistemaCollection();
-//		for(int i = 0; i < locaisDoSistemaCollection.getCollectionLocaisDoSistema().size(); i++){
-//			if(this.descricaoSolicitante.toLowerCase().contains(locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i).toLowerCase())){
-//				this.localChamado = locaisDoSistemaCollection.getCollectionLocaisDoSistema().get(i);
-//				break;
-//			}
-//		}
+		locaisDoSistemaCollection.containsInCollection(descricaoSolicitante);
 	}
 	
 	public boolean eRemoto() {

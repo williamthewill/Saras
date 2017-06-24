@@ -81,7 +81,7 @@ public class Conecta {
 		seleciona.selectByIndex(1);// seleciono o primeiro indice
 		this.lotacaoUsuario = seleciona.getFirstSelectedOption().getText();
 	}
-
+	
 	public String getLotacaoSolicitante() {
 		return this.lotacaoUsuario;
 	}
