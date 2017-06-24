@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.ChamadoController;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
@@ -23,16 +21,13 @@ import java.io.IOException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-
-
 import model.Chamado;
 import model.NomesSolicitantes;
-import model.DAO.CSVUtils;
-
-
+import model.RegistroChamado;
 
 public class TelaChamado extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldSolicitante;
 	private JTextArea textAreaDescricao;
@@ -42,13 +37,11 @@ public class TelaChamado extends JFrame {
 	JCheckBox checkboxRemoto;
 	JCheckBox checkboxSoftplan;
 
-	static String descriProblema="";
-	static String descricaoAtendimento= "";
-	static int cont=0;
-
+	static String descriProblema = "";
+	static String descricaoAtendimento = "";
+	static int cont = 0;
+	private RegistroChamado registroChamado = new RegistroChamado();
 	
-	private ChamadoController chamadoController = new ChamadoController();
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -101,7 +94,7 @@ public class TelaChamado extends JFrame {
 						checkboxSoftplan.setSelected(false);
 						descriProblema= textAreaDescricao.getText();
 						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema);
-						chamadoController.insert( chamado);
+						registroChamado.salvaLocalmente(chamado);
 					
 						JOptionPane.showMessageDialog(null, "Cadastra");
 						descriProblema="";
@@ -122,7 +115,7 @@ public class TelaChamado extends JFrame {
 					
 					if (!checkboxSoftplan.isSelected()){
 						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema);
-						chamadoController.insert( chamado);
+						registroChamado.salvaLocalmente(chamado);
 						
 						textAreaDescricao.setText("");
 						textFieldSolicitante.setText("");
