@@ -98,7 +98,12 @@ public class TelaChamado extends JFrame {
 						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema.replaceAll("\n", " /# "));
 						
 						registroChamado.salvaLocalmente(chamado);
-						registroChamado.cadastraChamado(chamado, new AtendenteController().recuperaAtendente());
+						try {
+							registroChamado.cadastraChamado(chamado, new AtendenteController().recuperaAtendente());
+						} catch (IOException | InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 						JOptionPane.showMessageDialog(null, "Cadastra");
 						descriProblema="";
