@@ -40,8 +40,6 @@ public class NomesSolicitantes {
 		}
 		return null;
 		
-		
-		
 	}
 	
 	public void escreveNomeSolicitante(String nome) throws IOException{

@@ -21,7 +21,7 @@ public class MainTeste {
 		//csvUtils.load("./persistences/Chamado.csv");*/
 		LocaisDoSistemaCollection locaisDoSistemaCollection = new LocaisDoSistemaCollection();
 		
-		System.out.println(locaisDoSistemaCollection.containsInCollection("notificações"));
+		System.out.println(locaisDoSistemaCollection.containsInCollection("pasTa diGital"));
 		
 	}
 }

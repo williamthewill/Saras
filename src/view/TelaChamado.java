@@ -24,7 +24,12 @@ import java.io.IOException;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 
+
+import model.Chamado;
 import model.NomesSolicitantes;
+import model.DAO.CSVUtils;
+
+
 
 public class TelaChamado extends JFrame {
 
@@ -33,11 +38,17 @@ public class TelaChamado extends JFrame {
 	private JTextArea textAreaDescricao;
 	private JTextField textFieldLinha1;
 	private JTextField textFieldLinha2;
-	JCheckBox checkBoxFone;
-	JCheckBox chckbxRemoto;
-	JCheckBox chckbxSoftplan;
+	JCheckBox checkboxFone;
+	JCheckBox checkboxRemoto;
+	JCheckBox checkboxSoftplan;
+
+	static String descriProblema="";
+	static String descricaoAtendimento= "";
+	static int cont=0;
+
 	
 	private ChamadoController chamadoController = new ChamadoController();
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -68,48 +79,59 @@ public class TelaChamado extends JFrame {
 		contentPane.add(panelPainel);
 		panelPainel.setLayout(null);
 		
+		JLabel alertaEsof = new JLabel("");
 		JLabel lblSalvar = new JLabel("Salvar");
-	
+		
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				
 				if(textAreaDescricao.getText()!=null&& textAreaDescricao.getText().trim().length() > 0 && textFieldSolicitante.getText()!=null&& textFieldSolicitante.getText().trim().length() > 0 ){
-					String descricaoProblema="";
 					boolean eFone= false;
 					boolean eRemoto= false;
 					boolean eSoft= false;
-					if (checkBoxFone.isSelected()){
+					
+					if (checkboxFone.isSelected()){
 						eFone= true;
 					}
-		
-					if (chckbxRemoto.isSelected()){
+					if (checkboxRemoto.isSelected()){
 						eRemoto= true;
 					}
+					if(descriProblema!=""){
+						checkboxSoftplan.setSelected(false);
+						descriProblema= textAreaDescricao.getText();
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema);
+						chamadoController.insert( chamado);
 					
-					if (chckbxSoftplan.isSelected()){
-						eSoft= true;
-						textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
-						//chckbxSoftplan.setSelected(false);
-						//chamadoController.insert(chamado);
-						//registrachamado.regitrar(chamado);
-					}
-				
-					//CSVUtils csvUtils = new CSVUtils();
-					//Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), eSoft, eRemoto, eFone, textAreaDescricao.getText());
-					
-					if (!chckbxSoftplan.isSelected()){
+						JOptionPane.showMessageDialog(null, "Cadastra");
+						descriProblema="";
 						textAreaDescricao.setText("");
-						textFieldSolicitante.setText("");						
+						textFieldSolicitante.setText("");
+						
 					}
-					checkBoxFone.setSelected(false);
-					chckbxRemoto.setSelected(false);
-				
-				}else{
+					
+					if (checkboxSoftplan.isSelected()){
+						System.out.println("Entrou");
+						descricaoAtendimento=textAreaDescricao.getText();
+						descriProblema="soft";
+						JOptionPane.showMessageDialog(null, "Agora descreva o problema a ser enviado para Softplan \nATENÇÃO! após clicar em SALVAR o seu chamado vai ser cadastrado. ");
+						eSoft= true;
+						alertaEsof.setText("");
+						textAreaDescricao.setText("Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
+					}
+					
+					if (!checkboxSoftplan.isSelected()){
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft, eRemoto, eFone, descriProblema);
+						chamadoController.insert( chamado);
+						
+						textAreaDescricao.setText("");
+						textFieldSolicitante.setText("");
+					}
+					checkboxFone.setSelected(false);
+					checkboxRemoto.setSelected(false);
+				}else
 					JOptionPane.showMessageDialog(null,"Existe algum campo em branco, por favor preencha");
-				}
-			
+
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -283,32 +305,32 @@ public class TelaChamado extends JFrame {
 		chackBoxDefLinha.setBackground(new Color(30, 144, 255));
 		chackBoxDefLinha.setBounds(55, 336, 97, 23);
 		panelPainel.add(chackBoxDefLinha);
-	
 		
-		checkBoxFone = new JCheckBox("Fone");
-		checkBoxFone.addMouseListener(new MouseAdapter() {
+	
+		checkboxFone = new JCheckBox("Fone");
+		checkboxFone.addMouseListener(new MouseAdapter() {
 						@Override
 			public void mouseClicked(MouseEvent e) {	
 			}
 						@Override
 			public void mouseEntered(MouseEvent arg0) {
-				checkBoxFone.setForeground(Color.BLACK);
+				checkboxFone.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent e) {
-				checkBoxFone.setForeground(SystemColor.textHighlight);
+				checkboxFone.setForeground(SystemColor.textHighlight);
 			}
 			
 
 		});
-		checkBoxFone.setFont(new Font("Tahoma", Font.BOLD, 13));
-		checkBoxFone.setForeground(SystemColor.textHighlight);
-		checkBoxFone.setBackground(Color.WHITE);
-		checkBoxFone.setBounds(308, 19, 62, 23);
-		contentPane.add(checkBoxFone);
+		checkboxFone.setFont(new Font("Tahoma", Font.BOLD, 13));
+		checkboxFone.setForeground(SystemColor.textHighlight);
+		checkboxFone.setBackground(Color.WHITE);
+		checkboxFone.setBounds(308, 19, 62, 23);
+		contentPane.add(checkboxFone);
 		
 		
-		chckbxRemoto = new JCheckBox("Remoto");
-		chckbxRemoto.addMouseListener(new MouseAdapter() {
+		checkboxRemoto = new JCheckBox("Remoto");
+		checkboxRemoto.addMouseListener(new MouseAdapter() {
 					@Override
 			public void mouseClicked(MouseEvent arg0) {
 			
@@ -316,10 +338,10 @@ public class TelaChamado extends JFrame {
 					
 					@Override
 			public void mouseEntered(MouseEvent arg0) {
-				chckbxRemoto.setForeground(Color.BLACK);
+				checkboxRemoto.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent e) {
-				chckbxRemoto.setForeground(SystemColor.textHighlight);
+				checkboxRemoto.setForeground(SystemColor.textHighlight);
 			}
 			
 			
@@ -327,36 +349,51 @@ public class TelaChamado extends JFrame {
 	
 			
 		});
-		chckbxRemoto.setFont(new Font("Tahoma", Font.BOLD, 13));
-		chckbxRemoto.setForeground(SystemColor.textHighlight);
-		chckbxRemoto.setBackground(Color.WHITE);
-		chckbxRemoto.setBounds(390, 19, 88, 23);
-		contentPane.add(chckbxRemoto);
+		checkboxRemoto.setFont(new Font("Tahoma", Font.BOLD, 13));
+		checkboxRemoto.setForeground(SystemColor.textHighlight);
+		checkboxRemoto.setBackground(Color.WHITE);
+		checkboxRemoto.setBounds(390, 19, 88, 23);
+		contentPane.add(checkboxRemoto);
 		
 		
 		
 		
-		chckbxSoftplan = new JCheckBox("Softplan");
-		chckbxSoftplan.addMouseListener(new MouseAdapter() {
+		checkboxSoftplan = new JCheckBox("Softplan");
+		
+		checkboxSoftplan.addMouseListener(new MouseAdapter() {
 			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(checkboxSoftplan.isSelected()){
+					
+					alertaEsof.setText("Cole ou descreva o seu atendimento!");
+					
+				}else{
+					alertaEsof.setText("");
+				}
+					
+				
+			}
+			
 			public void mouseEntered(MouseEvent arg0) {
-				chckbxSoftplan.setForeground(Color.BLACK);
+				checkboxSoftplan.setForeground(Color.BLACK);
 			}
 			public void mouseExited(MouseEvent e) {
-				chckbxSoftplan.setForeground(SystemColor.textHighlight);
+				checkboxSoftplan.setForeground(SystemColor.textHighlight);
 			}
+			
+			
 		});
-		chckbxSoftplan.setFont(new Font("Tahoma", Font.BOLD, 13));
-		chckbxSoftplan.setForeground(SystemColor.textHighlight);
-		chckbxSoftplan.setBackground(Color.WHITE);
-		chckbxSoftplan.setBounds(480, 19, 88, 23);
-		contentPane.add(chckbxSoftplan);
+		checkboxSoftplan.setFont(new Font("Tahoma", Font.BOLD, 13));
+		checkboxSoftplan.setForeground(SystemColor.textHighlight);
+		checkboxSoftplan.setBackground(Color.WHITE);
+		checkboxSoftplan.setBounds(480, 19, 88, 23);
+		contentPane.add(checkboxSoftplan);
 		
 		//aqui criava-se textAreaDescricao
 		textAreaDescricao = new JTextArea();
 		textAreaDescricao.addKeyListener(new java.awt.event.KeyAdapter() { // terminar metodo, ver no trelo?????????????????????????????????????????????????????????????w
             public void keyReleased(java.awt.event.KeyEvent evt) {
-            if(!chckbxSoftplan.isSelected()){
+            if(!checkboxSoftplan.isSelected()){
             	
             	NomesSolicitantes nomesSolicitantes= new NomesSolicitantes();
             	
@@ -504,6 +541,12 @@ public class TelaChamado extends JFrame {
 		lblVoltar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblVoltar.setBounds(610, 502, 34, 14);
 		contentPane.add(lblVoltar);
+		
+		
+		alertaEsof.setFont(new Font("Tahoma", Font.BOLD, 15));
+		alertaEsof.setForeground(Color.RED);
+		alertaEsof.setBounds(293, 484, 284, 23);
+		contentPane.add(alertaEsof);
 		
 		
 	}

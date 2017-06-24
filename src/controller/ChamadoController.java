@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import model.Chamado;
 import model.DAO.CSVUtils;
 import model.DAO.FactoryDAO;
@@ -19,7 +21,7 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 		try {
 			csvUtils.salvar("./persistences/Chamados.csv", chamado);
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "O arquivo está sendo aberto em outra operação");
 		}
 	}
 

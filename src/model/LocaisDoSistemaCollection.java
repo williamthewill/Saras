@@ -40,11 +40,11 @@ public class LocaisDoSistemaCollection {
 	public String containsInCollection(String description){
 		for(int i = 0; i < locaisDoSistema.length; i++){
 			for(int j = 0; j < locaisDoSistema[i].length; j++){
-				if(description.contains(locaisDoSistema[i][j])){
+				if(description.toLowerCase().contains(locaisDoSistema[i][j].toLowerCase())){
 					return locaisDoSistema[i][0];
 				}
 			}
 		}
-		return null;
+		return "Acesso ao Sistema (outras causas)";
 	}
 }
