@@ -81,7 +81,6 @@ public class TelaLogin extends JFrame {
 		lblEntrar.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
-
 				if (textFieldNome.getText() != null && textFieldNome.getText().trim().length() > 0
 						&& passwordFieldSenha.getText() != null && passwordFieldSenha.getText().trim().length() > 0) {
 

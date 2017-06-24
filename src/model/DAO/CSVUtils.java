@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import model.Chamado;
 
 public class CSVUtils {
@@ -21,7 +23,7 @@ public class CSVUtils {
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getNomeSolicitante();
         chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getSetor();
+        chamadoLine += chamado.getSetor();//lotação
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getTipoAtendimento();
         chamadoLine += DEFAULT_SEPARATOR;
@@ -125,10 +127,52 @@ public class CSVUtils {
 		Chamado chamado;
 		while( line != null ){
 			chamado = createChamado(line);
-			allChamados.add(chamado);
+			if(chamado.getEstado() == 0){
+				allChamados.add(chamado);				
+			}
 			line = br.readLine();
 		}
 		br.close();
 		return allChamados;
+	}
+	
+	public boolean alteraSetor(String arquivo, String nomeSolicitante, String setor) throws Exception {
+		File f = new File(arquivo);
+		if(!f.exists()){
+			throw new Exception("Arquivo não encontrado");
+		}			
+		File nf = new File("./persistences/temporario.tmp");
+        FileWriter fw = null;
+        Scanner s = null;
+        try {
+            fw = new FileWriter(nf);
+            s = new Scanner(f);
+
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                if(line.contains(nomeSolicitante)){
+                	Chamado chamado = createChamado(line);
+                	chamado.setSetor(setor);
+                	line = followCVSformat(chamado);
+                }
+                try {
+                    fw.write(line + System.getProperty("line.separator"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fw.close();
+                s.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        f.delete();
+        nf.renameTo(f);
+        return true;
 	}
 }
