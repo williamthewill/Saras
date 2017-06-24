@@ -27,7 +27,7 @@ public class AtendenteController implements FactoryDAO<Atendente>{
 		return null;
 	}
 	
-	public Atendente recuperaAtende(){
+	public Atendente recuperaAtendente(){
 		return atendenteDao.recuperaAtendente();
 	}
 	
