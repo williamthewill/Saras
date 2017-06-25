@@ -16,6 +16,7 @@ public class RegistroChamado {
 	private ChamadoController chamadoController = new ChamadoController();
 	private List<String> chamadosNaoSalvos = new ArrayList<>();
 	private Conecta conecta = new Conecta();
+	private boolean mats=false;
 	
 	public void salvaLocalmente(Chamado chamado){
 		chamadoController.insert(chamado);
@@ -30,9 +31,9 @@ public class RegistroChamado {
 		try {
 			for (Chamado chamado : chamadoController.todosChamados()) {
 				this.cadastraChamado(chamado, atendente);
-				Thread.sleep(500);
+				Thread.sleep(1000);
 				chamadoController.alteraEstado(chamado.getNomeSolicitante(), 1);
-				Thread.sleep(8500);
+				Thread.sleep(7000);
 			}
 		} catch (Exception e) {
 			JOptionPane.showInputDialog(null,e.getMessage());
@@ -52,7 +53,8 @@ public class RegistroChamado {
 				conecta.clicKnomeSolicitante(chamado);
 				Thread.sleep(1000);
 				conecta.clicLotacao();
-				chamado.setSetor(conecta.getLotacaoSolicitante());
+				chamadoController.alteraSetor(chamado.getNomeSolicitante(), conecta.getLotacaoSolicitante());
+				Thread.sleep(500);
 				conecta.clickContatoFeitoPor();
 				conecta.clickTipoLocalChamado(chamado);
 				Thread.sleep(1000);
@@ -61,18 +63,22 @@ public class RegistroChamado {
 				Thread.sleep(1000);
 			}catch (NoSuchElementException | UnhandledAlertException e) {
 				chamadosNaoSalvos.add(chamado.getNomeSolicitante());
-				// escrever -1 no csv
 			}			
 		} else {
-			try{
+			try{				
+				this.conectaChamado ( atendente, true);
+				JOptionPane.showMessageDialog(null, "Por favor  efetue login no Mantis\n Somente depois clique em  OK");
 				Thread.sleep(1000);
-				conectaChamado(atendente, chamado.getESoftplan());
-				Thread.sleep(1000);
+				System.out.println("1");
 				conecta.clickCadastrarOcorrencias();
+				Thread.sleep(1000);
+				System.out.println(chamado.getNomeSolicitante());
 				conecta.clicKnomeSolicitante(chamado);
 				Thread.sleep(1000);
 				conecta.clicLotacao();
-				chamado.setSetor(conecta.getLotacaoSolicitante());
+				System.out.println("4");
+				chamadoController.alteraSetor(chamado.getNomeSolicitante(), conecta.getLotacaoSolicitante());
+				Thread.sleep(500);
 				conecta.clickContatoFeitoPor();
 				conecta.clickTipoLocalChamado(chamado);
 				Thread.sleep(1000);
@@ -82,7 +88,9 @@ public class RegistroChamado {
 				// carrega no campo do SOS o texto do mants
 				conecta.clicDescricaoProblema(chamado);
 				conecta.clickTerminoCadastro();
-				Thread.sleep(2000);
+				this.mats=true;
+				chamadoController.alteraEstado(chamado.getNomeSolicitante(), 1);
+				Thread.sleep(6000);
 				//escreve no arquivo que foi aberto o chamado
 			}catch (NoSuchElementException | UnhandledAlertException e) {
 				JOptionPane.showMessageDialog(null, "Aconteceu algo, não foi possível abrir o Matins, por favor tente novamente");
@@ -100,9 +108,13 @@ public class RegistroChamado {
 			JOptionPane.showMessageDialog(null, "Não consegui cadastrar as pessoas abaixo:"+"\n"+nomesErro.toString()+"\n"+"MOTIVO: O nome cadastro no JABBER não é igual ao do SOS."+"\n"+"Abra assua Planilha e cadastre Manualmente!");
 			
 			chamadosNaoSalvos.clear();
-		}else{
+		}
+		if(chamadosNaoSalvos.size()==0 && !mats){
 			conecta.close();
-			JOptionPane.showInputDialog("Chamado Cadastrados com sucesso");
+			JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
+		}
+		if(this.mats){
+			JOptionPane.showMessageDialog(null, "Seu Mants foi aberto com sucesso, agora anexe seus arquivos se houver");
 		}
 		
 	

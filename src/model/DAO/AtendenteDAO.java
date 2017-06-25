@@ -57,7 +57,7 @@ public class AtendenteDAO {
 			FileInputStream arquivoLeitura = new FileInputStream("./persistences/Atendente.ser");
             ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
 			this.atendente = (Atendente) objLeitura.readObject();
-            objLeitura.close();
+			objLeitura.close();
             arquivoLeitura.close();
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null,("Login não cadastrado, por favor primeiro clique em (Cadastre-se)"));

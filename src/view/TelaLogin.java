@@ -45,7 +45,7 @@ public class TelaLogin extends JFrame {
 
 	public TelaLogin() {
 		setTitle("SARAS   Vers\u00E3o: 0.0.1");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaLogin.class.getResource("/Imagens/SarasIco_ne.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaLogin.class.getResource("./imagens/SarasIco_ne.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 638, 507);
 		contentPane = new JPanel();
@@ -55,27 +55,27 @@ public class TelaLogin extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/novosHori.png")));
+		lblNewLabel.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/novosHori.png")));
 		lblNewLabel.setBounds(0, 0, 632, 164);
 		contentPane.add(lblNewLabel);
 
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/mpsc1.png")));
+		label.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/mpsc1.png")));
 		label.setBounds(2, 454, 63, 20);
 		contentPane.add(label);
 
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/Softplan poligra1.png")));
+		label_1.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/Softplan poligra1.png")));
 		label_1.setBounds(73, 454, 81, 20);
 		contentPane.add(label_1);
 
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/LogoUFSC.png")));
+		label_2.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/LogoUFSC.png")));
 		label_2.setBounds(163, 440, 34, 40);
 		contentPane.add(label_2);
 
 		JLabel lblEntrar = new JLabel("");
-		lblEntrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/27.png")));
+		lblEntrar.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/27.png")));
 		lbEntrarLb = new JLabel("");
 
 		lblEntrar.addMouseListener(new MouseAdapter() {
@@ -91,10 +91,12 @@ public class TelaLogin extends JFrame {
 					String senhaTextField = String.valueOf(chars);
 					atendente.setSenha(senhaTextField);
 
-					AtendenteController atendenteController = new AtendenteController(); 
-					Atendente atendentePer = atendenteController.recuperaAtendente(); // recuperando
+					AtendenteController atendenteController = new AtendenteController();
+					// recuperando
+					Atendente atendentePer = atendenteController.recuperaAtendente();
 
-					if (atendente.getUsuarioRede().equals(atendentePer.getUsuarioRede())  //verificar se ta funcionado
+					//verificar se ta funcionado
+					if (atendente.getUsuarioRede().equals(atendentePer.getUsuarioRede())
 							&& atendente.getSenha().equals(atendentePer.getSenha())) {
 						
 						EventQueue.invokeLater(new Runnable() { // chama tela
@@ -119,7 +121,7 @@ public class TelaLogin extends JFrame {
 						});
 
 					}else{
-						JOptionPane.showInternalMessageDialog(null,("Senha ou usuário incorreto"));
+						JOptionPane.showMessageDialog(null,("Senha ou usuário incorreto"));
 					}
 
 				} else {
@@ -143,7 +145,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblEntrar);
 
 		JLabel lblSair = new JLabel("");
-		lblSair.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/outArtur.PNG")));
+		lblSair.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/outArtur.PNG")));
 		JLabel lblSairLbl = new JLabel("");
 		lblSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -176,7 +178,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblSair);
 
 		JLabel lblCadastrar = new JLabel("");
-		lblCadastrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/login26.png")));
+		lblCadastrar.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/login26.png")));
 		JLabel lblCadastrese = new JLabel("");
 		lblCadastrar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -219,7 +221,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblCadastrar);
 
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/Saras_menor.png")));
+		label_3.setIcon(new ImageIcon(TelaLogin.class.getResource("./imagens/Saras_menor.png")));
 		label_3.setBounds(238, 162, 157, 99);
 		contentPane.add(label_3);
 

@@ -26,9 +26,6 @@ public class CadastroAtendente{
 	
 	public Boolean validaUsuarioPortal() throws IOException, InterruptedException{
 		boolean returner = false;
-		
-		//returner = this.persisteAtendente();//remover quando implementar o codigo comentado abaixo
-		
 		Conecta conecta = new Conecta();
 		boolean autenticado = conecta.conectaAutentica(atendente);
 		

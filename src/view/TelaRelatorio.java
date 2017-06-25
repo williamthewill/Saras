@@ -28,6 +28,7 @@ import javax.swing.JCheckBox;
 
 public class TelaRelatorio extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldDateInicio;
 	private JTextField textFieldDateFim;
@@ -208,7 +209,7 @@ public class TelaRelatorio extends JFrame {
 			}
 		});
 		lblGerar.setBackground(new Color(230, 230, 250));
-		lblGerar.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/lupa.png")));
+		lblGerar.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/lupa.png")));
 		lblGerar.setBounds(546, 22, 46, 50);
 		panel.add(lblGerar);
 		
@@ -219,7 +220,7 @@ public class TelaRelatorio extends JFrame {
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/Saras_menor.png")));
+		lblNewLabel.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/Saras_menor.png")));
 		lblNewLabel.setBounds(0, 0, 163, 67);
 		contentPane.add(lblNewLabel);
 		
@@ -258,7 +259,6 @@ public class TelaRelatorio extends JFrame {
 		lblImprimir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Relatorio relatorio = new Relatorio();
 				try {
 					relatorio.geraPDF();
 					relatorio.abrePDF();
@@ -277,7 +277,7 @@ public class TelaRelatorio extends JFrame {
 			}
 			
 		});
-		lblImprimir.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/imprimir.PNG")));
+		lblImprimir.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/imprimir.PNG")));
 		lblImprimir.setBounds(493, 403, 38, 35);
 		contentPane.add(lblImprimir);
 		JLabel lblVoltarlbl = new JLabel(" ");
@@ -314,7 +314,7 @@ public class TelaRelatorio extends JFrame {
 			}
 			
 		});
-		labelVoltar.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/back-icon37.png")));
+		labelVoltar.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/back-icon37.png")));
 		labelVoltar.setBounds(541, 403, 38, 35);
 		contentPane.add(labelVoltar);
 		JLabel lblSairlbl = new JLabel("");
@@ -340,22 +340,22 @@ public class TelaRelatorio extends JFrame {
 				lblSairlbl.setText("");
 			}
 		});
-		labelSair.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/outXX.png")));
+		labelSair.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/outXX.png")));
 		labelSair.setBounds(589, 403, 38, 35);
 		contentPane.add(labelSair);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/mpsc1.png")));
+		lblNewLabel_4.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/mpsc1.png")));
 		lblNewLabel_4.setBounds(2, 407, 66, 26);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/Softplan poligra1.png")));
+		label_2.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/Softplan poligra1.png")));
 		label_2.setBounds(70, 409, 81, 26);
 		contentPane.add(label_2);
 		
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(TelaRelatorio.class.getResource("/Imagens/LogoUFSC.PNG")));
+		label_3.setIcon(new ImageIcon(TelaRelatorio.class.getResource("./imagens/LogoUFSC.PNG")));
 		label_3.setBounds(162, 403, 38, 35);
 		contentPane.add(label_3);
 		

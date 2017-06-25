@@ -9,8 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 public class NomesSolicitantes {
@@ -28,7 +26,6 @@ public class NomesSolicitantes {
 		BufferedReader reader = new BufferedReader(fileReader);
 		String linha;			
 		while((linha = reader.readLine()) != null){
-			//System.out.println(linha);
 			if(textoDescricao.toLowerCase().contains(linha.toLowerCase())){
 				return linha;
 			}

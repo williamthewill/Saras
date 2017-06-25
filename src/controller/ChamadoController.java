@@ -48,4 +48,13 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 			e.printStackTrace();
 		}
 	}	
+	
+	public void alteraSetor(String nomeSolicitante, String setor){
+		try {
+			csvUtils.alteraSetor(path, nomeSolicitante, setor);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

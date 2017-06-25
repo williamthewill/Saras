@@ -24,6 +24,8 @@ import java.io.IOException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
+
+import model.Atendente;
 import model.Chamado;
 import model.NomesSolicitantes;
 import model.RegistroChamado;
@@ -96,21 +98,22 @@ public class TelaChamado extends JFrame {
 						eRemoto = true;
 					}
 					if (descriProblema != "") {
-						checkboxSoftplan.setSelected(false);
+						
 						descriProblema = textAreaDescricao.getText();
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft,
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, true,
 								eRemoto, eFone, descriProblema.replaceAll("\n", " /# "));
 
 						registroChamado.salvaLocalmente(chamado);
 						try {
-							registroChamado.cadastraChamado(chamado, new AtendenteController().recuperaAtendente());
+							Atendente atendente = new AtendenteController().recuperaAtendente(); 
+							System.out.println(chamado.getNomeSolicitante());
+							registroChamado.cadastraChamado(chamado, atendente);
+							checkboxSoftplan.setSelected(false);
 							registroChamado.notificaExito();
 						} catch (IOException | InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-
-						JOptionPane.showMessageDialog(null, "Cadastra");
 						descriProblema = "";
 						textAreaDescricao.setText("");
 						textFieldSolicitante.setText("");
@@ -122,14 +125,13 @@ public class TelaChamado extends JFrame {
 						descriProblema = "soft";
 						JOptionPane.showMessageDialog(null,
 								"Agora descreva o problema a ser enviado para Softplan \nATENÇÃO! após clicar em SALVAR o seu chamado vai ser cadastrado. ");
-						eSoft = true;
 						alertaEsof.setText("");
 						textAreaDescricao.setText(
 								"Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
 					}
 
 					if (!checkboxSoftplan.isSelected()) {
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, eSoft,
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), false,
 								eRemoto, eFone, descriProblema);
 						registroChamado.salvaLocalmente(chamado);
 
@@ -156,7 +158,7 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(lblSalvar);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/salvar.png")));
+		lblNewLabel.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/salvar.png")));
 		lblNewLabel.setBounds(25, 68, 40, 40);
 		panelPainel.add(lblNewLabel);
 
@@ -186,12 +188,12 @@ public class TelaChamado extends JFrame {
 		label.addMouseListener(new MouseAdapter() {
 
 		});
-		label.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/Limpar.png")));
+		label.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/Limpar.png")));
 		label.setBounds(25, 133, 40, 47);
 		panelPainel.add(label);
 
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/cadastrar2.PNG")));
+		label_2.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/cadastrar2.PNG")));
 		label_2.setBounds(25, 271, 40, 47);
 		panelPainel.add(label_2);
 
@@ -226,7 +228,7 @@ public class TelaChamado extends JFrame {
 		JLabel label_7 = new JLabel("");
 		label_7.addMouseListener(new MouseAdapter() {
 		});
-		label_7.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/relatorio.png")));
+		label_7.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/relatorio.png")));
 		label_7.setBounds(25, 201, 40, 47);
 		panelPainel.add(label_7);
 
@@ -483,7 +485,7 @@ public class TelaChamado extends JFrame {
 			}
 
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/back-icon37.png")));
+		lblNewLabel_2.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/back-icon37.png")));
 		lblNewLabel_2.setBounds(610, 526, 40, 23);
 		contentPane.add(lblNewLabel_2);
 
@@ -515,24 +517,24 @@ public class TelaChamado extends JFrame {
 			}
 		});
 		label_4.setBackground(SystemColor.inactiveCaption);
-		label_4.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/outArtur.PNG")));
+		label_4.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/outArtur.PNG")));
 		label_4.setBounds(660, 518, 40, 41);
 		contentPane.add(label_4);
 
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(189, 531, 65, 25);
 		contentPane.add(lblNewLabel_3);
-		lblNewLabel_3.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/mpsc1.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/mpsc1.png")));
 
 		JLabel label_6 = new JLabel("");
 		label_6.setBounds(266, 531, 40, 25);
 		contentPane.add(label_6);
-		label_6.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/LogoUFSC.PNG")));
+		label_6.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/LogoUFSC.PNG")));
 
 		JLabel label_5 = new JLabel("");
 		label_5.setBounds(304, 531, 81, 25);
 		contentPane.add(label_5);
-		label_5.setIcon(new ImageIcon(TelaChamado.class.getResource("/Imagens/Softplan poligra1.png")));
+		label_5.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/Softplan poligra1.png")));
 
 		lblSair.setForeground(SystemColor.textHighlight);
 		lblSair.setFont(new Font("Tahoma", Font.PLAIN, 13));

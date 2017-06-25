@@ -4,7 +4,8 @@ public class Chamado {
 	
 	private String dataAbertura;
 	private String nomeSolicitante;
-	private String setor;//lotação
+	//lotação
+	private String setor;
 	private static String tipoAtendimento = "Solicitação";
 	private String descricaoSolicitante;
 	private String localChamado;
@@ -13,7 +14,8 @@ public class Chamado {
 	private boolean situacaoSalt;
 	private String dataEncerramento;
 	private static String solucao = "Orientado";
-	private String observacao; //Nome do atendente
+	//Nome do atendente
+	private String observacao;
 	private static int diasTrabalho = 0;
 	private boolean eSoftplan;
 	private String descricaoProblema;

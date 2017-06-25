@@ -54,12 +54,11 @@ public class Conecta {
 		this.driver.switchTo().frame(frame);
 		this.driver.findElement(By.name("login")).sendKeys(atendente.getUsuarioRede());
 		this.driver.findElement(By.name("senha")).sendKeys(atendente.getSenha());
-		// botsub1 = acessar
-		this.driver.findElement(By.name("mantis")).click();
-		
+		// botsub1 = aces
 		if(!eSoft){
-			this.driver.findElement(By.className("botao1")).click();
+			this.driver.findElement(By.name("mantis")).click();
 		}
+		this.driver.findElement(By.className("botao1")).click();
 		Thread.sleep(2000);
 	}
 	
@@ -69,11 +68,14 @@ public class Conecta {
 	}
 
 	public void clicKnomeSolicitante(Chamado chamado) throws InterruptedException {
-		// coloca nome do usuarui no campo login
+		System.out.println("entrou é foda");
+		System.out.println(chamado.getNomeSolicitante());
 		this.driver.findElement(By.name("login")).sendKeys(chamado.getNomeSolicitante());
 		this.driver.findElement(By.className("botao1")).click();
+		System.out.println("antes sliipemtra");
 		Thread.sleep(1000);
 		this.driver.findElement(By.linkText(chamado.getNomeSolicitante())).click(); //Jéssica de Araújo
+		System.out.println("jessica");
 	}
 
 	public void clicLotacao() {
