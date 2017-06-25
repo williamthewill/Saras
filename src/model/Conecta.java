@@ -49,7 +49,7 @@ public class Conecta {
 		}
 	}
 
-	public void login(Atendente atendente, Chamado chamado) throws InterruptedException, IOException {
+	public void login(Atendente atendente, boolean eSoft) throws InterruptedException, IOException {
 		this.frame = this.driver.findElement(By.cssSelector("frame"));
 		this.driver.switchTo().frame(frame);
 		this.driver.findElement(By.name("login")).sendKeys(atendente.getUsuarioRede());
@@ -57,11 +57,12 @@ public class Conecta {
 		// botsub1 = acessar
 		this.driver.findElement(By.name("mantis")).click();
 		
-		if(!chamado.getESoftplan()){
+		if(!eSoft){
 			this.driver.findElement(By.className("botao1")).click();
 		}
 		Thread.sleep(2000);
 	}
+	
 
 	public void clickCadastrarOcorrencias() {
 		this.driver.findElement(By.linkText("Cadastrar ocorrências")).click();
@@ -72,7 +73,7 @@ public class Conecta {
 		this.driver.findElement(By.name("login")).sendKeys(chamado.getNomeSolicitante());
 		this.driver.findElement(By.className("botao1")).click();
 		Thread.sleep(1000);
-		this.driver.findElement(By.linkText(chamado.getNomeSolicitante())).click();
+		this.driver.findElement(By.linkText(chamado.getNomeSolicitante())).click(); //Jéssica de Araújo
 	}
 
 	public void clicLotacao() {
