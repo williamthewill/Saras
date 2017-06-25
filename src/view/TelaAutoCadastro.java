@@ -53,7 +53,7 @@ public class TelaAutoCadastro extends JFrame {
 	 */
 	public TelaAutoCadastro() {
 		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(TelaAutoCadastro.class.getResource("./imagens/SarasIco_ne.png")));
+				Toolkit.getDefaultToolkit().getImage("./imagens/SarasIco_ne.png"));
 		setBackground(SystemColor.textHighlight);
 		setTitle("SARAS   Vers\u00E3o: 0.0.1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +65,7 @@ public class TelaAutoCadastro extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabelSOFTNovos = new JLabel("");
-		lblNewLabelSOFTNovos.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/novosHori.png")));
+		lblNewLabelSOFTNovos.setIcon(new ImageIcon("./imagens/novosHori.png"));
 		lblNewLabelSOFTNovos.setBounds(0, 0, 637, 202);
 		contentPane.add(lblNewLabelSOFTNovos);
 
@@ -110,7 +110,7 @@ public class TelaAutoCadastro extends JFrame {
 		contentPane.add(textFieldSenha);
 
 		JLabel lblSalvar = new JLabel("");
-		lblSalvar.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/salvar26.png")));
+		lblSalvar.setIcon(new ImageIcon("./imagens/salvar26.png"));
 		JLabel lblSAlvarlbl = new JLabel("");
 		lblSalvar.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e){  
@@ -140,7 +140,7 @@ public class TelaAutoCadastro extends JFrame {
 		contentPane.add(lblSalvar);
 
 		JLabel lblSair = new JLabel("");
-		lblSair.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/outArtur.PNG")));
+		lblSair.setIcon(new ImageIcon("./imagens/outArtur.PNG"));
 		JLabel lblSair_1lbl = new JLabel("");
 		lblSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -180,17 +180,17 @@ public class TelaAutoCadastro extends JFrame {
 		contentPane.add(label_1);
 
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/mpsc1.png")));
+		label_2.setIcon(new ImageIcon("./imagens/mpsc1.png"));
 		label_2.setBounds(2, 455, 63, 20);
 		contentPane.add(label_2);
 
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/Softplan poligra1.png")));
+		label_3.setIcon(new ImageIcon("./imagens/Softplan poligra1.png"));
 		label_3.setBounds(75, 455, 76, 20);
 		contentPane.add(label_3);
 
 		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/LogoUFSC.PNG")));
+		label_4.setIcon(new ImageIcon("./imagens/LogoUFSC.PNG"));
 		label_4.setBounds(171, 447, 34, 33);
 		contentPane.add(label_4);
 
@@ -229,7 +229,7 @@ public class TelaAutoCadastro extends JFrame {
 				lblVoltarlbl.setText("");
 			}
 		});
-		label_Voltar.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("./imagens/back-icon37.png")));
+		label_Voltar.setIcon(new ImageIcon("./imagens/back-icon37.png"));
 		label_Voltar.setForeground(SystemColor.textHighlight);
 		label_Voltar.setFont(new Font("Tahoma", Font.BOLD, 19));
 		label_Voltar.setBounds(549, 447, 34, 26);

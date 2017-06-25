@@ -158,7 +158,7 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(lblSalvar);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/salvar.png")));
+		lblNewLabel.setIcon(new ImageIcon("./imagens/salvar.png"));
 		lblNewLabel.setBounds(25, 68, 40, 40);
 		panelPainel.add(lblNewLabel);
 
@@ -188,12 +188,12 @@ public class TelaChamado extends JFrame {
 		label.addMouseListener(new MouseAdapter() {
 
 		});
-		label.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/Limpar.png")));
+		label.setIcon(new ImageIcon("./imagens/Limpar.png"));
 		label.setBounds(25, 133, 40, 47);
 		panelPainel.add(label);
 
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/cadastrar2.PNG")));
+		label_2.setIcon(new ImageIcon("./imagens/cadastrar2.PNG"));
 		label_2.setBounds(25, 271, 40, 47);
 		panelPainel.add(label_2);
 
@@ -228,7 +228,7 @@ public class TelaChamado extends JFrame {
 		JLabel label_7 = new JLabel("");
 		label_7.addMouseListener(new MouseAdapter() {
 		});
-		label_7.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/relatorio.png")));
+		label_7.setIcon(new ImageIcon("./imagens/relatorio.png"));
 		label_7.setBounds(25, 201, 40, 47);
 		panelPainel.add(label_7);
 
@@ -485,7 +485,7 @@ public class TelaChamado extends JFrame {
 			}
 
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/back-icon37.png")));
+		lblNewLabel_2.setIcon(new ImageIcon("./imagens/back-icon37.png"));
 		lblNewLabel_2.setBounds(610, 526, 40, 23);
 		contentPane.add(lblNewLabel_2);
 
@@ -517,24 +517,24 @@ public class TelaChamado extends JFrame {
 			}
 		});
 		label_4.setBackground(SystemColor.inactiveCaption);
-		label_4.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/outArtur.PNG")));
+		label_4.setIcon(new ImageIcon("./imagens/outArtur.PNG"));
 		label_4.setBounds(660, 518, 40, 41);
 		contentPane.add(label_4);
 
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(189, 531, 65, 25);
 		contentPane.add(lblNewLabel_3);
-		lblNewLabel_3.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/mpsc1.png")));
+		lblNewLabel_3.setIcon(new ImageIcon("./imagens/mpsc1.png"));
 
 		JLabel label_6 = new JLabel("");
 		label_6.setBounds(266, 531, 40, 25);
 		contentPane.add(label_6);
-		label_6.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/LogoUFSC.PNG")));
+		label_6.setIcon(new ImageIcon("./imagens/LogoUFSC.PNG"));
 
 		JLabel label_5 = new JLabel("");
 		label_5.setBounds(304, 531, 81, 25);
 		contentPane.add(label_5);
-		label_5.setIcon(new ImageIcon(TelaChamado.class.getResource("./imagens/Softplan poligra1.png")));
+		label_5.setIcon(new ImageIcon("./imagens/Softplan poligra1.png"));
 
 		lblSair.setForeground(SystemColor.textHighlight);
 		lblSair.setFont(new Font("Tahoma", Font.PLAIN, 13));

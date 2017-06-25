@@ -63,7 +63,7 @@ public class TelaTutorial extends JDialog {
 		contentPanel.add(txtpnVamosComearPrimeiro);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(TelaTutorial.class.getResource("./imagens/cadastre-se.png")));
+		lblNewLabel_1.setIcon(new ImageIcon("./imagens/cadastre-se.png"));
 		lblNewLabel_1.setBounds(229, 193, 116, 25);
 		contentPanel.add(lblNewLabel_1);
 		{
@@ -82,7 +82,7 @@ public class TelaTutorial extends JDialog {
 						
 						txtpnVamosComearPrimeiro.setText("");
 						
-						lblNewLabel_1.setIcon(new ImageIcon(TelaTutorial.class.getResource("./imagens/Salvar.png")));
+						lblNewLabel_1.setIcon(new ImageIcon("./imagens/Salvar.png"));
 						
 					}
 				});
