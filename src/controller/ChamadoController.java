@@ -14,21 +14,21 @@ import model.DAO.FactoryDAO;
 public class ChamadoController implements FactoryDAO<Chamado>{
 
 	private CSVUtils csvUtils = new CSVUtils();
-	
+	private static String path = "./persistences/Chamados.csv";
 	@Override
 	public void insert(Object obj) {
 		Chamado chamado = (Chamado)obj;	
 		try {
-			csvUtils.salvar("./persistences/Chamados.csv", chamado);
+			csvUtils.salvar(path, chamado);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "O arquivo está sendo aberto em outra operação");
 		}
 	}
 
 	@Override
-	public List<Chamado> findAll() {
+	public List<Chamado> findAll() throws Exception {
 		try {
-			return csvUtils.load("./persistences/Chamado.csv");
+			return csvUtils.load(path);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -37,11 +37,15 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 		return null;
 	}
 	
-	public List<Chamado> todosChamados() throws FileNotFoundException, IOException{
+	public List<Chamado> todosChamados() throws Exception{
 		return this.findAll();
 	}
 
-	
-	
-	
+	public void alteraEstado(String nomeSolicitante, int estado){
+		try {
+			csvUtils.alteraEstado(path, nomeSolicitante, estado);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 }

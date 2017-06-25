@@ -79,6 +79,10 @@ public class Chamado {
 		return this.estado;
 	}
 	
+	public void setEstado(int estado){
+		this.estado = estado;
+	}
+	
 	public int getDiasTrabalho() {
 		return diasTrabalho;
 	}

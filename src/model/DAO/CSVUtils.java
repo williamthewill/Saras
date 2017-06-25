@@ -76,10 +76,10 @@ public class CSVUtils {
 		pw.close();
 	}
 	
-	public List<Chamado> load(String arquivo, int position) throws FileNotFoundException, IOException {
+	public List<Chamado> load(String arquivo, int position) throws Exception {
 		File file = new File(arquivo);
 		if (!file.exists()) {
-			return null;
+			throw new Exception("Sem chamados cadastrados");
 		}
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 		String line = br.readLine();
@@ -96,10 +96,10 @@ public class CSVUtils {
 		return chamados;
 	}
 	
-	public List<Chamado> load(String arquivo, int beginPosition, int endPosition) throws FileNotFoundException, IOException {
+	public List<Chamado> load(String arquivo, int beginPosition, int endPosition) throws Exception {
 		File file = new File(arquivo);
 		if (!file.exists()) {
-			return null;
+			throw new Exception("Sem chamados cadastrados");
 		}
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 		String line = br.readLine();
@@ -116,10 +116,10 @@ public class CSVUtils {
 		return chamados;
 	}
 	
-	public List<Chamado> load(String arquivo) throws FileNotFoundException, IOException {
+	public List<Chamado> load(String arquivo) throws Exception {
 		File file = new File(arquivo);
 		if (!file.exists()) {
-			return null;
+			 throw new Exception("Sem chamados cadastrados");
 		}
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 		String line = br.readLine();
@@ -153,6 +153,46 @@ public class CSVUtils {
                 if(line.contains(nomeSolicitante)){
                 	Chamado chamado = createChamado(line);
                 	chamado.setSetor(setor);
+                	line = followCVSformat(chamado);
+                }
+                try {
+                    fw.write(line + System.getProperty("line.separator"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fw.close();
+                s.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        f.delete();
+        nf.renameTo(f);
+        return true;
+	}
+	
+	public boolean alteraEstado(String arquivo, String nomeSolicitante, int estado) throws Exception {
+		File f = new File(arquivo);
+		if(!f.exists()){
+			throw new Exception("Arquivo não encontrado");
+		}			
+		File nf = new File("./persistences/temporario.tmp");
+        FileWriter fw = null;
+        Scanner s = null;
+        try {
+            fw = new FileWriter(nf);
+            s = new Scanner(f);
+
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                if(line.contains(nomeSolicitante)){
+                	Chamado chamado = createChamado(line);
+                	chamado.setEstado(estado);
                 	line = followCVSformat(chamado);
                 }
                 try {

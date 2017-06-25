@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.itextpdf.text.pdf.TextField;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +16,9 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JPasswordField;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -28,7 +33,7 @@ public class TelaAutoCadastro extends JFrame {
 	private static final long serialVersionUID = 4804405991557711595L;
 	private JPanel contentPane;
 	private JTextField textFieldUsuario;
-	private JPasswordField texfeadSenha;
+	private JPasswordField textFieldSenha;
 
 	/**
 	 * Launch the application.
@@ -105,38 +110,23 @@ public class TelaAutoCadastro extends JFrame {
 		label.setBounds(245, 254, 14, 14);
 		contentPane.add(label);
 
-		texfeadSenha = new JPasswordField();
-		texfeadSenha.setBounds(257, 311, 180, 26);
-		contentPane.add(texfeadSenha);
+		textFieldSenha = new JPasswordField();
+		textFieldSenha.setBounds(257, 311, 180, 26);
+		contentPane.add(textFieldSenha);
 
 		JLabel lblSalvar = new JLabel("");
 		lblSalvar.setIcon(new ImageIcon(TelaAutoCadastro.class.getResource("/Imagens/salvar26.png")));
 		JLabel lblSAlvarlbl = new JLabel("");
-		lblSalvar.addMouseListener(new MouseAdapter() {
-
+		lblSalvar.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e){  
+		        if (e.getKeyCode() == e.VK_ENTER) {
+		        	new SalvaAtendente(textFieldUsuario, textFieldSenha);
+		        }
+		     }
+		});
+		lblSalvar.addMouseListener(new MouseAdapter() {	
 			public void mouseClicked(MouseEvent e) {
-
-				if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
-						&& texfeadSenha.getText() != null && texfeadSenha.getText().trim().length() > 0) {
-				
-					Atendente atendente = new Atendente();
-					try {
-
-						atendente.setUsuarioRede(textFieldUsuario.getText());
-						char[] chars = texfeadSenha.getPassword();
-						String senha = String.valueOf(chars);
-						atendente.setSenha(senha);
-
-						CadastroAtendente cadastro = new CadastroAtendente(atendente);
-						cadastro.validaUsuarioPortal();
-
-					} catch (IOException | InterruptedException e1) {
-						JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
-					}
-
-				}else{
-					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
-				}
+				new SalvaAtendente(textFieldUsuario, textFieldSenha);
 			}
 
 			public void mouseEntered(MouseEvent arg0) {
@@ -147,6 +137,8 @@ public class TelaAutoCadastro extends JFrame {
 				lblSAlvarlbl.setText("");
 			}
 		});
+		
+				
 		lblSalvar.setForeground(SystemColor.textHighlight);
 		lblSalvar.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblSalvar.setBounds(510, 447, 34, 26);
@@ -263,4 +255,29 @@ public class TelaAutoCadastro extends JFrame {
 		lblSair_1lbl.setBounds(593, 422, 34, 14);
 		contentPane.add(lblSair_1lbl);
 	}
+	
+	public static class SalvaAtendente{
+		public SalvaAtendente(JTextField textFieldUsuario, JPasswordField textFieldSenha) {
+			if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
+					&& textFieldUsuario.getText() != null && textFieldSenha.getText().trim().length() > 0) {
+				Atendente atendente = new Atendente();
+				try {
+					atendente.setUsuarioRede(textFieldUsuario.getText());
+					char[] chars = textFieldSenha.getPassword();
+					String senha = String.valueOf(chars);
+					atendente.setSenha(senha);
+
+					CadastroAtendente cadastro = new CadastroAtendente(atendente);
+					cadastro.validaUsuarioPortal();
+
+					} catch (IOException | InterruptedException e1) {
+					JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
+				}
+
+			}else{
+				JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
+			}
+		}
+	}
+
 }

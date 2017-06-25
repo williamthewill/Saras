@@ -162,83 +162,108 @@ public class Relatorio {
 	}
 
 	public int quantFone() throws FileNotFoundException, IOException {
-		System.out.println("Entrou aqui");
 		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado = chamadoController.todosChamados();
-		for (int i = 0; i < listaChamado.size(); i++) {
-			if (listaChamado.get(i).eFone()  ) {
-				this.contFone++;
+		List<Chamado> listaChamado;
+		try {
+			listaChamado = chamadoController.todosChamados();
+			for (int i = 0; i < listaChamado.size(); i++) {
+				if (listaChamado.get(i).eFone()) {
+					this.contFone++;
+				}
 			}
+		} catch (Exception e) {
+			JOptionPane.showInputDialog(null, e.getMessage());
 		}
 		return this.contFone;
-
 	}
 
 	public int quantAcessoRemoto() throws FileNotFoundException, IOException {
 		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado = chamadoController.todosChamados();
-		for (int i = 0; i < listaChamado.size(); i++) {
-			if (listaChamado.get(i).eRemoto()) {
-				this.contRemoto++;
+		List<Chamado> listaChamado;
+		try {
+			listaChamado = chamadoController.todosChamados();
+			for (int i = 0; i < listaChamado.size(); i++) {
+				if (listaChamado.get(i).eRemoto()) {
+					this.contRemoto++;
+				}
 			}
+		} catch (Exception e) {
+			JOptionPane.showInputDialog(null, e.getMessage());
 		}
 		return this.contRemoto;
-
 	}
 
 	public int quantChamadoDia() throws FileNotFoundException, IOException {
 		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado = chamadoController.todosChamados();
-		for (int i = 0; i < listaChamado.size(); i++) {
-			if (listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
-				this.contChamadosDia++;
+		List<Chamado> listaChamado;
+		try {
+			listaChamado = chamadoController.todosChamados();
+			for (int i = 0; i < listaChamado.size(); i++) {
+				if (listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
+					this.contChamadosDia++;					
+				}	
 			}
+			return this.contChamadosDia;
+		} catch (Exception e) {
+			JOptionPane.showInputDialog(null, e.getMessage());
 		}
-		return this.contChamadosDia;
-
+		return 0;
 	}
 
 	public String[] quantUsuarioMaiorInteracao() throws FileNotFoundException, IOException {
 		String[] retorno = new String[2];
 		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado = chamadoController.todosChamados();
-		List<String> usuarioMInteracao = new ArrayList<>();
-		for (int  i= 0; i < listaChamado.size(); i++) {
-			usuarioMInteracao.add(listaChamado.get(i).getNomeSolicitante());
-		}
-		String nome = "";
-		int maior = 0;
-		for (int j = 0; j < listaChamado.size(); j++) {
-			int count = Collections.frequency(usuarioMInteracao, usuarioMInteracao.get(j));
-			if (count > maior) {
-				maior = count;
-				nome = usuarioMInteracao.get(j);
+		List<Chamado> listaChamado;
+		try {
+			listaChamado = chamadoController.todosChamados();
+			List<String> usuarioMInteracao = new ArrayList<>();
+			for (int  i= 0; i < listaChamado.size(); i++) {
+				usuarioMInteracao.add(listaChamado.get(i).getNomeSolicitante());
+			}
+			String nome = "";
+			int maior = 0;
+			for (int j = 0; j < listaChamado.size(); j++) {
+				int count = Collections.frequency(usuarioMInteracao, usuarioMInteracao.get(j));
+				if (count > maior) {
+					maior = count;
+					nome = usuarioMInteracao.get(j);
+				}
+				this.usuarioMInterecao = nome;
+				this.contLocalSistema = maior;
 			}
 			retorno[0]=this.usuarioMInterecao = nome;
 			retorno[1]=(this.contUsuarioMInterecao=maior)+"";
+		} catch (Exception e) {
+			JOptionPane.showInputDialog(null, e.getMessage());
 		}
-		 
 		return retorno;
 	}
 
 	public String[] quantLocalSistema() throws FileNotFoundException, IOException {
 		String[] retorno = new String[2];
 		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado = chamadoController.todosChamados();
-		List<String> localChamado = new ArrayList<>();
-		for (int i = 0; i < listaChamado.size(); i++) {
-			localChamado.add(listaChamado.get(i).getLocalChamado());
-		}
-		String nome = "";
-		int maior = 0;
-		for (int j = 0; j < listaChamado.size(); j++) {
-			int count = Collections.frequency(localChamado, localChamado.get(j));
-			if (count > maior) {
-				maior = count;
-				nome = localChamado.get(j);
+		List<Chamado> listaChamado;
+		try {
+			listaChamado = chamadoController.todosChamados();
+			List<String> localChamado = new ArrayList<>();
+			for (int i = 0; i < listaChamado.size(); i++) {
+				localChamado.add(listaChamado.get(i).getLocalChamado());
+			}
+			String nome = "";
+			int maior = 0;
+			for (int j = 0; j < listaChamado.size(); j++) {
+				int count = Collections.frequency(localChamado, localChamado.get(j));
+				if (count > maior) {
+					maior = count;
+					nome = localChamado.get(j);
+				}
+				this.localSistema = nome;
+				this.contLocalSistema = maior;
 			}
 			retorno[0]=this.localSistema = nome;
 			retorno[1]=(this.contLocalSistema = maior)+"";
+		} catch (Exception e) {
+			JOptionPane.showInputDialog(null, e.getMessage());
 		}
 		return retorno;
 	}

@@ -27,11 +27,20 @@ public class RegistroChamado {
 
 	public void cadastraChamados(Atendente atendente) throws IOException, InterruptedException{
 		conectaChamado(atendente, false);
-		for (Chamado chamado : chamadoController.todosChamados()) {
-			this.cadastraChamado(chamado, atendente);
-			Thread.sleep(8000);
+		try {
+			for (Chamado chamado : chamadoController.todosChamados()) {
+				this.cadastraChamado(chamado, atendente);
+				Thread.sleep(500);
+				chamadoController.alteraEstado(chamado.getNomeSolicitante(), 1);
+				Thread.sleep(8500);
+			}
+		} catch (Exception e) {
+			JOptionPane.showInputDialog(null,e.getMessage());
 		}
-		System.out.println(chamadosNaoSalvos.get(0));
+		for (String nomeSolicitante : chamadosNaoSalvos) {
+			chamadoController.alteraEstado(nomeSolicitante, -1);
+			Thread.sleep(100);
+		}
 	}
 	
 	public void cadastraChamado(Chamado chamado, Atendente atendente) throws IOException, InterruptedException {
