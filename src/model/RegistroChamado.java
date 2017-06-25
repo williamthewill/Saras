@@ -20,21 +20,26 @@ public class RegistroChamado {
 	public void salvaLocalmente(Chamado chamado){
 		chamadoController.insert(chamado);
 	}
+	public void conectaChamado ( Atendente atendente, boolean eSoft) throws IOException, InterruptedException{
+		conecta.conecta();
+		conecta.login(atendente, eSoft);
+	}
 
 	public void cadastraChamados(Atendente atendente) throws IOException, InterruptedException{
+		conectaChamado(atendente, false);
 		for (Chamado chamado : chamadoController.todosChamados()) {
 			this.cadastraChamado(chamado, atendente);
+			Thread.sleep(9000);
 		}
 		System.out.println(chamadosNaoSalvos.get(0));
 	}
 	
 	public void cadastraChamado(Chamado chamado, Atendente atendente) throws IOException, InterruptedException {
 		if(!chamado.getESoftplan()){
-			try{
-				conecta.conecta();
-				conecta.login(atendente, chamado);
+			try{				
 				Thread.sleep(1000);
 				conecta.clickCadastrarOcorrencias();
+				Thread.sleep(1000);
 				conecta.clicKnomeSolicitante(chamado);
 				Thread.sleep(1000);
 				conecta.clicLotacao();
@@ -51,8 +56,7 @@ public class RegistroChamado {
 		} else {
 			try{
 				Thread.sleep(1000);
-				conecta.conecta();
-				conecta.login(atendente, chamado);
+				conectaChamado(atendente, chamado.getESoftplan());
 				Thread.sleep(1000);
 				conecta.clickCadastrarOcorrencias();
 				conecta.clicKnomeSolicitante(chamado);

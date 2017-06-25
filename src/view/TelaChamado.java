@@ -117,7 +117,6 @@ public class TelaChamado extends JFrame {
 					}
 
 					if (checkboxSoftplan.isSelected()) {
-						System.out.println("Entrou");
 						descricaoAtendimento = textAreaDescricao.getText();
 						descriProblema = "soft";
 						JOptionPane.showMessageDialog(null,

@@ -38,16 +38,12 @@ public class AtendenteDAO {
 		boolean returner = false;
 		 try{
             FileOutputStream arquivoGrav = new FileOutputStream("./persistences/Atendente.ser");
-            
 			ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
-            
 			objGravar.writeObject(atendente);
-			
             objGravar.flush();
             objGravar.close();
             arquivoGrav.flush();
             arquivoGrav.close();
-			
 			returner = true;
         }catch( Exception e ){
 			e.printStackTrace();
@@ -58,7 +54,7 @@ public class AtendenteDAO {
 	
 	public Atendente recuperaAtendente(){
 		try{
-			FileInputStream arquivoLeitura = new FileInputStream("./media/Atendente.ser");
+			FileInputStream arquivoLeitura = new FileInputStream("./persistences/Atendente.ser");
             ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
 			this.atendente = (Atendente) objLeitura.readObject();
             objLeitura.close();

@@ -58,7 +58,7 @@ public class Chamado {
 	
 	private void buscaLocalChamado(){
 		LocaisDoSistemaCollection locaisDoSistemaCollection = new LocaisDoSistemaCollection();
-		locaisDoSistemaCollection.containsInCollection(descricaoSolicitante);
+		this.localChamado = locaisDoSistemaCollection.containsInCollection(descricaoSolicitante);
 	}
 	
 	public boolean eRemoto() {
