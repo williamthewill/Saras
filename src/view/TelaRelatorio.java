@@ -31,6 +31,7 @@ public class TelaRelatorio extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldDateInicio;
 	private JTextField textFieldDateFim;
+	private Relatorio relatorio = new Relatorio();
 
 	/**
 	 * Launch the application.
@@ -358,7 +359,7 @@ public class TelaRelatorio extends JFrame {
 		label_3.setBounds(162, 403, 38, 35);
 		contentPane.add(label_3);
 		
-		JLabel labelTotalRemoto = new JLabel("0");
+		JLabel labelTotalRemoto = new JLabel();
 		labelTotalRemoto.setForeground(Color.RED);
 		labelTotalRemoto.setFont(new Font("Tahoma", Font.BOLD, 13));
 		labelTotalRemoto.setBounds(107, 197, 23, 14);

@@ -62,14 +62,14 @@ public class Chamado {
 	}
 	
 	public boolean eRemoto() {
-		if(descricaoProblema.contains("Este atendimento teve interação via acesso remoto.")){
+		if(descricaoSolicitante.contains("Este atendimento teve interação via acesso remoto.")){
 			return true;
 		};
 		return false;
 	}
 	
 	public boolean eFone() {
-		if(descricaoProblema.contains("Este atendimento teve interação via telefone, referente a: ")){
+		if(descricaoSolicitante.contains("Este atendimento teve interação via telefone, referente a: ")){
 			return true;
 		}
 		return false;

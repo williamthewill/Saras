@@ -29,7 +29,7 @@ public class RegistroChamado {
 		conectaChamado(atendente, false);
 		for (Chamado chamado : chamadoController.todosChamados()) {
 			this.cadastraChamado(chamado, atendente);
-			Thread.sleep(9000);
+			Thread.sleep(8000);
 		}
 		System.out.println(chamadosNaoSalvos.get(0));
 	}
@@ -52,6 +52,7 @@ public class RegistroChamado {
 				Thread.sleep(1000);
 			}catch (NoSuchElementException | UnhandledAlertException e) {
 				chamadosNaoSalvos.add(chamado.getNomeSolicitante());
+				// escrever -1 no csv
 			}			
 		} else {
 			try{
@@ -81,6 +82,20 @@ public class RegistroChamado {
 	}
 	
 	public void notificaExito(){
-		JOptionPane.showInputDialog("Chamado Cadastrados com sucesso");
+		StringBuilder nomesErro =new  StringBuilder();
+		if(chamadosNaoSalvos.size()!=0){
+			for(int i=0; i<chamadosNaoSalvos.size(); i++){
+				nomesErro.append("\n"+chamadosNaoSalvos.get(i));
+			}
+			conecta.close();
+			JOptionPane.showMessageDialog(null, "Não consegui cadastrar as pessoas abaixo:"+"\n"+nomesErro.toString()+"\n"+"MOTIVO: O nome cadastro no JABBER não é igual ao do SOS."+"\n"+"Abra assua Planilha e cadastre Manualmente!");
+			
+			chamadosNaoSalvos.clear();
+		}else{
+			conecta.close();
+			JOptionPane.showInputDialog("Chamado Cadastrados com sucesso");
+		}
+		
+	
 	}
 }

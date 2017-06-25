@@ -45,6 +45,7 @@ public class Relatorio {
 		Document doc = null;
 		OutputStream os = null;
 		try {
+			
 			try {
 				doc = new Document(PageSize.A4, 72, 72, 72, 72);
 				os = new FileOutputStream("./persistences/Relatório Consolidado Saras.pdf");
@@ -77,7 +78,7 @@ public class Relatorio {
 				// criação de tabela
 				PdfPTable table = new PdfPTable(2);
 				PdfPCell header = new PdfPCell(new Paragraph("Relatório consolidado",
-						FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
+				FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
 				header.setColspan(2);
 				table.addCell(header);
 				Paragraph p3 = new Paragraph("TIPOS:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
@@ -85,15 +86,15 @@ public class Relatorio {
 				Paragraph p4 = new Paragraph("QUANTIDADE:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
 				table.addCell(p4);
 				table.addCell("Telefone");
-				table.addCell(Integer.toString(this.contFone));
+				table.addCell(Integer.toString(this.quantFone()));
 				table.addCell("Acesso Remoto");
-				table.addCell(Integer.toString(this.contRemoto));
+				table.addCell(Integer.toString(this.quantAcessoRemoto()));
 				table.addCell("Chamados do dia");
-				table.addCell(Integer.toString(this.contChamadosDia));
+				table.addCell(Integer.toString(this.quantChamadoDia()));
 				table.addCell("Loca do Sistema");
-				table.addCell(this.localSistema+" "+Integer.toString(this.contLocalSistema));
+				table.addCell(this.quantLocalSistema()[0]+" "+this.quantLocalSistema()[1] );
 				table.addCell("Usuário de maior Interação");
-				table.addCell("null");
+				table.addCell(this.quantUsuarioMaiorInteracao()[0]+" "+this.quantUsuarioMaiorInteracao()[1]);
 				doc.add(table);
 			} finally {
 				if (doc != null) {
@@ -160,18 +161,20 @@ public class Relatorio {
 		return localSistema;
 	}
 
-	public void quantFone() throws FileNotFoundException, IOException {
+	public int quantFone() throws FileNotFoundException, IOException {
+		System.out.println("Entrou aqui");
 		chamadoController = new ChamadoController();
 		List<Chamado> listaChamado = chamadoController.todosChamados();
 		for (int i = 0; i < listaChamado.size(); i++) {
-			if (listaChamado.get(i).eFone()) {
+			if (listaChamado.get(i).eFone()  ) {
 				this.contFone++;
 			}
 		}
+		return this.contFone;
 
 	}
 
-	public void quantAcessoRemoto() throws FileNotFoundException, IOException {
+	public int quantAcessoRemoto() throws FileNotFoundException, IOException {
 		chamadoController = new ChamadoController();
 		List<Chamado> listaChamado = chamadoController.todosChamados();
 		for (int i = 0; i < listaChamado.size(); i++) {
@@ -179,23 +182,24 @@ public class Relatorio {
 				this.contRemoto++;
 			}
 		}
+		return this.contRemoto;
 
 	}
 
-	public void quantChamadoDia() throws FileNotFoundException, IOException {
+	public int quantChamadoDia() throws FileNotFoundException, IOException {
 		chamadoController = new ChamadoController();
 		List<Chamado> listaChamado = chamadoController.todosChamados();
 		for (int i = 0; i < listaChamado.size(); i++) {
 			if (listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
 				this.contChamadosDia++;
-
 			}
-			
 		}
+		return this.contChamadosDia;
 
 	}
 
-	public void quantUsuarioMaiorInteracao() throws FileNotFoundException, IOException {
+	public String[] quantUsuarioMaiorInteracao() throws FileNotFoundException, IOException {
+		String[] retorno = new String[2];
 		chamadoController = new ChamadoController();
 		List<Chamado> listaChamado = chamadoController.todosChamados();
 		List<String> usuarioMInteracao = new ArrayList<>();
@@ -210,12 +214,15 @@ public class Relatorio {
 				maior = count;
 				nome = usuarioMInteracao.get(j);
 			}
-			this.usuarioMInterecao = nome;
-			this.contLocalSistema = maior;
+			retorno[0]=this.usuarioMInterecao = nome;
+			retorno[1]=(this.contUsuarioMInterecao=maior)+"";
 		}
+		 
+		return retorno;
 	}
 
-	public void quantLocalSistema() throws FileNotFoundException, IOException {
+	public String[] quantLocalSistema() throws FileNotFoundException, IOException {
+		String[] retorno = new String[2];
 		chamadoController = new ChamadoController();
 		List<Chamado> listaChamado = chamadoController.todosChamados();
 		List<String> localChamado = new ArrayList<>();
@@ -230,8 +237,9 @@ public class Relatorio {
 				maior = count;
 				nome = localChamado.get(j);
 			}
-			this.localSistema = nome;
-			this.contLocalSistema = maior;
+			retorno[0]=this.localSistema = nome;
+			retorno[1]=(this.contLocalSistema = maior)+"";
 		}
+		return retorno;
 	}
 }

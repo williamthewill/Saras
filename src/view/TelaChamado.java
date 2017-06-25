@@ -104,6 +104,7 @@ public class TelaChamado extends JFrame {
 						registroChamado.salvaLocalmente(chamado);
 						try {
 							registroChamado.cadastraChamado(chamado, new AtendenteController().recuperaAtendente());
+							registroChamado.notificaExito();
 						} catch (IOException | InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -200,6 +201,7 @@ public class TelaChamado extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					registroChamado.cadastraChamados(atendenteController.recuperaAtendente());
+					registroChamado.notificaExito();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (InterruptedException e) {
