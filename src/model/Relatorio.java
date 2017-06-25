@@ -190,30 +190,45 @@ public class Relatorio {
 				this.contChamadosDia++;
 
 			}
+			
 		}
 
 	}
 
-	public void quantUsuarioMaiorInteracao() {
-		// this.usuarioMInterecao= Coloca aqui o usuarui maior interacao;
-		// this.contUsuarioMInterecao= Coloca aqui a quantidade de vezes que ele
-		// apareceu.
+	public void quantUsuarioMaiorInteracao() throws FileNotFoundException, IOException {
+		chamadoController = new ChamadoController();
+		List<Chamado> listaChamado = chamadoController.todosChamados();
+		List<String> usuarioMInteracao = new ArrayList<>();
+		for (int  i= 0; i < listaChamado.size(); i++) {
+			usuarioMInteracao.add(listaChamado.get(i).getNomeSolicitante());
+		}
+		String nome = "";
+		int maior = 0;
+		for (int j = 0; j < listaChamado.size(); j++) {
+			int count = Collections.frequency(usuarioMInteracao, usuarioMInteracao.get(j));
+			if (count > maior) {
+				maior = count;
+				nome = usuarioMInteracao.get(j);
+			}
+			this.usuarioMInterecao = nome;
+			this.contLocalSistema = maior;
+		}
 	}
 
 	public void quantLocalSistema() throws FileNotFoundException, IOException {
 		chamadoController = new ChamadoController();
 		List<Chamado> listaChamado = chamadoController.todosChamados();
 		List<String> localChamado = new ArrayList<>();
-		for (int l = 0; l < listaChamado.size(); l++) {
-			localChamado.add(listaChamado.get(l).getLocalChamado());
+		for (int i = 0; i < listaChamado.size(); i++) {
+			localChamado.add(listaChamado.get(i).getLocalChamado());
 		}
 		String nome = "";
 		int maior = 0;
-		for (int i = 0; i < listaChamado.size(); i++) {
-			int count = Collections.frequency(localChamado, localChamado.get(i));
+		for (int j = 0; j < listaChamado.size(); j++) {
+			int count = Collections.frequency(localChamado, localChamado.get(j));
 			if (count > maior) {
 				maior = count;
-				nome = localChamado.get(i);
+				nome = localChamado.get(j);
 			}
 			this.localSistema = nome;
 			this.contLocalSistema = maior;

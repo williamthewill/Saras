@@ -75,7 +75,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(label_2);
 
 		JLabel lblEntrar = new JLabel("");
-		lblEntrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/entrar 26.PNG")));
+		lblEntrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/Imagens/27.png")));
 		lbEntrarLb = new JLabel("");
 
 		lblEntrar.addMouseListener(new MouseAdapter() {
