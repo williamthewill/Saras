@@ -39,8 +39,8 @@ public class Relatorio {
 	private String usuarioMInterecao;
 	private String localSistema;
 
-	ChamadoController chamadoController;
-
+	private ChamadoController chamadoController;
+	//COLOCAR PARAMETROS NA METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
 	public void geraPDF() throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;

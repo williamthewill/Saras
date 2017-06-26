@@ -38,15 +38,14 @@ public class TelaChamado extends JFrame {
 	private JTextArea textAreaDescricao;
 	private JTextField textFieldLinha1;
 	private JTextField textFieldLinha2;
-	JCheckBox checkboxFone;
-	JCheckBox checkboxRemoto;
-	JCheckBox checkboxSoftplan;
-
-	static String descriProblema = "";
-	static String descricaoAtendimento = "";
-	static int cont = 0;
+	private JCheckBox checkboxFone;
+	private JCheckBox checkboxRemoto;
+	private JCheckBox checkboxSoftplan;
+	private static String descriProblema = "";
+	private static String descricaoAtendimento = "";
 	private RegistroChamado registroChamado = new RegistroChamado();
 	private AtendenteController atendenteController = new AtendenteController();
+	private Atendente atendente;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -84,6 +83,7 @@ public class TelaChamado extends JFrame {
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				if (textAreaDescricao.getText() != null && textAreaDescricao.getText().trim().length() > 0
 						&& textFieldSolicitante.getText() != null
 						&& textFieldSolicitante.getText().trim().length() > 0) {
@@ -105,8 +105,8 @@ public class TelaChamado extends JFrame {
 
 						registroChamado.salvaLocalmente(chamado);
 						try {
-							Atendente atendente = new AtendenteController().recuperaAtendente(); 
-							System.out.println(chamado.getNomeSolicitante());
+							atendente = new AtendenteController().recuperaAtendente(); 
+							
 							registroChamado.cadastraChamado(chamado, atendente);
 							checkboxSoftplan.setSelected(false);
 							registroChamado.notificaExito();
@@ -402,7 +402,7 @@ public class TelaChamado extends JFrame {
 					NomesSolicitantes nomesSolicitantes = new NomesSolicitantes();
 					try {
 						textFieldSolicitante
-								.setText(nomesSolicitantes.getNomeSoslicitante(textAreaDescricao.getText()));
+								.setText(nomesSolicitantes.getNomePortalSolicitante(textAreaDescricao.getText()));
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

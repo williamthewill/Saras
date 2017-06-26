@@ -15,7 +15,6 @@ import org.openqa.selenium.support.ui.Select;
 public class Conecta {
 
 	WebElement elemento;
-
 	String link;
 	WebDriver driver;
 	String lotacao;
@@ -36,11 +35,11 @@ public class Conecta {
 			profile.setPreference("network.proxy.ssl", "proxy.mp.sc.gov.br");
 			profile.setPreference("network.proxy.ssl_port", 8080);
 
-			String a = System.getProperty("user.dir");
-			String b = "\\geckodriver" + this.validaSistemaOp() + ".exe";
-			String c = a + b;
+			String userDir = System.getProperty("user.dir");
+			String gecko = "\\geckodriver" + this.validaSistemaOp() + ".exe";
+			String pathGecko = userDir + gecko;
 
-			System.setProperty("webdriver.gecko.driver", c);
+			System.setProperty("webdriver.gecko.driver", pathGecko);
 			driver = new FirefoxDriver(profile);
 			driver.get("http://suportesig.mp.sc.gov.br/sos/");
 
@@ -78,7 +77,7 @@ public class Conecta {
 		System.out.println("jessica");
 	}
 
-	public void clicLotacao() {
+	public void clickLotacao() {
 		Select seleciona = new Select(driver.findElement(By.name("lotacao")));
 		seleciona.selectByIndex(1);// seleciono o primeiro indice
 		this.lotacaoUsuario = seleciona.getFirstSelectedOption().getText();
@@ -108,7 +107,7 @@ public class Conecta {
 		this.driver.findElement(By.name("salt")).click();
 	}
 
-	public void clicDescricaoProblema(Chamado chamado) {
+	public void clickDescricaoProblema(Chamado chamado) {
 		this.driver.findElement(By.name("resumo")).sendKeys(chamado.getDescricaoProblema());
 	}
 

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class NomesSolicitantes {
 
 	
-	public String getNomeSoslicitante(String textoDescricao ) throws IOException{
+	public String getNomePortalSolicitante(String textoDescricao ) throws IOException{
 		
 		try{
 

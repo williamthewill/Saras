@@ -11,6 +11,8 @@ import model.DAO.AtendenteDAO;
 public class CadastroAtendente{
 	
 	private Atendente atendente;
+	private Conecta conecta;
+	private AtendenteDAO persiste;
 	
 	public CadastroAtendente(Atendente atendente){
 		this.atendente=atendente;
@@ -26,7 +28,7 @@ public class CadastroAtendente{
 	
 	public Boolean validaUsuarioPortal() throws IOException, InterruptedException{
 		boolean returner = false;
-		Conecta conecta = new Conecta();
+		conecta = new Conecta();
 		boolean autenticado = conecta.conectaAutentica(atendente);
 		
 		if(autenticado){

@@ -16,7 +16,7 @@ public class RegistroChamado {
 	private ChamadoController chamadoController = new ChamadoController();
 	private List<String> chamadosNaoSalvos = new ArrayList<>();
 	private Conecta conecta = new Conecta();
-	private boolean mats=false;
+	private boolean mants=false;
 	
 	public void salvaLocalmente(Chamado chamado){
 		chamadoController.insert(chamado);
@@ -45,6 +45,7 @@ public class RegistroChamado {
 	}
 	
 	public void cadastraChamado(Chamado chamado, Atendente atendente) throws IOException, InterruptedException {
+			
 		if(!chamado.getESoftplan()){
 			try{				
 				Thread.sleep(1000);
@@ -52,7 +53,7 @@ public class RegistroChamado {
 				Thread.sleep(1000);
 				conecta.clicKnomeSolicitante(chamado);
 				Thread.sleep(1000);
-				conecta.clicLotacao();
+				conecta.clickLotacao();
 				chamadoController.alteraSetor(chamado.getNomeSolicitante(), conecta.getLotacaoSolicitante());
 				Thread.sleep(500);
 				conecta.clickContatoFeitoPor();
@@ -69,14 +70,11 @@ public class RegistroChamado {
 				this.conectaChamado ( atendente, true);
 				JOptionPane.showMessageDialog(null, "Por favor  efetue login no Mantis\n Somente depois clique em  OK");
 				Thread.sleep(1000);
-				System.out.println("1");
 				conecta.clickCadastrarOcorrencias();
 				Thread.sleep(1000);
-				System.out.println(chamado.getNomeSolicitante());
 				conecta.clicKnomeSolicitante(chamado);
 				Thread.sleep(1000);
-				conecta.clicLotacao();
-				System.out.println("4");
+				conecta.clickLotacao();
 				chamadoController.alteraSetor(chamado.getNomeSolicitante(), conecta.getLotacaoSolicitante());
 				Thread.sleep(500);
 				conecta.clickContatoFeitoPor();
@@ -86,9 +84,9 @@ public class RegistroChamado {
 				// clica no checkbox salt do SOS
 				conecta.clickESof();
 				// carrega no campo do SOS o texto do mants
-				conecta.clicDescricaoProblema(chamado);
+				conecta.clickDescricaoProblema(chamado);
 				conecta.clickTerminoCadastro();
-				this.mats=true;
+				this.mants=true;
 				chamadoController.alteraEstado(chamado.getNomeSolicitante(), 1);
 				Thread.sleep(6000);
 				//escreve no arquivo que foi aberto o chamado
@@ -109,11 +107,11 @@ public class RegistroChamado {
 			
 			chamadosNaoSalvos.clear();
 		}
-		if(chamadosNaoSalvos.size()==0 && !mats){
+		if(chamadosNaoSalvos.size()==0 && !mants){
 			conecta.close();
 			JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
 		}
-		if(this.mats){
+		if(this.mants){
 			JOptionPane.showMessageDialog(null, "Seu Mants foi aberto com sucesso, agora anexe seus arquivos se houver");
 		}
 		

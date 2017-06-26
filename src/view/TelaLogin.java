@@ -24,8 +24,8 @@ import java.awt.Toolkit;
 public class TelaLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	static private JTextField textFieldNome;
-	static private JPasswordField passwordFieldSenha;
+	private JTextField textFieldNome;
+	private JPasswordField passwordFieldSenha;
 	private JLabel lbEntrarLb;
 
 	public static void main(String[] args) {

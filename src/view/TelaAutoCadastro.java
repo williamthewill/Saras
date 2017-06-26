@@ -29,6 +29,8 @@ public class TelaAutoCadastro extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUsuario;
 	private JPasswordField textFieldSenha;
+	private Atendente atendente = new Atendente();
+	private CadastroAtendente cadastro;
 
 	/**
 	 * Launch the application.
@@ -112,16 +114,29 @@ public class TelaAutoCadastro extends JFrame {
 		JLabel lblSalvar = new JLabel("");
 		lblSalvar.setIcon(new ImageIcon("./imagens/salvar26.png"));
 		JLabel lblSAlvarlbl = new JLabel("");
-		lblSalvar.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e){  
-		        if (e.getKeyCode() == e.VK_ENTER) {
-		        	new SalvaAtendente(textFieldUsuario, textFieldSenha);
-		        }
-		     }
-		});
+
 		lblSalvar.addMouseListener(new MouseAdapter() {	
 			public void mouseClicked(MouseEvent e) {
-				new SalvaAtendente(textFieldUsuario, textFieldSenha);
+				
+				if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
+						&& textFieldUsuario.getText() != null && textFieldSenha.getText().trim().length() > 0) {
+					
+					try {
+						atendente.setUsuarioRede(textFieldUsuario.getText());
+						char[] chars = textFieldSenha.getPassword();
+						String senha = String.valueOf(chars);
+						atendente.setSenha(senha);
+						
+						cadastro = new CadastroAtendente(atendente);
+						cadastro.validaUsuarioPortal();
+
+						} catch (IOException | InterruptedException e1) {
+						JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
+					}
+
+				}else{
+					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
+				}
 			}
 
 			public void mouseEntered(MouseEvent arg0) {
@@ -253,25 +268,7 @@ public class TelaAutoCadastro extends JFrame {
 	
 	public static class SalvaAtendente{
 		public SalvaAtendente(JTextField textFieldUsuario, JPasswordField textFieldSenha) {
-			if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
-					&& textFieldUsuario.getText() != null && textFieldSenha.getText().trim().length() > 0) {
-				Atendente atendente = new Atendente();
-				try {
-					atendente.setUsuarioRede(textFieldUsuario.getText());
-					char[] chars = textFieldSenha.getPassword();
-					String senha = String.valueOf(chars);
-					atendente.setSenha(senha);
-
-					CadastroAtendente cadastro = new CadastroAtendente(atendente);
-					cadastro.validaUsuarioPortal();
-
-					} catch (IOException | InterruptedException e1) {
-					JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
-				}
-
-			}else{
-				JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
-			}
+			
 		}
 	}
 

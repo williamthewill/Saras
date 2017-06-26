@@ -7,15 +7,14 @@ import model.DAO.AtendenteDAO;
 import model.DAO.FactoryDAO;
 
 public class AtendenteController implements FactoryDAO<Atendente>{
-	Atendente atendente;
+	private Atendente atendente;
+	private AtendenteDAO atendenteDao = new AtendenteDAO(atendente);
 	public AtendenteController(Atendente atendente) {
 		this.atendente = atendente;
 	} 
 	
 	public AtendenteController() {
 	}
-	
-	AtendenteDAO atendenteDao = new AtendenteDAO(atendente);
 			
 	@Override
 	public void insert(Object obj) {

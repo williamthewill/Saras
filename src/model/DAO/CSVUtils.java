@@ -2,7 +2,6 @@ package model.DAO;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,6 +15,7 @@ import model.Chamado;
 public class CSVUtils {
 
     private static final char DEFAULT_SEPARATOR = ';';
+    Chamado chamado;
     
     @SuppressWarnings("static-access")
 	private String followCVSformat(Chamado chamado) {
@@ -151,7 +151,7 @@ public class CSVUtils {
             while (s.hasNextLine()) {
                 String line = s.nextLine();
                 if(line.contains(nomeSolicitante)){
-                	Chamado chamado = createChamado(line);
+                	chamado = createChamado(line);
                 	chamado.setSetor(setor);
                 	line = followCVSformat(chamado);
                 }
@@ -191,7 +191,7 @@ public class CSVUtils {
             while (s.hasNextLine()) {
                 String line = s.nextLine();
                 if(line.contains(nomeSolicitante)){
-                	Chamado chamado = createChamado(line);
+                	chamado = createChamado(line);
                 	chamado.setEstado(estado);
                 	line = followCVSformat(chamado);
                 }

@@ -104,7 +104,7 @@ public class TelaTutorial extends JDialog {
 			}
 		}
 	}
-	
+
 	public String lerArqui() throws IOException{
 		FileInputStream inputStream = new FileInputStream("sarasTuto.txt");
 		String texto="";
