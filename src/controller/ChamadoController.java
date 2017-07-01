@@ -40,6 +40,10 @@ public class ChamadoController implements FactoryDAO<Chamado>{
 	public List<Chamado> todosChamados() throws Exception{
 		return this.findAll();
 	}
+	
+	public List<Chamado> chamadosData(String beginDate, String endDate) throws Exception{
+		return csvUtils.loadFromDate(path, beginDate, endDate);
+	}
 
 	public void alteraEstado(String nomeSolicitante, int estado){
 		try {

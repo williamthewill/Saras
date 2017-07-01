@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -83,11 +84,11 @@ public class Relatorio {
 				Paragraph p4 = new Paragraph("QUANTIDADE:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
 				table.addCell(p4);
 				table.addCell("Telefone");
-				table.addCell(Integer.toString(this.quantFone()));
+				table.addCell(Integer.toString(this.quantFone(true)));
 				table.addCell("Acesso Remoto");
-				table.addCell(Integer.toString(this.quantAcessoRemoto()));
+				table.addCell(Integer.toString(this.quantAcessoRemoto(true)));
 				table.addCell("Chamados do dia");
-				table.addCell(Integer.toString(this.quantChamadoDia()));
+				table.addCell(Integer.toString(this.quantChamadoDia(true)));
 				table.addCell("Loca do Sistema");
 				table.addCell(this.quantLocalSistema()[0]+" "+this.quantLocalSistema()[1] );
 				table.addCell("Usuário de maior Interação");
@@ -107,7 +108,7 @@ public class Relatorio {
 		}
 	}
 	
-	public void geraRelatorioComFiltro(String datainicio, String dataFim, boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior) throws DocumentException, IOException {
+	public void geraRelatorioComFiltro(boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior) throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;
 		try {
@@ -148,19 +149,19 @@ public class Relatorio {
 				table.addCell(p4);
 				table.addCell("Telefone");
 				if(fone){
-					table.addCell(Integer.toString(this.quantFone()));
+					table.addCell(Integer.toString(this.quantFone(true)));
 				}else{
 					table.addCell("");	
 				}
 				table.addCell("Acesso Remoto");
 				if(remoto){
-					table.addCell(Integer.toString(this.quantAcessoRemoto()));
+					table.addCell(Integer.toString(this.quantAcessoRemoto(true)));
 				}else{
 					table.addCell("");
 				}
 				table.addCell("Chamados do dia");
 				if(chamadoDia){
-					table.addCell(Integer.toString(this.quantChamadoDia()));
+					table.addCell(Integer.toString(this.quantChamadoDia(true)));
 				}else{
 					table.addCell("");
 				}
@@ -213,17 +214,28 @@ public class Relatorio {
 		java.awt.Desktop.getDesktop().open(new File("./persistences/Relatório Consolidado Saras.pdf"));
 	}
 
-	public void listaChamado() throws Exception{
+	public void listaChamado(){
 		chamadoController = new ChamadoController();
-		this.listaChamado = chamadoController.todosChamados();
+		try {
+			this.listaChamado = chamadoController.todosChamados();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
-	public void listaChamadoData() throws Exception{
+	public void listaChamadoData(String data1, String data2){
 		chamadoController = new ChamadoController();
-		this.listaChamado = chamadoController.chamadosData(data1, data2); 
+		try {
+			this.listaChamado = chamadoController.chamadosData(data1, data2);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
 	}
 
-	public int quantFone() throws FileNotFoundException, IOException {
+	public int quantFone(boolean fone){
+		if(!fone){
+			return 0;
+		}
 		try {
 			for (int i = 0; i < this.listaChamado.size(); i++) {
 				if (listaChamado.get(i).eFone()) {
@@ -236,8 +248,11 @@ public class Relatorio {
 		return this.contFone;
 	}
 
-	public int quantAcessoRemoto() throws FileNotFoundException, IOException {
-		
+	public int quantAcessoRemoto(boolean remoto) {
+		if(!remoto){
+			return 0;
+		}
+			
 		try {
 			for (int i = 0; i < this.listaChamado.size(); i++) {
 				if (this.listaChamado.get(i).eRemoto()) {
@@ -250,7 +265,11 @@ public class Relatorio {
 		return this.contRemoto;
 	}
 
-	public int quantChamadoDia() throws FileNotFoundException, IOException {
+	public int quantChamadoDia(boolean chamadoDia){
+		
+		if(!chamadoDia){
+			return 0;
+		}
 		try{
 			for (int i = 0; i < this.listaChamado.size(); i++) {
 				if (this.listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
@@ -264,7 +283,7 @@ public class Relatorio {
 		return 0;
 	}
 
-	public String[] quantUsuarioMaiorInteracao() throws FileNotFoundException, IOException {
+	public String[] quantUsuarioMaiorInteracao(){
 		String[] retorno = new String[2];
 		try{
 			List<String> usuarioMInteracao = new ArrayList<>();
@@ -290,7 +309,7 @@ public class Relatorio {
 		return retorno;
 	}
 
-	public String[] quantLocalSistema() throws FileNotFoundException, IOException {
+	public String[] quantLocalSistema() {
 		String[] retorno = new String[2];
 		try{
 			List<String> localChamado = new ArrayList<>();
@@ -317,33 +336,27 @@ public class Relatorio {
 	}
 	
 	public boolean validaData(String data1, String data2){
-		boolean retorno = false;
-		Date dataPrim = null;
-    	String dataTexto = new String(data1);
-    	Date dataSegun = null;
-    	String dataTexto2 = new String(data2);
-    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    	try {
-    		format.setLenient(false);
-    		dataPrim = format.parse(dataTexto);
-    		format.setLenient(false);
-    		dataSegun = format.parse(dataTexto2);
-    		int teste = data2.compareToIgnoreCase(data1);
-    		if(teste>=0){
-    			retorno =true;
-    		}
-    	} catch (ParseException e) {
-    		retorno= false;
-    	}
-
-		return retorno;
+		DateFormat prototype = new SimpleDateFormat ("dd-MM-yyyy");
+		prototype.setLenient (false);
+		Date dataInici = null;
+		Date dataFim = null;
+		try {
+			dataInici = prototype.parse(data1);
+			dataFim = prototype.parse(data2);
+		} catch (ParseException e) {
+			return  false;
+		}
+		return dataInici.before(dataFim);
 	}
 	
-	public int total(){
+	public int total(boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior){
 		int total=0;
 		try {
-			total= quantAcessoRemoto()+quantChamadoDia()+quantFone()+ Integer.parseInt(quantLocalSistema()[1])+Integer.parseInt(quantUsuarioMaiorInteracao()[1]);
-		} catch (NumberFormatException | IOException e) {
+			
+			total= quantAcessoRemoto(remoto)+quantChamadoDia(chamadoDia)+quantFone(chamadoDia);
+		
+		
+		} catch (NumberFormatException e) {
 			total=-1;
 			System.out.println("Erro classe relatorio"+e.getMessage());;
 		}

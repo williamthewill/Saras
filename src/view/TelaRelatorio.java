@@ -87,7 +87,13 @@ public class TelaRelatorio extends JFrame {
 		lblFim.setBounds(10, 60, 46, 14);
 		panel.add(lblFim);
 		
-		textFieldDateInicio = new JTextField("___/___/___");
+		textFieldDateInicio = new JTextField("dd-MM-yyyy");
+		textFieldDateInicio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textFieldDateInicio.setText("");
+			}
+		});
 	
 		textFieldDateInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
@@ -98,8 +104,14 @@ public class TelaRelatorio extends JFrame {
 		textFieldDateInicio.setColumns(10);
 		
 		textFieldDateFim = new JTextField();
+		textFieldDateFim.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textFieldDateFim.setText("");
+			}
+		});
 		textFieldDateFim.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textFieldDateFim.setText("___/___/___");
+		textFieldDateFim.setText("dd-MM-yyyy");
 		textFieldDateFim.setForeground(Color.WHITE);
 		textFieldDateFim.setBackground(new Color(30, 144, 255));
 		textFieldDateFim.setColumns(10);
@@ -204,32 +216,21 @@ public class TelaRelatorio extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				relatorio = new Relatorio();
-				try {
-					relatorio.listaChamado();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				if((textFieldDateInicio.getText().equals("___/___/___")||textFieldDateInicio.getText().equals("") && 
-						textFieldDateFim.getText().equals("___/___/___") ||textFieldDateInicio.getText().equals("")) && chckbxFone.isSelected( )==false &&
+				
+				
+				if((textFieldDateInicio.getText().equals("dd-MM-yyyy")||textFieldDateInicio.getText().equals("") && 
+						textFieldDateFim.getText().equals("dd-MM-yyyy") ||textFieldDateInicio.getText().equals("")) && chckbxFone.isSelected( )==false &&
 						chckbxremoto.isSelected()==false &&  chckbxlocalSistema.isSelected()==false &&  chckbxchamadosDoDia.isSelected()==false &&
 						chckbxusurioMaiorInterao.isSelected()==false) {
 							try {
-								
-								//JOptionPane.showMessageDialog(null, "Sem filtro");
-								
-								labelTotal.setText(Integer.toString(relatorio.total()));
-								labelTotalRemoto.setText(Integer.toString(relatorio.quantAcessoRemoto()));
-								labelTotalFone.setText(Integer.toString(relatorio.quantFone()));
-								labelTotalDodia.setText(Integer.toString(relatorio.quantChamadoDia()));
+								relatorio.listaChamado();
+								labelTotal.setText(Integer.toString(relatorio.total(true, true, true, true, true)));
+								labelTotalRemoto.setText(Integer.toString(relatorio.quantAcessoRemoto(true)));
+								labelTotalFone.setText(Integer.toString(relatorio.quantFone(true)));
+								labelTotalDodia.setText(Integer.toString(relatorio.quantChamadoDia(true)));
 								lblLocalSistema.setText(relatorio.quantLocalSistema()[0]+" "+relatorio.quantLocalSistema()[1]); 
 								labelUsuarioMaiorInter.setText(relatorio.quantUsuarioMaiorInteracao()[0]+" "+relatorio.quantUsuarioMaiorInteracao()[1]);
-								
-							
 								relatorio.geraRelatorioSemFiltro();
-								
-								
-								
 							} catch (DocumentException | IOException e) {
 								JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
 							}   
@@ -237,6 +238,7 @@ public class TelaRelatorio extends JFrame {
 						}else{
 						
 							if(relatorio.validaData(textFieldDateInicio.getText(), textFieldDateFim.getText())){
+								relatorio.listaChamado();
 								boolean fone=false;
 								boolean remoto=false;
 								boolean localSistema=false;
@@ -244,33 +246,37 @@ public class TelaRelatorio extends JFrame {
 								boolean usuarioMaior=true;
 								if(chckbxFone.isSelected()){
 									fone=true;
+									labelTotalFone.setText(Integer.toString(relatorio.quantFone(true)));
 								}
 								if(chckbxremoto.isSelected()){
 									remoto=true;
+									labelTotalRemoto.setText(Integer.toString(relatorio.quantAcessoRemoto(true)));
 								}
 								if(chckbxlocalSistema.isSelected()){
 									localSistema=true;
+									lblLocalSistema.setText(relatorio.quantLocalSistema()[0]+" "+relatorio.quantLocalSistema()[1]);
 								}
 								if(chckbxchamadosDoDia.isSelected()){
 									chamadoDia=true;
+									labelTotalDodia.setText(Integer.toString(relatorio.quantChamadoDia(true)));
 								}
 								if(chckbxusurioMaiorInterao.isSelected()){
 									usuarioMaior=true;
+									labelUsuarioMaiorInter.setText(relatorio.quantUsuarioMaiorInteracao()[0]+" "+relatorio.quantUsuarioMaiorInteracao()[1]);
 								}
 								try {
+									labelTotal.setText(Integer.toString(relatorio.total(fone, remoto, localSistema, chamadoDia, usuarioMaior)));
 									
-									JOptionPane.showMessageDialog(null, "com filtro");
+								
 									
-									relatorio.geraRelatorioComFiltro(textFieldDateInicio.getText(), textFieldDateFim.getText(), fone, remoto, localSistema, chamadoDia, usuarioMaior);
-								
-								
+									relatorio.geraRelatorioComFiltro(fone, remoto, localSistema, chamadoDia, usuarioMaior);
 									chckbxFone.setSelected(false);
 									chckbxremoto.setSelected(false);
 									chckbxchamadosDoDia.setSelected(false);
 									chckbxlocalSistema.setSelected(false);
 									chckbxusurioMaiorInterao.setSelected(false);
-									textFieldDateInicio.setText("___/___/___");
-									textFieldDateFim.setText("___/___/___");
+									textFieldDateInicio.setText("dd-MM-yyyy");
+									textFieldDateFim.setText("dd-MM-yyyy");
 								
 								} catch (DocumentException | IOException e) {
 									JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
