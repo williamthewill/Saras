@@ -137,7 +137,7 @@ public class CSVUtils {
 		return allChamados;
 	}
 	
-	public List<Chamado> loadToDate(String arquivo, String data) throws Exception{
+	public List<Chamado> loadFromDate(String arquivo, String data) throws Exception{
 		File file = new File(arquivo);
 		if (!file.exists()) {
 			 throw new Exception("Sem chamados cadastrados");
