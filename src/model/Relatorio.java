@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +42,7 @@ public class Relatorio {
 
 	private ChamadoController chamadoController;
 	//COLOCAR PARAMETROS NA METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
-	public void geraPDF() throws DocumentException, IOException {
+	public void geraRelatorioSemFiltro() throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;
 		try {
@@ -50,22 +51,17 @@ public class Relatorio {
 				doc = new Document(PageSize.A4, 72, 72, 72, 72);
 				os = new FileOutputStream("./persistences/Relatório Consolidado Saras.pdf");
 				PdfWriter.getInstance(doc, os);
-
 				doc.open();// abre o documento
-
 				Paragraph emissão = new Paragraph("Emitido em:" + FormataData.data + " - " + FormataData.hora);
 				emissão.setAlignment(Element.ALIGN_RIGHT);
 				doc.add(emissão);
-
 				Paragraph pagina = new Paragraph("Página: 1 de 1");
 				pagina.setAlignment(Element.ALIGN_RIGHT);
 				doc.add(pagina);
-
 				Paragraph data = new Paragraph("___________________________________________________________________");
 				data.setAlignment(Element.ALIGN_CENTER);
 				doc.add(data);
-
-				Image img = Image.getInstance(Relatorio.class.getResource("/Imagens/Saras.png"));
+				Image img = Image.getInstance("./imagens/Saras.png");
 				img.setAlignment(Element.ALIGN_CENTER);
 				doc.add(img);
 				// criação de paragrafo
@@ -98,18 +94,100 @@ public class Relatorio {
 				doc.add(table);
 			} finally {
 				if (doc != null) {
-					// fechamento do documento
-					doc.close();
+					doc.close();// fechamento do documento
 				}
 				if (os != null) {
-					// fechamento da stream de saída
-					os.close();
+					os.close();	// fechamento da stream de saída
 				}
 			}
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
 		}
 	}
+	
+	public void geraRelatorioComFiltro(String datainicio, String dataFim, boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior) throws DocumentException, IOException {
+		Document doc = null;
+		OutputStream os = null;
+		try {
+			
+			try {
+				doc = new Document(PageSize.A4, 72, 72, 72, 72);
+				os = new FileOutputStream("./persistences/Relatório Consolidado Saras.pdf");
+				PdfWriter.getInstance(doc, os);
+				doc.open();// abre o documento
+				Paragraph emissão = new Paragraph("Emitido em:" + FormataData.data + " - " + FormataData.hora);
+				emissão.setAlignment(Element.ALIGN_RIGHT);
+				doc.add(emissão);
+				Paragraph pagina = new Paragraph("Página: 1 de 1");
+				pagina.setAlignment(Element.ALIGN_RIGHT);
+				doc.add(pagina);
+				Paragraph data = new Paragraph("___________________________________________________________________");
+				data.setAlignment(Element.ALIGN_CENTER);
+				doc.add(data);
+				Image img = Image.getInstance("./imagens/Saras.png");
+				img.setAlignment(Element.ALIGN_CENTER);
+				doc.add(img);
+				// criação de paragrafo
+
+				Paragraph p1 = new Paragraph("Sistema de Automação de Registro de Atendimento Simples",
+						FontFactory.getFont(FontFactory.HELVETICA, 14, Font.BOLDITALIC));
+				p1.setAlignment(Element.ALIGN_CENTER);
+				p1.setSpacingAfter(20);
+				doc.add(p1);
+				// criação de tabela
+				PdfPTable table = new PdfPTable(2);
+				PdfPCell header = new PdfPCell(new Paragraph("Relatório consolidado",
+				FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
+				header.setColspan(2);
+				table.addCell(header);
+				Paragraph p3 = new Paragraph("TIPOS:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
+				table.addCell(p3);
+				Paragraph p4 = new Paragraph("QUANTIDADE:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
+				table.addCell(p4);
+				table.addCell("Telefone");
+				if(fone){
+					table.addCell(Integer.toString(this.quantFone()));
+				}else{
+					table.addCell("");	
+				}
+				table.addCell("Acesso Remoto");
+				if(remoto){
+					table.addCell(Integer.toString(this.quantAcessoRemoto()));
+				}else{
+					table.addCell("");
+				}
+				table.addCell("Chamados do dia");
+				if(chamadoDia){
+					table.addCell(Integer.toString(this.quantChamadoDia()));
+				}else{
+					table.addCell("");
+				}
+				table.addCell("Loca do Sistema");
+				if(localSistema){
+					table.addCell(this.quantLocalSistema()[0]+" "+this.quantLocalSistema()[1] );
+				}else{
+					table.addCell("" );
+				}
+				table.addCell("Usuário de maior Interação");
+				if(usuarioMaior){
+					table.addCell(this.quantUsuarioMaiorInteracao()[0]+" "+this.quantUsuarioMaiorInteracao()[1]);
+				}else{
+					table.addCell("");
+				}
+				doc.add(table);
+			} finally {
+				if (doc != null) {
+					doc.close();// fechamento do documento
+				}
+				if (os != null) {
+					os.close();	// fechamento da stream de saída
+				}
+			}
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
+		}
+	}
+	
 
 	public String geraMes() {
 		Date data = new Date();
@@ -265,6 +343,28 @@ public class Relatorio {
 		} catch (Exception e) {
 			JOptionPane.showInputDialog(null, e.getMessage());
 		}
+		return retorno;
+	}
+	
+	public boolean validaData(String data1, String data2){
+		boolean retorno = false;
+		Date dataPrim = null;
+    	String dataTexto = new String(data1);
+    	Date dataSegun = null;
+    	String dataTexto2 = new String(data2);
+    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    	try {
+    		format.setLenient(false);
+    		dataPrim = format.parse(dataTexto);
+    		format.setLenient(false);
+    		dataSegun = format.parse(dataTexto2);
+    		int teste = data2.compareToIgnoreCase(data1);
+    		if(teste>0){
+    			retorno =true;
+    		}
+    	} catch (ParseException e) {
+    		retorno= false;
+    	}
 		return retorno;
 	}
 }

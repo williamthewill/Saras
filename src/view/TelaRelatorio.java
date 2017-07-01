@@ -87,22 +87,22 @@ public class TelaRelatorio extends JFrame {
 		lblFim.setBounds(10, 60, 46, 14);
 		panel.add(lblFim);
 		
-		textFieldDateInicio = new JTextField("__/__/__");
+		textFieldDateInicio = new JTextField("___/___/___");
 		textFieldDateInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		textFieldDateInicio.setForeground(Color.WHITE);
 		textFieldDateInicio.setBackground(new Color(30, 144, 255));
-		textFieldDateInicio.setBounds(56, 34, 70, 20);
+		textFieldDateInicio.setBounds(56, 34, 88, 20);
 		panel.add(textFieldDateInicio);
 		textFieldDateInicio.setColumns(10);
 		
 		textFieldDateFim = new JTextField();
 		textFieldDateFim.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textFieldDateFim.setText("__/__/__");
+		textFieldDateFim.setText("___/___/___");
 		textFieldDateFim.setForeground(Color.WHITE);
 		textFieldDateFim.setBackground(new Color(30, 144, 255));
 		textFieldDateFim.setColumns(10);
-		textFieldDateFim.setBounds(56, 58, 70, 20);
+		textFieldDateFim.setBounds(56, 58, 88, 20);
 		panel.add(textFieldDateFim);
 		
 		JCheckBox chckbxFone = new JCheckBox(":Fone");
@@ -196,6 +196,49 @@ public class TelaRelatorio extends JFrame {
 		lblGerar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				if(textFieldDateInicio.getText().equals("___/___/___")||textFieldDateInicio.getText().equals("") && textFieldDateFim.getText().equals("___/___/___") ||textFieldDateInicio.getText().equals("") && chckbxFone.isSelected( )==false &&
+						chckbxremoto.isSelected()==false &&  chckbxlocalSistema.isSelected()==false &&  chckbxchamadosDoDia.isSelected()==false && chckbxusurioMaiorInterao.isSelected()==false) {
+							try {
+								JOptionPane.showMessageDialog(null, "Sem filtro");
+								relatorio.geraRelatorioSemFiltro();
+							} catch (DocumentException | IOException e) {
+								JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
+							}   
+				
+						}else{
+						
+							if(relatorio.validaData(textFieldDateInicio.getText(), textFieldDateFim.getText())){
+								boolean fone=false;
+								boolean remoto=false;
+								boolean localSistema=false;
+								boolean chamadoDia=false;
+								boolean usuarioMaior=true;
+								if(chckbxFone.isSelected()){
+									fone=true;
+								}
+								if(chckbxremoto.isSelected()){
+									remoto=true;
+								}
+								if(chckbxlocalSistema.isSelected()){
+									localSistema=true;
+								}
+								if(chckbxchamadosDoDia.isSelected()){
+									chamadoDia=true;
+								}
+								if(chckbxusurioMaiorInterao.isSelected()){
+									usuarioMaior=true;
+								}
+								try {
+									JOptionPane.showMessageDialog(null, "com filtro");
+									relatorio.geraRelatorioComFiltro(textFieldDateInicio.getText(), textFieldDateFim.getText(), fone, remoto, localSistema, chamadoDia, usuarioMaior);
+								} catch (DocumentException | IOException e) {
+									JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
+								}   
+							
+							}else{
+								JOptionPane.showMessageDialog(null, "Data invalida");
+							}
+						}
 		
 			}
 			public void mouseEntered(MouseEvent arg0) {
@@ -257,9 +300,9 @@ public class TelaRelatorio extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
-					relatorio.geraPDF();
+					
 					relatorio.abrePDF();
-				} catch (DocumentException | IOException | InterruptedException e) {
+				} catch (IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "Erro ao Gerar PDF");
 				}
