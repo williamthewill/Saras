@@ -3,14 +3,10 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnhandledAlertException;
-
 import controller.ChamadoController;
-
 public class RegistroChamado {
 	
 	private ChamadoController chamadoController = new ChamadoController();
@@ -114,7 +110,5 @@ public class RegistroChamado {
 		if(this.mants){
 			JOptionPane.showMessageDialog(null, "Seu Mants foi aberto com sucesso, agora anexe seus arquivos se houver");
 		}
-		
-	
 	}
 }

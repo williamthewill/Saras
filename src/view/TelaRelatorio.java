@@ -362,13 +362,11 @@ public class TelaRelatorio extends JFrame {
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane sair = new JOptionPane();
-		        int Sair = sair.showConfirmDialog(null,"Realmente você deseja sair do SARAS?","Sair",JOptionPane.YES_NO_OPTION);
-		        if(Sair == JOptionPane.YES_OPTION){
+				int sair = JOptionPane.showConfirmDialog(null,"Realmente você deseja sair do SARAS?","Sair",JOptionPane.YES_NO_OPTION);
+		        if(sair == JOptionPane.YES_OPTION){
 		           System.exit(0);
-		           // this.dispose();
 		     	}else{
-		         if(Sair == JOptionPane.NO_OPTION){
+		         if(sair == JOptionPane.NO_OPTION){
 
 		         }
 		      }

@@ -1,30 +1,23 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
 import controller.AtendenteController;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.SystemColor;
-
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.io.IOException;
-
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-
 import model.Atendente;
 import model.Chamado;
 import model.NomesSolicitantes;
@@ -89,8 +82,6 @@ public class TelaChamado extends JFrame {
 						&& textFieldSolicitante.getText().trim().length() > 0) {
 					boolean eFone = false;
 					boolean eRemoto = false;
-					boolean eSoft = false;
-
 					if (checkboxFone.isSelected()) {
 						eFone = true;
 					}
@@ -283,13 +274,11 @@ public class TelaChamado extends JFrame {
 		});
 
 		textFieldLinha1.setVisible(false);
-
 		textFieldLinha1.setForeground(Color.WHITE);
 		textFieldLinha1.setBackground(new Color(0, 0, 51));
 		textFieldLinha1.setBounds(4, 336, 24, 20);
 		panelPainel.add(textFieldLinha1);
 		textFieldLinha1.setColumns(10);
-
 		textFieldLinha2 = new JTextField();
 		//cria um listener de digitação do fieldNumero
 		textFieldLinha2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -311,7 +300,6 @@ public class TelaChamado extends JFrame {
 		chackBoxDefLinha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				if (chackBoxDefLinha.isSelected()) {
 					textFieldLinha1.setVisible(true);
 					textFieldLinha2.setVisible(true);
@@ -346,7 +334,6 @@ public class TelaChamado extends JFrame {
 		checkboxFone.setBackground(Color.WHITE);
 		checkboxFone.setBounds(308, 19, 62, 23);
 		contentPane.add(checkboxFone);
-
 		checkboxRemoto = new JCheckBox("Remoto");
 		checkboxRemoto.addMouseListener(new MouseAdapter() {
 			@Override
@@ -401,10 +388,8 @@ public class TelaChamado extends JFrame {
 				if (!checkboxSoftplan.isSelected()) {
 					NomesSolicitantes nomesSolicitantes = new NomesSolicitantes();
 					try {
-						textFieldSolicitante
-								.setText(nomesSolicitantes.getNomePortalSolicitante(textAreaDescricao.getText()));
+						textFieldSolicitante.setText(nomesSolicitantes.getNomePortalSolicitante(textAreaDescricao.getText()));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -493,21 +478,17 @@ public class TelaChamado extends JFrame {
 		JLabel label_4 = new JLabel("");
 		label_4.addMouseListener(new MouseAdapter() {
 			@Override
-
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane sair = new JOptionPane();
-				int Sair = sair.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+				int sair = JOptionPane.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
 						JOptionPane.YES_NO_OPTION);
-				if (Sair == JOptionPane.YES_OPTION) {
+				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
-					// this.dispose();
 				} else {
-					if (Sair == JOptionPane.NO_OPTION) {
+					if (sair == JOptionPane.NO_OPTION) {
 
 					}
 				}
 			}
-
 			public void mouseEntered(MouseEvent arg0) {
 				lblSair.setText("Sair");
 			}

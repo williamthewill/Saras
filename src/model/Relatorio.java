@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +40,7 @@ public class Relatorio {
 	private String localSistema;
 
 	private ChamadoController chamadoController;
-	//COLOCAR PARAMETROS NA METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
+	//COLOCAR PARAMETROS NO METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
 	public void geraRelatorioSemFiltro() throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;
@@ -266,7 +265,7 @@ public class Relatorio {
 				}
 			}
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return this.contRemoto;
 	}
@@ -283,7 +282,7 @@ public class Relatorio {
 			}
 			return this.contChamadosDia;
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return 0;
 	}
@@ -312,7 +311,7 @@ public class Relatorio {
 			retorno[0]=this.usuarioMInterecao = nome;
 			retorno[1]=(this.contUsuarioMInterecao=maior)+"";
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return retorno;
 	}
@@ -341,30 +340,20 @@ public class Relatorio {
 			retorno[0]=this.localSistema = nome;
 			retorno[1]=(this.contLocalSistema = maior)+"";
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return retorno;
 	}
 	
 	public boolean validaData(String data1, String data2){
 		boolean retorno = false;
-		Date dataPrim = null;
-    	String dataTexto = new String(data1);
-    	Date dataSegun = null;
-    	String dataTexto2 = new String(data2);
-    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    	try {
-    		format.setLenient(false);
-    		dataPrim = format.parse(dataTexto);
-    		format.setLenient(false);
-    		dataSegun = format.parse(dataTexto2);
-    		int teste = data2.compareToIgnoreCase(data1);
-    		if(teste>0){
-    			retorno =true;
-    		}
-    	} catch (ParseException e) {
-    		retorno= false;
-    	}
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		format.setLenient(false);
+		format.setLenient(false);
+		int teste = data2.compareToIgnoreCase(data1);
+		if(teste>0){
+			retorno = true;
+		}
 		return retorno;
 	}
 }

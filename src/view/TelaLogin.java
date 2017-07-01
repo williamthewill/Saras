@@ -1,14 +1,11 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controller.AtendenteController;
 import model.Atendente;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -80,6 +77,7 @@ public class TelaLogin extends JFrame {
 
 		lblEntrar.addMouseListener(new MouseAdapter() {
 
+			@SuppressWarnings("deprecation")
 			public void mouseClicked(MouseEvent e) {
 				if (textFieldNome.getText() != null && textFieldNome.getText().trim().length() > 0
 						&& passwordFieldSenha.getText() != null && passwordFieldSenha.getText().trim().length() > 0) {
@@ -150,14 +148,13 @@ public class TelaLogin extends JFrame {
 		lblSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane sair = new JOptionPane();
-				int Sair = sair.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+				int sair = JOptionPane.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
 						JOptionPane.YES_NO_OPTION);
-				if (Sair == JOptionPane.YES_OPTION) {
+				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
 					// this.dispose();
 				} else {
-					if (Sair == JOptionPane.NO_OPTION) {
+					if (sair == JOptionPane.NO_OPTION) {
 
 					}
 				}

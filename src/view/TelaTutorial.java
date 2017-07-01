@@ -66,45 +66,36 @@ public class TelaTutorial extends JDialog {
 		lblNewLabel_1.setIcon(new ImageIcon("./imagens/cadastre-se.png"));
 		lblNewLabel_1.setBounds(229, 193, 116, 25);
 		contentPanel.add(lblNewLabel_1);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.textHighlight);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("Continuar");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						txtpnF.setText("*Muito bem, agora na tela de Cadastro insira o mesmo usuario e senha do portal do SOS. Depois clique no botão SALVAR, do sistema.");
-						txtpnF.setForeground(new Color(0, 0, 102));
-						txtpnF.setFont(new Font("Tahoma", Font.BOLD, 17));
-						
-						txtpnVamosComearPrimeiro.setText("");
-						
-						lblNewLabel_1.setIcon(new ImageIcon("./imagens/Salvar.png"));
-						
-					}
-				});
-				okButton.setBackground(Color.WHITE);
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBackground(SystemColor.textHighlight);
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+		JButton okButton = new JButton("Continuar");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtpnF.setText("*Muito bem, agora na tela de Cadastro insira o mesmo usuario e senha do portal do SOS. Depois clique no botão SALVAR, do sistema.");
+				txtpnF.setForeground(new Color(0, 0, 102));
+				txtpnF.setFont(new Font("Tahoma", Font.BOLD, 17));
+				txtpnVamosComearPrimeiro.setText("");
+				lblNewLabel_1.setIcon(new ImageIcon("./imagens/Salvar.png"));
 			}
-			{
-				JButton cancelButton = new JButton("Sair");
-				cancelButton.setBackground(Color.WHITE);
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+		});
+		okButton.setBackground(Color.WHITE);
+		okButton.setActionCommand("OK");
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+		JButton cancelButton = new JButton("Sair");
+		cancelButton.setBackground(Color.WHITE);
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
-		}
+		});
+		cancelButton.setActionCommand("Cancel");
+		buttonPane.add(cancelButton);
 	}
 
+	@SuppressWarnings("deprecation")
 	public String lerArqui() throws IOException{
 		FileInputStream inputStream = new FileInputStream("sarasTuto.txt");
 		String texto="";
@@ -119,7 +110,6 @@ public class TelaTutorial extends JDialog {
 	public void escreveArqui(String valor) throws IOException{
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("sarasTuto.txt"));
         String linha = valor;
-       
         buffWrite.append(linha + "\n");
         buffWrite.close();
 	}	
