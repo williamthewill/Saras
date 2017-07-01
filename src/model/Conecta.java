@@ -67,14 +67,14 @@ public class Conecta {
 	}
 
 	public void clicKnomeSolicitante(Chamado chamado) throws InterruptedException {
-		System.out.println("entrou é foda");
-		System.out.println(chamado.getNomeSolicitante());
+		
+		
 		this.driver.findElement(By.name("login")).sendKeys(chamado.getNomeSolicitante());
 		this.driver.findElement(By.className("botao1")).click();
-		System.out.println("antes sliipemtra");
+		
 		Thread.sleep(1000);
-		this.driver.findElement(By.linkText(chamado.getNomeSolicitante())).click(); //Jéssica de Araújo
-		System.out.println("jessica");
+		this.driver.findElement(By.linkText(chamado.getNomeSolicitante())).click(); 
+		
 	}
 
 	public void clickLotacao() {

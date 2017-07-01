@@ -29,7 +29,7 @@ public class TelaRelatorio extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldDateInicio;
 	private JTextField textFieldDateFim;
-	private Relatorio relatorio = new Relatorio();
+	private Relatorio relatorio;
 
 	/**
 	 * Launch the application.
@@ -193,17 +193,43 @@ public class TelaRelatorio extends JFrame {
 		panel.add(chckbxusurioMaiorInterao);
 		JLabel lblNewLabel_3 = new JLabel("");
 		JLabel lblGerar = new JLabel("");
+		JLabel labelTotal = new JLabel("");
+		JLabel labelTotalRemoto = new JLabel();
+		JLabel labelTotalFone = new JLabel("");
+		JLabel labelTotalDodia = new JLabel("");
+		JLabel lblLocalSistema = new JLabel("");
+		JLabel labelUsuarioMaiorInter = new JLabel("");
 		
 		lblGerar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				relatorio = new Relatorio();
+				try {
+					relatorio.listaChamado();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if((textFieldDateInicio.getText().equals("___/___/___")||textFieldDateInicio.getText().equals("") && 
 						textFieldDateFim.getText().equals("___/___/___") ||textFieldDateInicio.getText().equals("")) && chckbxFone.isSelected( )==false &&
 						chckbxremoto.isSelected()==false &&  chckbxlocalSistema.isSelected()==false &&  chckbxchamadosDoDia.isSelected()==false &&
 						chckbxusurioMaiorInterao.isSelected()==false) {
 							try {
-								JOptionPane.showMessageDialog(null, "Sem filtro");
+								
+								//JOptionPane.showMessageDialog(null, "Sem filtro");
+								
+								labelTotal.setText(Integer.toString(relatorio.total()));
+								labelTotalRemoto.setText(Integer.toString(relatorio.quantAcessoRemoto()));
+								labelTotalFone.setText(Integer.toString(relatorio.quantFone()));
+								labelTotalDodia.setText(Integer.toString(relatorio.quantChamadoDia()));
+								lblLocalSistema.setText(relatorio.quantLocalSistema()[0]+" "+relatorio.quantLocalSistema()[1]); 
+								labelUsuarioMaiorInter.setText(relatorio.quantUsuarioMaiorInteracao()[0]+" "+relatorio.quantUsuarioMaiorInteracao()[1]);
+								
+							
 								relatorio.geraRelatorioSemFiltro();
+								
+								
+								
 							} catch (DocumentException | IOException e) {
 								JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
 							}   
@@ -412,40 +438,40 @@ public class TelaRelatorio extends JFrame {
 		label_3.setBounds(162, 403, 38, 35);
 		contentPane.add(label_3);
 		
-		JLabel labelTotalRemoto = new JLabel();
+		
 		labelTotalRemoto.setForeground(Color.RED);
 		labelTotalRemoto.setFont(new Font("Tahoma", Font.BOLD, 13));
-		labelTotalRemoto.setBounds(107, 197, 23, 14);
+		labelTotalRemoto.setBounds(107, 197, 273, 14);
 		contentPane.add(labelTotalRemoto);
 		
-		JLabel labelTotalFone = new JLabel("0");
+		
 		labelTotalFone.setForeground(Color.RED);
 		labelTotalFone.setFont(new Font("Tahoma", Font.BOLD, 13));
-		labelTotalFone.setBounds(85, 220, 23, 14);
+		labelTotalFone.setBounds(85, 220, 163, 14);
 		contentPane.add(labelTotalFone);
 		
-		JLabel labelTotalDodia = new JLabel("0");
+		
 		labelTotalDodia.setForeground(Color.RED);
 		labelTotalDodia.setFont(new Font("Tahoma", Font.BOLD, 13));
-		labelTotalDodia.setBounds(162, 245, 23, 14);
+		labelTotalDodia.setBounds(162, 245, 236, 14);
 		contentPane.add(labelTotalDodia);
 		
-		JLabel lblLocalSistema = new JLabel("Nenhum");
+		
 		lblLocalSistema.setForeground(Color.RED);
 		lblLocalSistema.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblLocalSistema.setBounds(128, 269, 153, 14);
 		contentPane.add(lblLocalSistema);
 		
-		JLabel labelUsuarioMaiorInter = new JLabel("Nenhum");
+		
 		labelUsuarioMaiorInter.setForeground(Color.RED);
 		labelUsuarioMaiorInter.setFont(new Font("Tahoma", Font.BOLD, 13));
 		labelUsuarioMaiorInter.setBounds(174, 295, 153, 14);
 		contentPane.add(labelUsuarioMaiorInter);
 		
-		JLabel labelTotal = new JLabel("0");
+		
 		labelTotal.setForeground(Color.RED);
 		labelTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		labelTotal.setBounds(53, 330, 23, 14);
+		labelTotal.setBounds(53, 330, 48, 14);
 		contentPane.add(labelTotal);
 		
 		

@@ -39,6 +39,7 @@ public class Relatorio {
 	private int contLocalSistema;
 	private String usuarioMInterecao;
 	private String localSistema;
+	private List<Chamado> listaChamado;
 
 	private ChamadoController chamadoController;
 	//COLOCAR PARAMETROS NO METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
@@ -212,40 +213,19 @@ public class Relatorio {
 		java.awt.Desktop.getDesktop().open(new File("./persistences/Relatório Consolidado Saras.pdf"));
 	}
 
-	public int getContFone() {
-		return contFone;
+	public void listaChamado() throws Exception{
+		chamadoController = new ChamadoController();
+		this.listaChamado = chamadoController.todosChamados();
 	}
-
-	public int getContRemoto() {
-		return contRemoto;
-	}
-
-	public int getContChamadosDia() {
-		return contChamadosDia;
-	}
-
-	public int getContUsuarioMInterecao() {
-		return contUsuarioMInterecao;
-	}
-
-	public int getContLocalSistema() {
-		return contLocalSistema;
-	}
-
-	public String getUsuarioMInterecao() {
-		return usuarioMInterecao;
-	}
-
-	public String getLocalSistema() {
-		return localSistema;
+	
+	public void listaChamadoData() throws Exception{
+		chamadoController = new ChamadoController();
+		this.listaChamado = chamadoController.chamadosData(data1, data2); 
 	}
 
 	public int quantFone() throws FileNotFoundException, IOException {
-		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado;
 		try {
-			listaChamado = chamadoController.todosChamados();
-			for (int i = 0; i < listaChamado.size(); i++) {
+			for (int i = 0; i < this.listaChamado.size(); i++) {
 				if (listaChamado.get(i).eFone()) {
 					this.contFone++;
 				}
@@ -257,12 +237,10 @@ public class Relatorio {
 	}
 
 	public int quantAcessoRemoto() throws FileNotFoundException, IOException {
-		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado;
+		
 		try {
-			listaChamado = chamadoController.todosChamados();
-			for (int i = 0; i < listaChamado.size(); i++) {
-				if (listaChamado.get(i).eRemoto()) {
+			for (int i = 0; i < this.listaChamado.size(); i++) {
+				if (this.listaChamado.get(i).eRemoto()) {
 					this.contRemoto++;
 				}
 			}
@@ -273,12 +251,9 @@ public class Relatorio {
 	}
 
 	public int quantChamadoDia() throws FileNotFoundException, IOException {
-		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado;
-		try {
-			listaChamado = chamadoController.todosChamados();
-			for (int i = 0; i < listaChamado.size(); i++) {
-				if (listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
+		try{
+			for (int i = 0; i < this.listaChamado.size(); i++) {
+				if (this.listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
 					this.contChamadosDia++;					
 				}	
 			}
@@ -291,17 +266,14 @@ public class Relatorio {
 
 	public String[] quantUsuarioMaiorInteracao() throws FileNotFoundException, IOException {
 		String[] retorno = new String[2];
-		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado;
-		try {
-			listaChamado = chamadoController.todosChamados();
+		try{
 			List<String> usuarioMInteracao = new ArrayList<>();
-			for (int  i= 0; i < listaChamado.size(); i++) {
-				usuarioMInteracao.add(listaChamado.get(i).getNomeSolicitante());
+			for (int  i= 0; i < this.listaChamado.size(); i++) {
+				usuarioMInteracao.add(this.listaChamado.get(i).getNomeSolicitante());
 			}
 			String nome = "";
 			int maior = 0;
-			for (int j = 0; j < listaChamado.size(); j++) {
+			for (int j = 0; j < this.listaChamado.size(); j++) {
 				int count = Collections.frequency(usuarioMInteracao, usuarioMInteracao.get(j));
 				if (count > maior) {
 					maior = count;
@@ -320,17 +292,14 @@ public class Relatorio {
 
 	public String[] quantLocalSistema() throws FileNotFoundException, IOException {
 		String[] retorno = new String[2];
-		chamadoController = new ChamadoController();
-		List<Chamado> listaChamado;
-		try {
-			listaChamado = chamadoController.todosChamados();
+		try{
 			List<String> localChamado = new ArrayList<>();
-			for (int i = 0; i < listaChamado.size(); i++) {
-				localChamado.add(listaChamado.get(i).getLocalChamado());
+			for (int i = 0; i < this.listaChamado.size(); i++) {
+				localChamado.add(this.listaChamado.get(i).getLocalChamado());
 			}
 			String nome = "";
 			int maior = 0;
-			for (int j = 0; j < listaChamado.size(); j++) {
+			for (int j = 0; j < this.listaChamado.size(); j++) {
 				int count = Collections.frequency(localChamado, localChamado.get(j));
 				if (count > maior) {
 					maior = count;
@@ -368,5 +337,16 @@ public class Relatorio {
     	}
 
 		return retorno;
+	}
+	
+	public int total(){
+		int total=0;
+		try {
+			total= quantAcessoRemoto()+quantChamadoDia()+quantFone()+ Integer.parseInt(quantLocalSistema()[1])+Integer.parseInt(quantUsuarioMaiorInteracao()[1]);
+		} catch (NumberFormatException | IOException e) {
+			total=-1;
+			System.out.println("Erro classe relatorio"+e.getMessage());;
+		}
+		return total;
 	}
 }

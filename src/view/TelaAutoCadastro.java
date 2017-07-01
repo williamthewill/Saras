@@ -129,7 +129,7 @@ public class TelaAutoCadastro extends JFrame {
 						cadastro.validaUsuarioPortal();
 
 						} catch (IOException | InterruptedException e1) {
-						JOptionPane.showInternalMessageDialog(null,("Login não encontrado no portal MPSC"));
+						JOptionPane.showMessageDialog(null,("Login não encontrado no portal MPSC"));
 					}
 
 				}else{
