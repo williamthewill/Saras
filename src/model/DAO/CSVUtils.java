@@ -6,7 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -137,7 +140,7 @@ public class CSVUtils {
 		return allChamados;
 	}
 	
-	public List<Chamado> loadFromDate(String arquivo, String data) throws Exception{
+	public List<Chamado> loadFromDate(String arquivo, String beginDate, String endDate) throws Exception{
 		File file = new File(arquivo);
 		if (!file.exists()) {
 			 throw new Exception("Sem chamados cadastrados");
@@ -148,7 +151,12 @@ public class CSVUtils {
 		Chamado chamado;
 		while( line != null ){
 			chamado = createChamado(line);
-			if(chamado.getDataAbertura().equals(data)){
+			DateFormat prototype = new SimpleDateFormat ("dd-MM-yyyy");
+			prototype.setLenient (false); 
+			Date beginDt = prototype.parse (beginDate);
+			Date endDt = prototype.parse (endDate);
+			Date dateChamado = prototype.parse(chamado.getDataAbertura());
+			if(dateChamado.after(beginDt) && dateChamado.before(endDt) || dateChamado.equals(beginDt) || dateChamado.equals(endDt)){
 				chamados.add(chamado);				
 			}
 			line = br.readLine();
