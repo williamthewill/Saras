@@ -51,8 +51,7 @@ public class TelaAutoCadastro extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaAutoCadastro() {
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage("./imagens/SarasIco_ne.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./imagens/SarasIco_ne.png"));
 		setBackground(SystemColor.textHighlight);
 		setTitle("SARAS   Vers\u00E3o: 0.0.1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,27 +111,27 @@ public class TelaAutoCadastro extends JFrame {
 		lblSalvar.setIcon(new ImageIcon("./imagens/salvar26.png"));
 		JLabel lblSAlvarlbl = new JLabel("");
 
-		lblSalvar.addMouseListener(new MouseAdapter() {	
+		lblSalvar.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			public void mouseClicked(MouseEvent e) {
-				
+
 				if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
 						&& textFieldUsuario.getText() != null && textFieldSenha.getText().trim().length() > 0) {
-					
+
 					try {
 						atendente.setUsuarioRede(textFieldUsuario.getText());
 						char[] chars = textFieldSenha.getPassword();
 						String senha = String.valueOf(chars);
 						atendente.setSenha(senha);
-						
+
 						cadastro = new CadastroAtendente(atendente);
 						cadastro.validaUsuarioPortal();
 
-						} catch (IOException | InterruptedException e1) {
-						JOptionPane.showMessageDialog(null,("Login não encontrado no portal MPSC"));
+					} catch (IOException | InterruptedException e1) {
+						JOptionPane.showMessageDialog(null, ("Login não encontrado no portal MPSC"));
 					}
 
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
 				}
 			}
@@ -145,8 +144,7 @@ public class TelaAutoCadastro extends JFrame {
 				lblSAlvarlbl.setText("");
 			}
 		});
-		
-				
+
 		lblSalvar.setForeground(SystemColor.textHighlight);
 		lblSalvar.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblSalvar.setBounds(510, 447, 34, 26);
@@ -261,10 +259,10 @@ public class TelaAutoCadastro extends JFrame {
 		lblSair_1lbl.setBounds(593, 422, 34, 14);
 		contentPane.add(lblSair_1lbl);
 	}
-	
-	public static class SalvaAtendente{
+
+	public static class SalvaAtendente {
 		public SalvaAtendente(JTextField textFieldUsuario, JPasswordField textFieldSenha) {
-			
+
 		}
 	}
 

@@ -76,7 +76,7 @@ public class TelaChamado extends JFrame {
 		lblSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 				if (textAreaDescricao.getText() != null && textAreaDescricao.getText().trim().length() > 0
 						&& textFieldSolicitante.getText() != null
 						&& textFieldSolicitante.getText().trim().length() > 0) {
@@ -89,15 +89,15 @@ public class TelaChamado extends JFrame {
 						eRemoto = true;
 					}
 					if (descriProblema != "") {
-						
+
 						descriProblema = textAreaDescricao.getText();
 						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, true,
 								eRemoto, eFone, descriProblema.replaceAll("\n", " /# "));
 
 						registroChamado.salvaLocalmente(chamado);
 						try {
-							atendente = new AtendenteController().recuperaAtendente(); 
-							
+							atendente = new AtendenteController().recuperaAtendente();
+
 							registroChamado.cadastraChamado(chamado, atendente);
 							checkboxSoftplan.setSelected(false);
 							registroChamado.notificaExito();
@@ -110,12 +110,12 @@ public class TelaChamado extends JFrame {
 						textFieldSolicitante.setText("");
 
 					}
-					
+
 					if (!checkboxSoftplan.isSelected()) {
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), false,
-								eRemoto, eFone, descriProblema);
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(),
+								false, eRemoto, eFone, descriProblema);
 						registroChamado.salvaLocalmente(chamado);
-						
+
 						textAreaDescricao.setText("");
 						textFieldSolicitante.setText("");
 					}
@@ -136,10 +136,12 @@ public class TelaChamado extends JFrame {
 					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
 				}
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblSalvar.setForeground(Color.black);
 			}
+
 			public void mouseExited(MouseEvent e) {
 				lblSalvar.setForeground(Color.white);
 			}
@@ -265,12 +267,13 @@ public class TelaChamado extends JFrame {
 
 		textFieldLinha1 = new JTextField();
 		textFieldLinha1.setToolTipText("");
-		//cria um listener de ouvinte de digição do fieldNumero
+		// cria um listener de ouvinte de digição do fieldNumero
 		textFieldLinha1.addKeyListener(new java.awt.event.KeyAdapter() {
-			//cri um ouvinte para cada tecla precionada
+			// cri um ouvinte para cada tecla precionada
 			public void keyReleased(java.awt.event.KeyEvent evt) {
-				//faz com que pegue a cada tecla digitada, e substituir tudo que não seja numero por ""
-				textFieldLinha1.setText(textFieldLinha1.getText().replaceAll("[^0-9]", "")); 
+				// faz com que pegue a cada tecla digitada, e substituir tudo
+				// que não seja numero por ""
+				textFieldLinha1.setText(textFieldLinha1.getText().replaceAll("[^0-9]", ""));
 			}
 		});
 
@@ -281,12 +284,13 @@ public class TelaChamado extends JFrame {
 		panelPainel.add(textFieldLinha1);
 		textFieldLinha1.setColumns(10);
 		textFieldLinha2 = new JTextField();
-		//cria um listener de digitação do fieldNumero
+		// cria um listener de digitação do fieldNumero
 		textFieldLinha2.addKeyListener(new java.awt.event.KeyAdapter() {
-			//cria um ouvunte para cada tecla precionada 
+			// cria um ouvunte para cada tecla precionada
 			public void keyReleased(java.awt.event.KeyEvent evt) {
-				// faz com que pegue o texto a cada tecla digitada, e substituir tudo que não seja numero por "" 																								// com
-				textFieldLinha2.setText(textFieldLinha2.getText().replaceAll("[^0-9]", "")); 
+				// faz com que pegue o texto a cada tecla digitada, e substituir
+				// tudo que não seja numero por "" // com
+				textFieldLinha2.setText(textFieldLinha2.getText().replaceAll("[^0-9]", ""));
 			}
 		});
 
@@ -322,10 +326,12 @@ public class TelaChamado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				checkboxFone.setForeground(Color.BLACK);
 			}
+
 			public void mouseExited(MouseEvent e) {
 				checkboxFone.setForeground(SystemColor.textHighlight);
 			}
@@ -389,7 +395,8 @@ public class TelaChamado extends JFrame {
 				if (!checkboxSoftplan.isSelected()) {
 					NomesSolicitantes nomesSolicitantes = new NomesSolicitantes();
 					try {
-						textFieldSolicitante.setText(nomesSolicitantes.getNomePortalSolicitante(textAreaDescricao.getText()));
+						textFieldSolicitante
+								.setText(nomesSolicitantes.getNomePortalSolicitante(textAreaDescricao.getText()));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -490,6 +497,7 @@ public class TelaChamado extends JFrame {
 					}
 				}
 			}
+
 			public void mouseEntered(MouseEvent arg0) {
 				lblSair.setText("Sair");
 			}

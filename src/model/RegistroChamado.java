@@ -13,6 +13,7 @@ public class RegistroChamado {
 	private List<String> chamadosNaoSalvos = new ArrayList<>();
 	private Conecta conecta = new Conecta();
 	private boolean mants=false;
+	private boolean erro = false;
 	
 	public void salvaLocalmente(Chamado chamado){
 		chamadoController.insert(chamado);
@@ -87,28 +88,31 @@ public class RegistroChamado {
 				Thread.sleep(6000);
 				//escreve no arquivo que foi aberto o chamado
 			}catch (NoSuchElementException | UnhandledAlertException e) {
+				erro = true;
 				JOptionPane.showMessageDialog(null, "Aconteceu algo, não foi possível abrir o Matins, por favor tente novamente");
 			}
 		}
 	}
 	
 	public void notificaExito(){
-		StringBuilder nomesErro =new  StringBuilder();
-		if(chamadosNaoSalvos.size()!=0){
-			for(int i=0; i<chamadosNaoSalvos.size(); i++){
-				nomesErro.append("\n"+chamadosNaoSalvos.get(i));
+		if(!erro){
+			StringBuilder nomesErro =new  StringBuilder();
+			if(chamadosNaoSalvos.size()!=0){
+				for(int i=0; i<chamadosNaoSalvos.size(); i++){
+					nomesErro.append("\n"+chamadosNaoSalvos.get(i));
+				}
+				conecta.close();
+				JOptionPane.showMessageDialog(null, "Não consegui cadastrar as pessoas abaixo:"+"\n"+nomesErro.toString()+"\n"+"MOTIVO: O nome cadastro no JABBER não é igual ao do SOS."+"\n"+"Abra assua Planilha e cadastre Manualmente!");
+				
+				chamadosNaoSalvos.clear();
 			}
-			conecta.close();
-			JOptionPane.showMessageDialog(null, "Não consegui cadastrar as pessoas abaixo:"+"\n"+nomesErro.toString()+"\n"+"MOTIVO: O nome cadastro no JABBER não é igual ao do SOS."+"\n"+"Abra assua Planilha e cadastre Manualmente!");
-			
-			chamadosNaoSalvos.clear();
-		}
-		if(chamadosNaoSalvos.size()==0 && !mants){
-			conecta.close();
-			JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
-		}
-		if(this.mants){
-			JOptionPane.showMessageDialog(null, "Seu Mants foi aberto com sucesso, agora anexe seus arquivos se houver");
+			if(chamadosNaoSalvos.size()==0 && !mants){
+				conecta.close();
+				JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
+			}
+			if(this.mants){
+				JOptionPane.showMessageDialog(null, "Seu Mants foi aberto com sucesso, agora anexe seus arquivos se houver");
+			}			
 		}
 	}
 }

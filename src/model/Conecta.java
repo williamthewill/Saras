@@ -44,7 +44,7 @@ public class Conecta {
 			driver.get("http://suportesig.mp.sc.gov.br/sos/");
 
 		} catch (WebDriverException e) {
-			JOptionPane.showMessageDialog(null, "Não foi possível conectar, me feche e abra novamente");
+			JOptionPane.showMessageDialog(null, "Não foi possível conectar");
 		}
 	}
 

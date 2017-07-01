@@ -36,19 +36,16 @@ public class Relatorio {
 	private int contFone;
 	private int contRemoto;
 	private int contChamadosDia;
-	private int contUsuarioMInterecao;
-	private int contLocalSistema;
-	private String usuarioMInterecao;
-	private String localSistema;
 	private List<Chamado> listaChamado;
 
 	private ChamadoController chamadoController;
-	//COLOCAR PARAMETROS NO METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
+
+	// COLOCAR PARAMETROS NO METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
 	public void geraRelatorioSemFiltro() throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;
 		try {
-			
+
 			try {
 				doc = new Document(PageSize.A4, 72, 72, 72, 72);
 				os = new FileOutputStream("./persistences/Relatório Consolidado Saras.pdf");
@@ -76,7 +73,7 @@ public class Relatorio {
 				// criação de tabela
 				PdfPTable table = new PdfPTable(2);
 				PdfPCell header = new PdfPCell(new Paragraph("Relatório consolidado",
-				FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
+						FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
 				header.setColspan(2);
 				table.addCell(header);
 				Paragraph p3 = new Paragraph("TIPOS:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
@@ -90,29 +87,30 @@ public class Relatorio {
 				table.addCell("Chamados do dia");
 				table.addCell(Integer.toString(this.quantChamadoDia(true)));
 				table.addCell("Loca do Sistema");
-				table.addCell(this.quantLocalSistema()[0]+" "+this.quantLocalSistema()[1] );
+				table.addCell(this.quantLocalSistema()[0] + " " + this.quantLocalSistema()[1]);
 				table.addCell("Usuário de maior Interação");
-				table.addCell(this.quantUsuarioMaiorInteracao()[0]+" "+this.quantUsuarioMaiorInteracao()[1]);
+				table.addCell(this.quantUsuarioMaiorInteracao()[0] + " " + this.quantUsuarioMaiorInteracao()[1]);
 				doc.add(table);
 			} finally {
 				if (doc != null) {
 					doc.close();// fechamento do documento
 				}
 				if (os != null) {
-					os.close();	// fechamento da stream de saída
+					os.close(); // fechamento da stream de saída
 				}
 			}
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
-			
+
 		}
 	}
-	
-	public void geraRelatorioComFiltro(boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior) throws DocumentException, IOException {
+
+	public void geraRelatorioComFiltro(boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia,
+			boolean usuarioMaior) throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;
 		try {
-			
+
 			try {
 				doc = new Document(PageSize.A4, 72, 72, 72, 72);
 				os = new FileOutputStream("./persistences/Relatório Consolidado Saras.pdf");
@@ -140,7 +138,7 @@ public class Relatorio {
 				// criação de tabela
 				PdfPTable table = new PdfPTable(2);
 				PdfPCell header = new PdfPCell(new Paragraph("Relatório consolidado",
-				FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
+						FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD)));
 				header.setColspan(2);
 				table.addCell(header);
 				Paragraph p3 = new Paragraph("TIPOS:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
@@ -148,49 +146,50 @@ public class Relatorio {
 				Paragraph p4 = new Paragraph("QUANTIDADE:", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD));
 				table.addCell(p4);
 				table.addCell("Telefone");
-				if(fone){
+				if (fone) {
 					table.addCell(Integer.toString(this.quantFone(true)));
-				}else{
-					table.addCell("");	
+				} else {
+					table.addCell("");
 				}
 				table.addCell("Acesso Remoto");
-				if(remoto){
+				if (remoto) {
 					table.addCell(Integer.toString(this.quantAcessoRemoto(true)));
-				}else{
+				} else {
 					table.addCell("");
 				}
 				table.addCell("Chamados do dia");
-				if(chamadoDia){
+				if (chamadoDia) {
 					table.addCell(Integer.toString(this.quantChamadoDia(true)));
-				}else{
+				} else {
 					table.addCell("");
 				}
 				table.addCell("Loca do Sistema");
-				if(localSistema){
-					table.addCell(this.quantLocalSistema()[0]+" "+this.quantLocalSistema()[1] );
-				}else{
-					table.addCell("" );
+				if (localSistema) {
+					table.addCell(this.quantLocalSistema()[0] + " " + this.quantLocalSistema()[1]);
+				} else {
+					table.addCell("");
 				}
 				table.addCell("Usuário de maior Interação");
-				if(usuarioMaior){
-					table.addCell(this.quantUsuarioMaiorInteracao()[0]+" "+this.quantUsuarioMaiorInteracao()[1]);
-				}else{
+				if (usuarioMaior) {
+					table.addCell(this.quantUsuarioMaiorInteracao()[0] + " " + this.quantUsuarioMaiorInteracao()[1]);
+				} else {
 					table.addCell("");
 				}
 				doc.add(table);
 			} finally {
 				if (doc != null) {
-					doc.close();// fechamento do documento
+					// fechamento do documento
+					doc.close();
 				}
 				if (os != null) {
-					os.close();	// fechamento da stream de saída
+					// fechamento da stream de saída
+					os.close();
 				}
 			}
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
 		}
 	}
-	
 
 	public String geraMes() {
 		Date data = new Date();
@@ -214,7 +213,7 @@ public class Relatorio {
 		java.awt.Desktop.getDesktop().open(new File("./persistences/Relatório Consolidado Saras.pdf"));
 	}
 
-	public void listaChamado(){
+	public void listaChamado() {
 		chamadoController = new ChamadoController();
 		try {
 			this.listaChamado = chamadoController.todosChamados();
@@ -222,18 +221,18 @@ public class Relatorio {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	public void listaChamadoData(String data1, String data2){
+
+	public void listaChamadoData(String data1, String data2) {
 		chamadoController = new ChamadoController();
 		try {
 			this.listaChamado = chamadoController.chamadosData(data1, data2);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		} 
+		}
 	}
 
-	public int quantFone(boolean fone){
-		if(!fone){
+	public int quantFone(boolean fone) {
+		if (!fone) {
 			return 0;
 		}
 		try {
@@ -249,10 +248,10 @@ public class Relatorio {
 	}
 
 	public int quantAcessoRemoto(boolean remoto) {
-		if(!remoto){
+		if (!remoto) {
 			return 0;
 		}
-			
+
 		try {
 			for (int i = 0; i < this.listaChamado.size(); i++) {
 				if (this.listaChamado.get(i).eRemoto()) {
@@ -265,16 +264,16 @@ public class Relatorio {
 		return this.contRemoto;
 	}
 
-	public int quantChamadoDia(boolean chamadoDia){
-		
-		if(!chamadoDia){
+	public int quantChamadoDia(boolean chamadoDia) {
+
+		if (!chamadoDia) {
 			return 0;
 		}
-		try{
+		try {
 			for (int i = 0; i < this.listaChamado.size(); i++) {
 				if (this.listaChamado.get(i).getDataAbertura().equals(FormataData.data)) {
-					this.contChamadosDia++;					
-				}	
+					this.contChamadosDia++;
+				}
 			}
 			return this.contChamadosDia;
 		} catch (Exception e) {
@@ -283,11 +282,11 @@ public class Relatorio {
 		return 0;
 	}
 
-	public String[] quantUsuarioMaiorInteracao(){
+	public String[] quantUsuarioMaiorInteracao() {
 		String[] retorno = new String[2];
-		try{
+		try {
 			List<String> usuarioMInteracao = new ArrayList<>();
-			for (int  i= 0; i < this.listaChamado.size(); i++) {
+			for (int i = 0; i < this.listaChamado.size(); i++) {
 				usuarioMInteracao.add(this.listaChamado.get(i).getNomeSolicitante());
 			}
 			String nome = "";
@@ -298,11 +297,9 @@ public class Relatorio {
 					maior = count;
 					nome = usuarioMInteracao.get(j);
 				}
-				this.usuarioMInterecao = nome;
-				this.contLocalSistema = maior;
 			}
-			retorno[0]=this.usuarioMInterecao = nome;
-			retorno[1]=(this.contUsuarioMInterecao=maior)+"";
+			retorno[0] = nome;
+			retorno[1] = maior + "";
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -311,7 +308,7 @@ public class Relatorio {
 
 	public String[] quantLocalSistema() {
 		String[] retorno = new String[2];
-		try{
+		try {
 			List<String> localChamado = new ArrayList<>();
 			for (int i = 0; i < this.listaChamado.size(); i++) {
 				localChamado.add(this.listaChamado.get(i).getLocalChamado());
@@ -324,41 +321,39 @@ public class Relatorio {
 					maior = count;
 					nome = localChamado.get(j);
 				}
-				this.localSistema = nome;
-				this.contLocalSistema = maior;
 			}
-			retorno[0]=this.localSistema = nome;
-			retorno[1]=(this.contLocalSistema = maior)+"";
+			retorno[0] = nome;
+			retorno[1] = maior + "";
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		return retorno;
 	}
-	
-	public boolean validaData(String data1, String data2){
-		DateFormat prototype = new SimpleDateFormat ("dd-MM-yyyy");
-		prototype.setLenient (false);
+
+	public boolean validaData(String data1, String data2) {
+		DateFormat prototype = new SimpleDateFormat("dd-MM-yyyy");
+		prototype.setLenient(false);
 		Date dataInici = null;
 		Date dataFim = null;
 		try {
 			dataInici = prototype.parse(data1);
 			dataFim = prototype.parse(data2);
 		} catch (ParseException e) {
-			return  false;
+			return false;
 		}
 		return dataInici.before(dataFim);
 	}
-	
-	public int total(boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior){
-		int total=0;
+
+	public int total(boolean fone, boolean remoto, boolean localSistema, boolean chamadoDia, boolean usuarioMaior) {
+		int total = 0;
 		try {
-			
-			total= quantAcessoRemoto(remoto)+quantChamadoDia(chamadoDia)+quantFone(chamadoDia);
-		
-		
+
+			total = quantAcessoRemoto(remoto) + quantChamadoDia(chamadoDia) + quantFone(chamadoDia);
+
 		} catch (NumberFormatException e) {
-			total=-1;
-			System.out.println("Erro classe relatorio"+e.getMessage());;
+			total = -1;
+			System.out.println("Erro classe relatorio" + e.getMessage());
+			;
 		}
 		return total;
 	}
