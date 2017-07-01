@@ -110,6 +110,15 @@ public class TelaChamado extends JFrame {
 						textFieldSolicitante.setText("");
 
 					}
+					
+					if (!checkboxSoftplan.isSelected()) {
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), false,
+								eRemoto, eFone, descriProblema);
+						registroChamado.salvaLocalmente(chamado);
+						
+						textAreaDescricao.setText("");
+						textFieldSolicitante.setText("");
+					}
 
 					if (checkboxSoftplan.isSelected()) {
 						descricaoAtendimento = textAreaDescricao.getText();
@@ -121,14 +130,6 @@ public class TelaChamado extends JFrame {
 								"Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
 					}
 
-					if (!checkboxSoftplan.isSelected()) {
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(), false,
-								eRemoto, eFone, descriProblema);
-						registroChamado.salvaLocalmente(chamado);
-
-						textAreaDescricao.setText("");
-						textFieldSolicitante.setText("");
-					}
 					checkboxFone.setSelected(false);
 					checkboxRemoto.setSelected(false);
 				} else {
