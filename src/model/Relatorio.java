@@ -52,9 +52,9 @@ public class Relatorio {
 				os = new FileOutputStream("./persistences/Relatório Consolidado Saras.pdf");
 				PdfWriter.getInstance(doc, os);
 				doc.open();// abre o documento
-				Paragraph emissão = new Paragraph("Emitido em:" + FormataData.data + " - " + FormataData.hora);
-				emissão.setAlignment(Element.ALIGN_RIGHT);
-				doc.add(emissão);
+				Paragraph emissao = new Paragraph("Emitido em:" + FormataData.data + " - " + FormataData.hora);
+				emissao.setAlignment(Element.ALIGN_RIGHT);
+				doc.add(emissao);
 				Paragraph pagina = new Paragraph("Página: 1 de 1");
 				pagina.setAlignment(Element.ALIGN_RIGHT);
 				doc.add(pagina);
@@ -102,6 +102,7 @@ public class Relatorio {
 			}
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
+			
 		}
 	}
 	
@@ -250,7 +251,7 @@ public class Relatorio {
 				}
 			}
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 		return this.contFone;
 	}
@@ -359,7 +360,7 @@ public class Relatorio {
     		format.setLenient(false);
     		dataSegun = format.parse(dataTexto2);
     		int teste = data2.compareToIgnoreCase(data1);
-    		if(teste>0){
+    		if(teste>=0){
     			retorno =true;
     		}
     	} catch (ParseException e) {

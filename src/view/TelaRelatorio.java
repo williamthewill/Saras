@@ -88,6 +88,7 @@ public class TelaRelatorio extends JFrame {
 		panel.add(lblFim);
 		
 		textFieldDateInicio = new JTextField("___/___/___");
+	
 		textFieldDateInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		textFieldDateInicio.setForeground(Color.WHITE);
@@ -196,8 +197,10 @@ public class TelaRelatorio extends JFrame {
 		lblGerar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(textFieldDateInicio.getText().equals("___/___/___")||textFieldDateInicio.getText().equals("") && textFieldDateFim.getText().equals("___/___/___") ||textFieldDateInicio.getText().equals("") && chckbxFone.isSelected( )==false &&
-						chckbxremoto.isSelected()==false &&  chckbxlocalSistema.isSelected()==false &&  chckbxchamadosDoDia.isSelected()==false && chckbxusurioMaiorInterao.isSelected()==false) {
+				if((textFieldDateInicio.getText().equals("___/___/___")||textFieldDateInicio.getText().equals("") && 
+						textFieldDateFim.getText().equals("___/___/___") ||textFieldDateInicio.getText().equals("")) && chckbxFone.isSelected( )==false &&
+						chckbxremoto.isSelected()==false &&  chckbxlocalSistema.isSelected()==false &&  chckbxchamadosDoDia.isSelected()==false &&
+						chckbxusurioMaiorInterao.isSelected()==false) {
 							try {
 								JOptionPane.showMessageDialog(null, "Sem filtro");
 								relatorio.geraRelatorioSemFiltro();
@@ -229,14 +232,26 @@ public class TelaRelatorio extends JFrame {
 									usuarioMaior=true;
 								}
 								try {
+									
 									JOptionPane.showMessageDialog(null, "com filtro");
+									
 									relatorio.geraRelatorioComFiltro(textFieldDateInicio.getText(), textFieldDateFim.getText(), fone, remoto, localSistema, chamadoDia, usuarioMaior);
+								
+								
+									chckbxFone.setSelected(false);
+									chckbxremoto.setSelected(false);
+									chckbxchamadosDoDia.setSelected(false);
+									chckbxlocalSistema.setSelected(false);
+									chckbxusurioMaiorInterao.setSelected(false);
+									textFieldDateInicio.setText("___/___/___");
+									textFieldDateFim.setText("___/___/___");
+								
 								} catch (DocumentException | IOException e) {
 									JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
 								}   
 							
-							}else{
-								JOptionPane.showMessageDialog(null, "Data invalida");
+							}else{	
+								JOptionPane.showMessageDialog(null, "Data inválida");
 							}
 						}
 		
