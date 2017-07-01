@@ -23,7 +23,8 @@ public class CSVUtils {
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getNomeSolicitante();
         chamadoLine += DEFAULT_SEPARATOR;
-        chamadoLine += chamado.getSetor();//lotação
+        //lotação
+        chamadoLine += chamado.getSetor();
         chamadoLine += DEFAULT_SEPARATOR;
         chamadoLine += chamado.getTipoAtendimento();
         chamadoLine += DEFAULT_SEPARATOR;
@@ -134,6 +135,26 @@ public class CSVUtils {
 		}
 		br.close();
 		return allChamados;
+	}
+	
+	public List<Chamado> loadToDate(String arquivo, String data) throws Exception{
+		File file = new File(arquivo);
+		if (!file.exists()) {
+			 throw new Exception("Sem chamados cadastrados");
+		}
+		BufferedReader br = new BufferedReader(new FileReader(arquivo));
+		String line = br.readLine();
+		List<Chamado> chamados = new ArrayList<>();
+		Chamado chamado;
+		while( line != null ){
+			chamado = createChamado(line);
+			if(chamado.getDataAbertura().equals(data)){
+				chamados.add(chamado);				
+			}
+			line = br.readLine();
+		}
+		br.close();
+		return chamados;
 	}
 	
 	public boolean alteraSetor(String arquivo, String nomeSolicitante, String setor) throws Exception {

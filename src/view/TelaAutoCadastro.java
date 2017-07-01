@@ -12,13 +12,10 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JPasswordField;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.awt.Toolkit;
-
 import model.*;
 import view.TelaLogin;
 import controller.CadastroAtendente;
@@ -116,6 +113,7 @@ public class TelaAutoCadastro extends JFrame {
 		JLabel lblSAlvarlbl = new JLabel("");
 
 		lblSalvar.addMouseListener(new MouseAdapter() {	
+			@SuppressWarnings("deprecation")
 			public void mouseClicked(MouseEvent e) {
 				
 				if (textFieldUsuario.getText() != null && textFieldUsuario.getText().trim().length() > 0
@@ -160,14 +158,12 @@ public class TelaAutoCadastro extends JFrame {
 		lblSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane sair = new JOptionPane();
-				int valor = sair.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+				int sair = JOptionPane.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
 						JOptionPane.YES_NO_OPTION);
-				if (valor == JOptionPane.YES_OPTION) {
+				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
-					// this.dispose();
 				} else {
-					if (valor == JOptionPane.NO_OPTION) {
+					if (sair == JOptionPane.NO_OPTION) {
 
 					}
 				}

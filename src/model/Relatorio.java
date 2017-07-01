@@ -41,7 +41,7 @@ public class Relatorio {
 	private String localSistema;
 
 	private ChamadoController chamadoController;
-	//COLOCAR PARAMETROS NA METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
+	//COLOCAR PARAMETROS NO METODO ABAIXO, VER NO DIAGRAMA DE CLASSES
 	public void geraRelatorioSemFiltro() throws DocumentException, IOException {
 		Document doc = null;
 		OutputStream os = null;
@@ -267,7 +267,7 @@ public class Relatorio {
 				}
 			}
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return this.contRemoto;
 	}
@@ -284,7 +284,7 @@ public class Relatorio {
 			}
 			return this.contChamadosDia;
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return 0;
 	}
@@ -313,7 +313,7 @@ public class Relatorio {
 			retorno[0]=this.usuarioMInterecao = nome;
 			retorno[1]=(this.contUsuarioMInterecao=maior)+"";
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return retorno;
 	}
@@ -342,7 +342,7 @@ public class Relatorio {
 			retorno[0]=this.localSistema = nome;
 			retorno[1]=(this.contLocalSistema = maior)+"";
 		} catch (Exception e) {
-			JOptionPane.showInputDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		return retorno;
 	}
@@ -366,6 +366,7 @@ public class Relatorio {
     	} catch (ParseException e) {
     		retorno= false;
     	}
+
 		return retorno;
 	}
 }

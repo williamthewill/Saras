@@ -41,7 +41,7 @@ public class CadastroAtendente{
 	}
 	
 	public Boolean persisteAtendente(){
-		 AtendenteDAO persiste = new AtendenteDAO(atendente);
+		 persiste = new AtendenteDAO(atendente);
 		 return persiste.persiste();
 	}
 }
