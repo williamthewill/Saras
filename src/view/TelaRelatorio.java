@@ -26,7 +26,7 @@ public class TelaRelatorio extends JFrame {
 	private JTextField textFieldDateFim;
 	private Relatorio relatorio;
 
-	public static void main(String[] args) {
+	public void frameTelaRelatório(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -278,7 +278,7 @@ public class TelaRelatorio extends JFrame {
 							JOptionPane.showMessageDialog(null, "Aconteceu algo, por gentileza tente novamente");
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Data inválida");
+						JOptionPane.showMessageDialog(null, "Intervalo de datas Incompatível");
 					}
 				}
 			}
@@ -399,14 +399,10 @@ public class TelaRelatorio extends JFrame {
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int sair = JOptionPane.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+				int sair = JOptionPane.showConfirmDialog(null, "Você realmente deseja sair do SARAS?", "Sair",
 						JOptionPane.YES_NO_OPTION);
 				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
-				} else {
-					if (sair == JOptionPane.NO_OPTION) {
-
-					}
 				}
 			}
 

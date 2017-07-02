@@ -40,7 +40,7 @@ public class TelaChamado extends JFrame {
 	private AtendenteController atendenteController = new AtendenteController();
 	private Atendente atendente;
 
-	public static void main(String[] args) {
+	public void frameTelaChamado(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,7 +54,7 @@ public class TelaChamado extends JFrame {
 			}
 		});
 	}
-
+	
 	public TelaChamado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 718, 585);
@@ -102,7 +102,6 @@ public class TelaChamado extends JFrame {
 							checkboxSoftplan.setSelected(false);
 							registroChamado.notificaExito();
 						} catch (IOException | InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						descriProblema = "";
@@ -124,7 +123,7 @@ public class TelaChamado extends JFrame {
 						descricaoAtendimento = textAreaDescricao.getText();
 						descriProblema = "soft";
 						JOptionPane.showMessageDialog(null,
-								"Agora descreva o problema a ser enviado para Softplan \nATENÇÃO! após clicar em SALVAR o seu chamado vai ser cadastrado. ");
+								"Agora descreva o problema a ser enviado para Softplan \nATENÇÃO: após clicar em salva o seu chamado vai ser cadastrado.");
 						alertaEsof.setText("");
 						textAreaDescricao.setText(
 								"Nº SIG:                        Nº SAJ: \n\nProblema: \n\nSegue evidências em anexo para melhor compreensão.\nSolicitação: \n");
@@ -133,7 +132,7 @@ public class TelaChamado extends JFrame {
 					checkboxFone.setSelected(false);
 					checkboxRemoto.setSelected(false);
 				} else {
-					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
+					JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos!");
 				}
 			}
 
@@ -235,14 +234,7 @@ public class TelaChamado extends JFrame {
 					public void run() {
 						try {
 							TelaRelatorio frame = new TelaRelatorio();
-							frame.setLocationRelativeTo(null);
-							frame.setBounds(100, 100, 635, 468);
-							frame.setLocationRelativeTo(null);
-							frame.setResizable(false);
-							frame.setSize(635, 468);
-							frame.setVisible(true);
-							frame.setLocationRelativeTo(null);
-							frame.setResizable(false);
+							frame.frameTelaRelatório();
 							dispose();
 
 						} catch (Exception e) {
@@ -487,14 +479,10 @@ public class TelaChamado extends JFrame {
 		label_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int sair = JOptionPane.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+				int sair = JOptionPane.showConfirmDialog(null, "Você realmente deseja sair do SARAS?", "Sair",
 						JOptionPane.YES_NO_OPTION);
 				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
-				} else {
-					if (sair == JOptionPane.NO_OPTION) {
-
-					}
 				}
 			}
 

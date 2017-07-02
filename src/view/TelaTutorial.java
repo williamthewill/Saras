@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,8 +26,9 @@ public class TelaTutorial extends JDialog {
 	private static final long serialVersionUID = 5222997766277344154L;
 	private final JPanel contentPanel = new JPanel();
 
-	public static void main(String[] args) {
+	public void frameTelaTurorial(){
 		try {
+			System.out.println("abriu tela");
 			TelaTutorial dialog = new TelaTutorial();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -34,7 +36,7 @@ public class TelaTutorial extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public TelaTutorial() {
 		setBounds(100, 100, 563, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -100,23 +102,47 @@ public class TelaTutorial extends JDialog {
 		buttonPane.add(cancelButton);
 	}
 
-	@SuppressWarnings("deprecation")
-	public String lerArqui() throws IOException {
-		FileInputStream inputStream = new FileInputStream("sarasTuto.txt");
-		String texto = "";
-		try {
-			texto = IOUtils.toString(inputStream);
-			System.out.println(texto);
-		} finally {
-			inputStream.close();
+	public String lerArqui() throws IOException{
+		String arquivo = "./persistences/sarasTuto.txt";
+		File file = new File(arquivo);
+		if (!file.exists()) {
+			new FileWriter(arquivo);
+			try {
+				escreveArqui("false");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		return texto;
+		FileInputStream inputStream = new FileInputStream(arquivo);
+		String texto="";
+		try {
+	    	texto = IOUtils.toString(inputStream);
+	       System.out.println(texto);
+	    } finally {
+	        inputStream.close();
+	    }
+		System.out.println("retorno: "+ texto);
+	    return texto;
 	}
-
-	public void escreveArqui(String valor) throws IOException {
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("sarasTuto.txt"));
-		String linha = valor;
-		buffWrite.append(linha + "\n");
-		buffWrite.close();
+	public void escreveArqui(String valor){
+		String arquivo = "./persistences/sarasTuto.txt";
+		File file = new File(arquivo);
+		BufferedWriter buffWrite = null;
+		try {
+			if (!file.exists()) {
+				new FileWriter(arquivo);
+			}
+			buffWrite = new BufferedWriter(new FileWriter(arquivo));
+	        String linha = valor;
+	        buffWrite.append(linha);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				buffWrite.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}				
+		}
 	}
 }

@@ -29,10 +29,7 @@ public class TelaAutoCadastro extends JFrame {
 	private Atendente atendente = new Atendente();
 	private CadastroAtendente cadastro;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public void frameTelaAutoCadastro(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,10 +43,7 @@ public class TelaAutoCadastro extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public TelaAutoCadastro() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./imagens/SarasIco_ne.png"));
 		setBackground(SystemColor.textHighlight);
@@ -126,13 +120,12 @@ public class TelaAutoCadastro extends JFrame {
 
 						cadastro = new CadastroAtendente(atendente);
 						cadastro.validaUsuarioPortal();
-
-					} catch (IOException | InterruptedException e1) {
-						JOptionPane.showMessageDialog(null, ("Login não encontrado no portal MPSC"));
-					}
+						textFieldSenha.setText("");
+						textFieldUsuario.setText("");
+					} catch (IOException | InterruptedException e1) {}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
+					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha todos os campos.");
 				}
 			}
 
@@ -160,10 +153,6 @@ public class TelaAutoCadastro extends JFrame {
 						JOptionPane.YES_NO_OPTION);
 				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
-				} else {
-					if (sair == JOptionPane.NO_OPTION) {
-
-					}
 				}
 			}
 

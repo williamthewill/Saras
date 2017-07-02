@@ -18,9 +18,14 @@ public class RegistroChamado {
 	public void salvaLocalmente(Chamado chamado){
 		chamadoController.insert(chamado);
 	}
-	public void conectaChamado ( Atendente atendente, boolean eSoft) throws IOException, InterruptedException{
-		conecta.conecta();
-		conecta.login(atendente, eSoft);
+	public void conectaChamado ( Atendente atendente, boolean eSoft) {
+		try {
+			conecta.conecta();
+			conecta.login(atendente, eSoft);
+		} catch (InterruptedException | IOException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao realizar login");
+			e.printStackTrace();
+		}
 	}
 
 	public void cadastraChamados(Atendente atendente) throws IOException, InterruptedException{
@@ -65,7 +70,7 @@ public class RegistroChamado {
 		} else {
 			try{				
 				this.conectaChamado ( atendente, true);
-				JOptionPane.showMessageDialog(null, "Por favor  efetue login no Mantis\n Somente depois clique em  OK");
+				JOptionPane.showMessageDialog(null, "Por favor  efetue seu login,\n somente depois clique em  OK");
 				Thread.sleep(1000);
 				conecta.clickCadastrarOcorrencias();
 				Thread.sleep(1000);
@@ -89,7 +94,7 @@ public class RegistroChamado {
 				//escreve no arquivo que foi aberto o chamado
 			}catch (NoSuchElementException | UnhandledAlertException e) {
 				erro = true;
-				JOptionPane.showMessageDialog(null, "Aconteceu algo, não foi possível abrir o Matins, por favor tente novamente");
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar Mantis, por favor tente novamente.");
 			}
 		}
 	}
@@ -111,7 +116,7 @@ public class RegistroChamado {
 				JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
 			}
 			if(this.mants){
-				JOptionPane.showMessageDialog(null, "Seu Mants foi aberto com sucesso, agora anexe seus arquivos se houver");
+				JOptionPane.showMessageDialog(null, "MANTIS ABERTO COM SUCESSO, agora anexe seus documentos se houver");
 			}			
 		}
 	}

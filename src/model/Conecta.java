@@ -53,7 +53,6 @@ public class Conecta {
 		this.driver.switchTo().frame(frame);
 		this.driver.findElement(By.name("login")).sendKeys(atendente.getUsuarioRede());
 		this.driver.findElement(By.name("senha")).sendKeys(atendente.getSenha());
-		// botsub1 = aces
 		if(!eSoft){
 			this.driver.findElement(By.name("mantis")).click();
 		}
@@ -136,7 +135,6 @@ public class Conecta {
 				JOptionPane.showMessageDialog(null, "Senha ou usuário inválido");
 			}
 		} catch (InterruptedException e) {
-
 			autentica = false;
 			JOptionPane.showMessageDialog(null, "Senha ou usuário inválido");
 		}

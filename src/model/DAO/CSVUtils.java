@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import model.Chamado;
 
 public class CSVUtils {
@@ -71,6 +74,9 @@ public class CSVUtils {
     	File file = new File(arquivo);
 		if (!file.exists()) {
 			new FileWriter(arquivo);		
+		}
+		if(!file.canWrite() || !file.canExecute() || !file.canRead()){
+			JOptionPane.showMessageDialog(null, "Seu arquivo de backup está sendo usado em outra tarefa.");
 		}
 		FileWriter fw = new FileWriter(arquivo, true);
 		PrintWriter pw = new PrintWriter(fw);

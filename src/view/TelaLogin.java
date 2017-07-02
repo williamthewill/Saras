@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.Toolkit;
 
 public class TelaLogin extends JFrame {
@@ -26,6 +27,27 @@ public class TelaLogin extends JFrame {
 	private JLabel lbEntrarLb;
 
 	public static void main(String[] args) {
+		TelaTutorial frame = new TelaTutorial();
+		
+		try {
+			System.out.println("fora do if");
+			if(frame.lerArqui().equals("false")){
+				System.out.println("dentro do if");
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							frame.frameTelaTurorial();
+							
+						} catch (Exception e) {          
+							e.printStackTrace();
+						}
+					}
+				});
+				frame.escreveArqui("true");
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -101,15 +123,7 @@ public class TelaLogin extends JFrame {
 							public void run() {
 								try {
 									TelaChamado frame = new TelaChamado();
-									frame.setLocationRelativeTo(null);
-									frame.setBounds(100, 100, 709, 585);
-									frame.setLocationRelativeTo(null);
-									frame.setResizable(false);
-
-									frame.setSize(709, 585);
-									frame.setVisible(true);
-									frame.setLocationRelativeTo(null);
-									frame.setResizable(false);
+									frame.frameTelaChamado();
 									dispose();
 
 								} catch (Exception e) {
@@ -119,11 +133,11 @@ public class TelaLogin extends JFrame {
 						});
 
 					}else{
-						JOptionPane.showMessageDialog(null,("Senha ou usuário incorreto"));
+						JOptionPane.showMessageDialog(null,("Usuário ou Senha inválidos."));
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha");
+					JOptionPane.showMessageDialog(null, "Existe algum campo em branco, por favor preencha todos os campos");
 				}
 			}
 
@@ -148,15 +162,10 @@ public class TelaLogin extends JFrame {
 		lblSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int sair = JOptionPane.showConfirmDialog(null, "Realmente você deseja sair do SARAS?", "Sair",
+				int sair = JOptionPane.showConfirmDialog(null, "Você realmente deseja sair do SARAS?", "Sair",
 						JOptionPane.YES_NO_OPTION);
 				if (sair == JOptionPane.YES_OPTION) {
 					System.exit(0);
-					// this.dispose();
-				} else {
-					if (sair == JOptionPane.NO_OPTION) {
-
-					}
 				}
 			}
 
@@ -186,13 +195,7 @@ public class TelaLogin extends JFrame {
 					public void run() {
 						try {
 							TelaAutoCadastro frame = new TelaAutoCadastro();
-							frame.setLocationRelativeTo(null);
-							frame.setBounds(100, 100, 643, 510);
-
-							frame.setSize(643, 510);
-							frame.setVisible(true);
-							frame.setLocationRelativeTo(null);
-							frame.setResizable(false);
+							frame.frameTelaAutoCadastro();
 							dispose();
 
 						} catch (Exception e) {
