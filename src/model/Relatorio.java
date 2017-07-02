@@ -100,7 +100,7 @@ public class Relatorio {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
+			//JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
 
 		}
 	}
@@ -187,7 +187,7 @@ public class Relatorio {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
+			//JOptionPane.showMessageDialog(null, "O arquivo está sendo executado em outro processo");
 		}
 	}
 

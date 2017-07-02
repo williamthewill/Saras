@@ -88,11 +88,40 @@ public class TelaChamado extends JFrame {
 					if (checkboxRemoto.isSelected()) {
 						eRemoto = true;
 					}
+					
+					String descricaoSolicitante = textAreaDescricao.getText().replaceAll("\n", " /# ");
+					if(eRemoto){
+						descricaoSolicitante += "/#"+"Este atendimento teve interação via acesso remoto.";
+					}
+					
+					if(eFone){
+						descricaoSolicitante = "Este atendimento teve interação via telefone, referente a: /#"+descricaoSolicitante;
+					}
+					
+					if (!checkboxSoftplan.isSelected()) {
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoSolicitante,
+								false, eRemoto, eFone, descriProblema);
+						registroChamado.salvaLocalmente(chamado);
+
+						textAreaDescricao.setText("");
+						textFieldSolicitante.setText("");
+					}
+					
 					if (descriProblema != "") {
 
+						descricaoSolicitante = textAreaDescricao.getText().replaceAll("\n", " /# ");
+						if(eRemoto){
+							descricaoSolicitante += "/#"+"Este atendimento teve interação via acesso remoto.";
+						}
+						
+						if(eFone){
+							descricaoSolicitante = "Este atendimento teve interação via telefone, referente a: /#"+descricaoSolicitante;
+						}
+
 						descriProblema = textAreaDescricao.getText();
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoAtendimento, true,
+						Chamado chamado = new Chamado(textFieldSolicitante.getText(), descricaoSolicitante, true,
 								eRemoto, eFone, descriProblema.replaceAll("\n", " /# "));
+						
 
 						registroChamado.salvaLocalmente(chamado);
 						try {
@@ -108,15 +137,6 @@ public class TelaChamado extends JFrame {
 						textAreaDescricao.setText("");
 						textFieldSolicitante.setText("");
 
-					}
-
-					if (!checkboxSoftplan.isSelected()) {
-						Chamado chamado = new Chamado(textFieldSolicitante.getText(), textAreaDescricao.getText(),
-								false, eRemoto, eFone, descriProblema);
-						registroChamado.salvaLocalmente(chamado);
-
-						textAreaDescricao.setText("");
-						textFieldSolicitante.setText("");
 					}
 
 					if (checkboxSoftplan.isSelected()) {

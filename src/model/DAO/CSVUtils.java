@@ -75,7 +75,7 @@ public class CSVUtils {
 		if (!file.exists()) {
 			new FileWriter(arquivo);		
 		}
-		if(!file.canWrite() || !file.canExecute() || !file.canRead()){
+		if(!file.canWrite() && !file.canExecute() && !file.canRead()){
 			JOptionPane.showMessageDialog(null, "Seu arquivo de backup está sendo usado em outra tarefa.");
 		}
 		FileWriter fw = new FileWriter(arquivo, true);

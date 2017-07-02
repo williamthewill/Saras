@@ -102,6 +102,10 @@ public class RegistroChamado {
 	public void notificaExito(){
 		if(!erro){
 			StringBuilder nomesErro =new  StringBuilder();
+			if(chamadosNaoSalvos.size()==0 && !mants){
+				conecta.close();
+				JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
+			}
 			if(chamadosNaoSalvos.size()!=0){
 				for(int i=0; i<chamadosNaoSalvos.size(); i++){
 					nomesErro.append("\n"+chamadosNaoSalvos.get(i));
@@ -110,10 +114,6 @@ public class RegistroChamado {
 				JOptionPane.showMessageDialog(null, "Não consegui cadastrar as pessoas abaixo:"+"\n"+nomesErro.toString()+"\n"+"MOTIVO: O nome cadastro no JABBER não é igual ao do SOS."+"\n"+"Abra assua Planilha e cadastre Manualmente!");
 				
 				chamadosNaoSalvos.clear();
-			}
-			if(chamadosNaoSalvos.size()==0 && !mants){
-				conecta.close();
-				JOptionPane.showMessageDialog(null, "Chamado Cadastrados com sucesso");
 			}
 			if(this.mants){
 				JOptionPane.showMessageDialog(null, "MANTIS ABERTO COM SUCESSO, agora anexe seus documentos se houver");
